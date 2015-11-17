@@ -1,0 +1,12 @@
+/*
+
+!/addons
+/addons/*
+
+!/addons/apps
+/addons/apps/*
+
+!/addons/apps/jw_stockists
+
+!.gitignore
+!readme.md
