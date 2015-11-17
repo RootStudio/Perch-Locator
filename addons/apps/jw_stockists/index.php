@@ -8,6 +8,7 @@ $Lang = $API->get('Lang');
 
 // Page Meta
 $Perch->page_title = $Lang->get('Stockist Locations');
+$Perch->add_css($API->app_path() . '/assets/css/locator.css');
 
 // Page Initialising
 include('modes/locations.list.pre.php');

@@ -26,4 +26,13 @@ class JwStockists_Locations extends PerchAPI_Factory
         'locationProcessedAt',
         'markerID'
     );
+
+    public function create($data, $ignore_timestamp = false)
+    {
+        if(!$ignore_timestamp) {
+            $data['locationUpdatedAt'] = date("Y-m-d H:i:s");
+        }
+
+        parent::create($data);
+    }
 }

@@ -1,0 +1,25 @@
+/* Tags */
+.tag {
+    border-radius: 4px;
+    border: 2px solid;
+    padding: 3px 5px;
+
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.tag.queued {
+    color: #FBB040;
+}
+
+.tag.processing {
+    color: #41B1EA;
+}
+
+.tag.synced {
+    color: #33A860;
+}
+
+.tag.error {
+    color: #CC0500;
+}

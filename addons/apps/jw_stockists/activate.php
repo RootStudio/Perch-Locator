@@ -18,6 +18,7 @@ CREATE TABLE `__PREFIX__jw_stockists_locations` (
   `locationDynamicFields` text,
   `locationUpdatedAt` datetime NOT NULL,
   `locationProcessedAt` datetime NOT NULL,
+  `locationProcessingStatus` tinyint(1) NOT NULL DEFAULT '1',
   `markerID` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`locationID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
