@@ -1,0 +1,6 @@
+{
+    "lang": "en-gb",
+    "Locator": "Locator",
+    "Stockist Locations": "Stockist Locations",
+    "There are no locations stored in the system at this time": "There are no locations stored in the system at this time"
+}

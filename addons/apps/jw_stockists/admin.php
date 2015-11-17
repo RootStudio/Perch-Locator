@@ -1,8 +1,9 @@
 <?php
 
-if($CurrentUser->logged_in() && $CurrentUser->has_priv('jw_stockists')) {
+if ($CurrentUser->logged_in() && $CurrentUser->has_priv('jw_stockists')) {
     $this->register_app('jw_stockists', 'Locator', 1, 'Store / Location finder', '1.0.0');
     $this->require_version('jw_stockists', 2.8);
+    $this->add_create_page('jw_stockists', 'edit');
 
     $this->add_setting('jw_stockists_batch_size', 'Batch Size', 'select', 25, array(
         array('label' => '10', 'value' => 10),
@@ -12,4 +13,14 @@ if($CurrentUser->logged_in() && $CurrentUser->has_priv('jw_stockists')) {
     ));
 
     $this->add_setting('jw_stockists_google_api_key', 'Google API Key', 'text');
+
+    spl_autoload_register(function ($class_name) {
+        if (strpos($class_name, 'JwStockists') === 0) {
+            include(PERCH_PATH . '/addons/apps/jw_stockists/classes/' . $class_name . '.class.php');
+
+            return true;
+        }
+
+        return false;
+    });
 }
