@@ -32,5 +32,6 @@
     "The location has been successfully updated. Return to %slocations list%s": "The location has been successfully updated. Return to %slocations list%s",
     "Locations \/ Edit Location": "Locations \/ Edit Location",
     "Status": "Status",
-    "Delete": "Delete"
+    "Delete": "Delete",
+    "Preview": "Preview"
 }

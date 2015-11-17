@@ -37,6 +37,11 @@ echo $Form->form_start();
     $country_opts = include '../utilities/country_codes.php';
     echo $Form->select_field('locationCountry', 'Country', $country_opts, isset($details['locationCountry']) ? $details['locationCountry'] : 'GB');
 
+    if(is_object($Location) && ($Location->get_status() === 3)) {
+        echo $HTML->heading2('Preview');
+        echo $Location->map_preview();
+    }
+
     echo $Form->fields_from_template($Template, $details, $Locations->static_fields);
     echo $Form->submit_field('btnSubmit', 'Save', $API->app_path());
 

@@ -64,7 +64,7 @@ echo $HTML->heading1('Listing Locations');
                     <?php echo $HTML->encode($Location->locationPostcode()); ?>
                 </td>
                 <td>
-                    <?php echo $Location->get_status(); ?>
+                    <?php echo $Location->get_status_tag(); ?>
                 </td>
                 <td>
                     <?php if ($CurrentUser->has_priv('jw_stockists.delete')): ?>
