@@ -2,5 +2,14 @@
     "lang": "en-gb",
     "Locator": "Locator",
     "Stockist Locations": "Stockist Locations",
-    "There are no locations stored in the system at this time": "There are no locations stored in the system at this time"
+    "There are no locations stored in the system at this time": "There are no locations stored in the system at this time",
+    "This page shows you the current locations stored in the app. To edit a location, click on its title": "This page shows you the current locations stored in the app. To edit a location, click on its title",
+    "Locations": "Locations",
+    "Import Data": "Import Data",
+    "Add Location": "Add Location",
+    "Listing Locations": "Listing Locations",
+    "Import": "Import",
+    "Mass Import": "Mass Import",
+    "All": "All",
+    "There are no locations stored in the system.": "There are no locations stored in the system."
 }

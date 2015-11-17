@@ -14,5 +14,5 @@ $locations = $Locations->all($Paging);
 
 if($locations === false) {
     $Locations->attempt_install();
-    $message = $HTML->warning_message('There are no locations stored in the system at this time');
+    $message = $HTML->warning_message('There are no locations stored in the system.');
 }
