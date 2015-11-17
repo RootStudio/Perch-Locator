@@ -12,7 +12,7 @@ $message = false;
 
 $locations = $Locations->all($Paging);
 
-if($locations === false) {
+if ($locations === false) {
     $Locations->attempt_install();
     $message = $HTML->warning_message('There are no locations stored in the system.');
 }
