@@ -58,7 +58,7 @@ $Set = $Core_CategorySets->get_by('setSlug', 'locator');
 if (!$Set) {
     $Set = $Core_CategorySets->create(array(
         'setTitle'         => PerchLang::get('Locator'),
-        'setSlug'          => 'blog',
+        'setSlug'          => 'locator',
         'setTemplate'      => '~/jw_stockists/templates/locator/category_set.html',
         'setCatTemplate'   => '~/jw_stockists/templates/locator/category.html',
         'setDynamicFields' => '[]'
