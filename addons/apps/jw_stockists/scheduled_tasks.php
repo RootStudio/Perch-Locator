@@ -1,6 +1,6 @@
 <?php
 
-PerchScheduledTasks::register_task('jw_stockists', 'geocode_location_batch', 10, 'jw_stockists_process_geocoding_queue');
+PerchScheduledTasks::register_task('jw_stockists', 'geocode_location_batch', 2, 'jw_stockists_process_geocoding_queue');
 
 function jw_stockists_process_geocoding_queue($last_run_date)
 {
@@ -14,6 +14,8 @@ function jw_stockists_process_geocoding_queue($last_run_date)
 
     if(PerchUtil::count($locations)) {
         foreach($locations as $Location) {
+            sleep(1);
+
             $Location->geocode();
             $counter++;
         }

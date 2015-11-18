@@ -38,9 +38,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
 $Form->handle_empty_block_generation($Template);
 
 $Form->require_field('locationTitle', 'Required');
-$Form->require_field('locationBuilding', 'Required');
 $Form->require_field('locationStreet', 'Required');
-$Form->require_field('locationTown', 'Required');
 $Form->require_field('locationCountry', 'Required');
 $Form->require_field('locationPostcode', 'Required');
 

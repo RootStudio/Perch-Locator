@@ -106,5 +106,9 @@
     "26": "100",
     "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=75\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=75\" class=\"action\">View Details<\/a>",
     "27": "50",
-    "28": "100"
+    "28": "100",
+    "29": "50",
+    "30": "100",
+    "31": "50",
+    "32": "100"
 }
