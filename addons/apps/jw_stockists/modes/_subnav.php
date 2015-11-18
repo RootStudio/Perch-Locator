@@ -18,7 +18,7 @@ $subnav_pages[] = array(
 $subnav_pages[] = array(
     'page' => array('jw_stockists/errors'),
     'label' => $Lang->get('Failed Jobs'),
-    'priv' => 'jw_stockists.import',
+    'priv' => 'jw_stockists.errors',
     'badge' => $Errors->total()
 );
 

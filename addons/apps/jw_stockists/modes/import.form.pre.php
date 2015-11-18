@@ -1,5 +1,9 @@
 <?php
 
+if ($CurrentUser->has_priv('jw_stockists.import')) {
+    PerchUtil::redirect($API->app_path());
+}
+
 // Load APIs
 $HTML = $API->get('HTML');
 $Form = $API->get('Form');

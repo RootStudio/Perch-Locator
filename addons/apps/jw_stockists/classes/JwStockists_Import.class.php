@@ -4,8 +4,18 @@
 include '../libraries/EasyCSV/AbstractBase.php';
 include '../libraries/EasyCSV/Reader.php';
 
+/**
+ * Class JwStockists_Import
+ *
+ * @author James Wigger <james.s.wigger@gmail.com>
+ */
 class JwStockists_Import
 {
+    /**
+     * Map CSV columns to Database Columns
+     *
+     * @var array
+     */
     protected $column_map = array(
         'title'    => 'locationTitle',
         'building' => 'locationBuilding',
@@ -16,9 +26,23 @@ class JwStockists_Import
         'postcode' => 'locationPostcode',
     );
 
+    /**
+     * Perch Resource Bucket
+     *
+     * @var array
+     */
     protected $bucket;
+
+    /**
+     * Bucket name
+     *
+     * @var string
+     */
     protected $bucket_name = 'csv_import';
 
+    /**
+     * JwStockists_Import constructor.
+     */
     public function __construct()
     {
         $Perch = Perch::fetch();
@@ -26,6 +50,12 @@ class JwStockists_Import
         PerchUtil::initialise_resource_bucket($this->bucket);
     }
 
+    /**
+     * Upload file to bucket
+     *
+     * @param $file_field
+     * @return bool
+     */
     public function upload_csv_file($file_field)
     {
         if ($this->import_dir_writable() && ($file_field['size'] > 0)) {
@@ -50,6 +80,11 @@ class JwStockists_Import
         }
     }
 
+    /**
+     * List uploaded CSV files
+     *
+     * @return array
+     */
     public function get_imported_csv_files()
     {
         $file_opts = array(
@@ -72,6 +107,12 @@ class JwStockists_Import
         return $file_opts;
     }
 
+    /**
+     * Import CSV data from uploaded file
+     *
+     * @param $file
+     * @return bool|int
+     */
     public function import_csv_from_path($file)
     {
         $full_path = PerchUtil::file_path($this->bucket['file_path'] . '/' . $file);
@@ -100,6 +141,11 @@ class JwStockists_Import
         return $counter;
     }
 
+    /**
+     * Check for writable directory
+     *
+     * @return bool
+     */
     public function import_dir_writable()
     {
         return is_dir($this->bucket['file_path']) && is_writable($this->bucket['file_path']);

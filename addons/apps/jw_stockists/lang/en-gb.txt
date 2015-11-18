@@ -84,5 +84,9 @@
     "11": "100",
     "12": "25",
     "13": "50",
-    "14": "100"
+    "14": "100",
+    "15": "25",
+    "16": "50",
+    "17": "100",
+    "To import CSV data, upload a new file and then select it from the menu. Imported data will be queued for geocoding.": "To import CSV data, upload a new file and then select it from the menu. Imported data will be queued for geocoding."
 }

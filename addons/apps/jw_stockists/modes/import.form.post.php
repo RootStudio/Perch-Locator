@@ -2,7 +2,7 @@
 
 // Side Panel UI
 echo $HTML->side_panel_start();
-echo $HTML->para('To force an immediate update to the marker location, tick "force geocoding", otherwise any changes will be queued to avoid API throttling.');
+echo $HTML->para('To import CSV data, upload a new file and then select it from the menu. Imported data will be queued for geocoding.');
 echo $HTML->side_panel_end();
 
 // Main Panel UI

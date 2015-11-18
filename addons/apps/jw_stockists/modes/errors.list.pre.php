@@ -1,5 +1,9 @@
 <?php
 
+if ($CurrentUser->has_priv('jw_stockists.errors')) {
+    PerchUtil::redirect($API->app_path());
+}
+
 $HTML = $API->get('HTML');
 
 $Paging = $API->get('Paging');
