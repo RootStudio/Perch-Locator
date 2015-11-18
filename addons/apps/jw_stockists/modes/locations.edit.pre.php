@@ -22,6 +22,15 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     $details = $Location->to_array();
 
     $heading1 = 'Locations / Edit Location';
+
+    if($Location->get_status() === 1) {
+        $message = $HTML->warning_message('This location is currently queued for Geocoding');
+    }
+
+    if($Location->get_status() === 4) {
+        $message = $HTML->failure_message('This location could not be Geocoded');
+    }
+
 } else {
     $locationID = false;
     $Location = false;

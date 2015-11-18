@@ -11,10 +11,28 @@ class JwStockists_Location extends PerchAPI_Base
     public function update($data, $ignore_timestamp = false)
     {
         if (!$ignore_timestamp) {
+            $this->set_status(1);
             $data['locationUpdatedAt'] = date("Y-m-d H:i:s");
         }
 
         parent::update($data);
+    }
+
+    public function delete()
+    {
+        $Marker = $this->get_marker();
+
+        if (!is_object($Marker)) {
+            $Marker->delete();
+        }
+
+        parent::delete();
+    }
+
+    public function get_marker()
+    {
+        $Markers = new JwStockists_Markers($this->api);
+        return $Markers->find($this->markerID());
     }
 
     public function get_status()
@@ -63,12 +81,10 @@ class JwStockists_Location extends PerchAPI_Base
             $marker_data['markerLatitude'] = $response['results'][0]['geometry']['location']['lat'];
             $marker_data['markerLongitude'] = $response['results'][0]['geometry']['location']['lng'];
 
-            $Markers = new JwStockists_Markers($this->api);
-            $Marker = $Markers->find($this->markerID());
+            $Marker = $this->get_marker();
 
             if (!is_object($Marker)) {
-                $Marker = $Markers->create($marker_data);
-                $this->set_marker($Marker);
+                $this->set_marker($marker_data);
             } else {
                 $Marker->update($marker_data);
             }
@@ -94,6 +110,9 @@ class JwStockists_Location extends PerchAPI_Base
         return '<img src="' . $base_url . http_build_query($parameters) . '" />';
     }
 
+    /**
+     * @param int $status_code 1: queued, 2: processing, 3: synced, 4: Failed
+     */
     private function set_status($status_code = 1)
     {
         $this->update(array(
@@ -101,8 +120,11 @@ class JwStockists_Location extends PerchAPI_Base
         ), true);
     }
 
-    private function set_marker(JwStockists_Marker $Marker)
+    private function set_marker($data)
     {
+        $Markers = new JwStockists_Markers($this->api);
+        $Marker = $Markers->create($data);
+
         $this->update(array(
             'markerID' => $Marker->id()
         ), true);

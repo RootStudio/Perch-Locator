@@ -23,11 +23,19 @@ CREATE TABLE `__PREFIX__jw_stockists_locations` (
   PRIMARY KEY (`locationID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
-CREATE TABLE `perch2_jw_stockists_markers` (
+CREATE TABLE `__PREFIX__jw_stockists_markers` (
   `markerID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `markerLatitude` decimal(9,6) NOT NULL DEFAULT '0.000000',
   `markerLongitude` decimal(9,6) NOT NULL DEFAULT '0.000000',
   PRIMARY KEY (`markerID`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE `__PREFIX__jw_stockists_failed_jobs` (
+  `errorID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `errorMessage` int(11) NOT NULL,
+  `errorDateTime` int(11) NOT NULL,
+  `locationID` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`errorID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 INSERT INTO `__PREFIX__settings` (`settingID`, `userID`, `settingValue`)
