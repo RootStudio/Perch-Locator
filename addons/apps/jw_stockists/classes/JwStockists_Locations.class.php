@@ -101,6 +101,17 @@ class JwStockists_Locations extends PerchAPI_Factory
         return $this->return_instances($results);
     }
 
+    public function get_queued($batch_limit = 25)
+    {
+        $sql  = 'SELECT * FROM ' . $this->table;
+        $sql .= ' WHERE `locationUpdatedAt` > `locationProcessedAt`';
+        $sql .= ' ORDER BY `locationUpdatedAt` ASC';
+        $sql .= ' LIMIT ' . $batch_limit;
+
+        $results = $this->db->get_rows($sql);
+        return $this->return_instances($results);
+    }
+
     /**
      * Create a new record
      *

@@ -15,7 +15,7 @@ $files = $Importer->get_imported_csv_files();
 // Defaults
 $message = false;
 
-if(!$Importer->import_dir_writable()) {
+if (!$Importer->import_dir_writable()) {
     $message = $HTML->warning_message('Your resources folder is not writable. Make this folder writable if you want to upload files.');
 }
 
@@ -29,7 +29,7 @@ if ($Form->submitted()) {
     } elseif (isset($data['csv_path']) && $data['csv_path'] != "") {
         $result = $Importer->import_csv_from_path($data['csv_path']);
 
-        if($result > 0) {
+        if ($result > 0) {
             $message = $HTML->success_message($result . ' locations have been imported');
         } else {
             $message = $HTML->failure_message('There was a problem importing from that CSV file');

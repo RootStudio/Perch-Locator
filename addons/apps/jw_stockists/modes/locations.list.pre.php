@@ -16,3 +16,7 @@ if ($locations === false) {
     $Locations->attempt_install();
     $message = $HTML->warning_message('There are no locations stored in the system.');
 }
+
+
+$test = $Locations->get_queued();
+var_dump($test);

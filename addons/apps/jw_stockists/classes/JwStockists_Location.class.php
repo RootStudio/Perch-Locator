@@ -163,6 +163,10 @@ class JwStockists_Location extends PerchAPI_Base
                 $Marker->update($marker_data);
             }
 
+            $this->update(array(
+                'locationProcessedAt' =>  date("Y-m-d H:i:s")
+            ), false, true);
+
             $this->set_status(3);
         } else {
             $status = $response['status'];
