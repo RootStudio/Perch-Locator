@@ -23,6 +23,8 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
 
     $heading1 = 'Locations / Edit Location';
 
+    $Location->geocode();
+
     if($Location->get_status() === 1) {
         $message = $HTML->warning_message('This location is currently queued for Geocoding');
     }

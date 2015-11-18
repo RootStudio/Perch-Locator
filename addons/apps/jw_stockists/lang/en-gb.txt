@@ -36,5 +36,6 @@
     "Preview": "Preview",
     "This location is currently queued for geocoding": "This location is currently queued for geocoding",
     "This location is currently queued for Geocoding": "This location is currently queued for Geocoding",
-    "This location could not be Geocoded": "This location could not be Geocoded"
+    "This location could not be Geocoded": "This location could not be Geocoded",
+    "Failed Jobs": "Failed Jobs"
 }

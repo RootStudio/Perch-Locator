@@ -32,8 +32,8 @@ CREATE TABLE `__PREFIX__jw_stockists_markers` (
 
 CREATE TABLE `__PREFIX__jw_stockists_failed_jobs` (
   `errorID` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `errorMessage` int(11) NOT NULL,
-  `errorDateTime` int(11) NOT NULL,
+  `errorMessage` text NOT NULL,
+  `errorDateTime` datetime NOT NULL,
   `locationID` int(11) unsigned NOT NULL,
   PRIMARY KEY (`errorID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
@@ -58,6 +58,7 @@ $UserPrivileges = $API->get('UserPrivileges');
 $UserPrivileges->create_privilege('jw_stockists', 'Access the locator app');
 $UserPrivileges->create_privilege('jw_stockists.delete', 'Delete locations');
 $UserPrivileges->create_privilege('jw_stockists.import', 'Mass import location data');
+$UserPrivileges->create_privilege('jw_stockists.errors', 'View error log');
 
 // Categories
 $Core_CategorySets = new PerchCategories_Sets();

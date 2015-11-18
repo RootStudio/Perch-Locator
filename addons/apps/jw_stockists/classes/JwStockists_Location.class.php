@@ -76,7 +76,7 @@ class JwStockists_Location extends PerchAPI_Base
         $Geocoder = new GoogleMapsGeocoder($address);
         $response = $Geocoder->geocode();
 
-        if (isset($response['results']) && PerchUtil::count($response['results'])) {
+        if ($response['status'] === 'OK') {
             $marker_data = array();
             $marker_data['markerLatitude'] = $response['results'][0]['geometry']['location']['lat'];
             $marker_data['markerLongitude'] = $response['results'][0]['geometry']['location']['lng'];
@@ -91,6 +91,27 @@ class JwStockists_Location extends PerchAPI_Base
 
             $this->set_status(3);
         } else {
+            $status = $response['status'];
+
+            switch($status) {
+                case 'ZERO_RESULTS':
+                    $this->set_error('No results found for address');
+                    break;
+                case 'OVER_QUERY_LIMIT':
+                    $this->set_error('API quota limit reached');
+                    break;
+                case 'REQUEST_DENIED':
+                    $this->set_error('Request denied by API');
+                    break;
+                case 'INVALID_REQUEST':
+                    $this->set_error('Request is missing required parameters');
+                    break;
+                case 'UNKNOWN_ERROR':
+                    $this->set_error('External server error');
+                default:
+                    break;
+            }
+
             $this->set_status(4);
         }
     }
@@ -129,4 +150,18 @@ class JwStockists_Location extends PerchAPI_Base
             'markerID' => $Marker->id()
         ), true);
     }
+
+    private function set_error($error_message)
+    {
+        $data = array();
+        $data['errorMessage'] = $error_message;
+        $data['errorDateTime'] = date("Y-m-d H:i:s");
+        $data['locationID'] = $this->id();
+
+        $Errors = new JwStockists_Errors($this->api);
+        $Error = $Errors->find_or_create_by_location($this->id(), $data);
+
+        return $Error;
+    }
+
 }
