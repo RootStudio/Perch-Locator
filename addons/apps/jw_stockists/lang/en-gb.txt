@@ -51,5 +51,19 @@
     "There have been no failed Geocoding jobs": "There have been no failed Geocoding jobs",
     "Force Geocoding": "Force Geocoding",
     "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=7\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=7\" class=\"action\">View Details<\/a>",
-    "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=6\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=6\" class=\"action\">View Details<\/a>"
+    "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=6\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=6\" class=\"action\">View Details<\/a>",
+    "Import Stockist Locations": "Import Stockist Locations",
+    "New File": "New File",
+    "Locations \/ Import Data": "Locations \/ Import Data",
+    "Import Locations": "Import Locations",
+    "CSV Data": "CSV Data",
+    "No action was selected": "No action was selected",
+    "Import Files": "Import Files",
+    "Select CSV File": "Select CSV File",
+    "Upload New": "Upload New",
+    "There was a problem importing from that CSV file": "There was a problem importing from that CSV file",
+    "Page %s of %s": "Page %s of %s",
+    "Next": "Next",
+    "Prev": "Prev",
+    "21 locations have been imported": "21 locations have been imported"
 }
