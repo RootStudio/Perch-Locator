@@ -53,6 +53,11 @@ class JwStockists_Markers extends PerchAPI_Factory
         'markerLongitude'
     );
 
+    /**
+     * Fetch a list of locations that have markers
+     *
+     * @return array
+     */
     public function get_locations()
     {
         $markers = $this->all();
@@ -60,6 +65,14 @@ class JwStockists_Markers extends PerchAPI_Factory
         return $this->eager_loading_processor($markers);
     }
 
+    /**
+     * Fetch a list of locations using the Haversine formula
+     *
+     * @param string $address
+     * @param int $radius
+     * @param int $limit
+     * @return array
+     */
     public function get_nearest_locations($address, $radius = 50, $limit = 25)
     {
         $response = JwStockists_Geocode::geocode($address);
@@ -84,6 +97,12 @@ class JwStockists_Markers extends PerchAPI_Factory
         }
     }
 
+    /**
+     * Pair marker data to location instance after eager loading
+     *
+     * @param $markers
+     * @return array
+     */
     private function eager_loading_processor($markers)
     {
         $marker_ids = array();

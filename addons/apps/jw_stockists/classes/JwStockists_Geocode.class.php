@@ -2,8 +2,19 @@
 
 include PERCH_PATH . '/addons/apps/jw_stockists/libraries/GoogleMapsGeocoder/GoogleMapsGeocoder.php';
 
+/**
+ * Class JwStockists_Geocode
+ *
+ * @author James Wigger <james.s.wigger@gmail.com>
+ */
 class JwStockists_Geocode
 {
+    /**
+     * Geocode address to lat,lng with optional API key
+     *
+     * @param $address
+     * @return array|SimpleXMLElement|string
+     */
     public static function geocode($address)
     {
         $API = new PerchAPI(1.0, 'jw_stockists');
