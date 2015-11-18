@@ -56,15 +56,40 @@ class JwStockists_Markers extends PerchAPI_Factory
     public function get_locations()
     {
         $markers = $this->all();
+
         return $this->eager_loadeding_processor($markers);
+    }
+
+    public function get_nearest_locations($address, $radius = 50)
+    {
+        $response = JwStockists_Geocode::geocode($address);
+
+        if ($response['status'] === 'OK') {
+            $lat = $response['results'][0]['geometry']['location']['lat'];
+            $lng = $response['results'][0]['geometry']['location']['lng'];
+
+            $sql = "SELECT distinct *,
+                    ( 3959 * acos( cos( radians( {$lat} ) ) * cos( radians( `latitude` ) ) * cos( radians( `longitude` ) - radians( {$lng} ) ) + sin( radians( {$lat} ) ) * sin( radians( `latitude` ) ) ) ) AS distance
+                    FROM `{$this->table}` HAVING distance <= {$radius}
+                    ORDER BY distance;";
+
+            $rows = $this->db->get_rows($sql);
+            $markers = $this->return_instances($rows);
+
+            return $this->eager_loadeding_processor($markers);
+
+        } else {
+            return array();
+            PerchUtil::debug($response['status']);
+        }
     }
 
     private function eager_loadeding_processor($markers)
     {
         $marker_ids = array();
-        if(PerchUtil::count($markers)) {
-            foreach($markers as $Marker) {
-                $marker_ids[] = (int) $Marker->id();
+        if (PerchUtil::count($markers)) {
+            foreach ($markers as $Marker) {
+                $marker_ids[] = (int)$Marker->id();
             }
         }
 
@@ -73,17 +98,17 @@ class JwStockists_Markers extends PerchAPI_Factory
 
         $locations_data = array();
 
-        if(PerchUtil::count($locations)) {
-            foreach($locations as $Location) {
+        if (PerchUtil::count($locations)) {
+            foreach ($locations as $Location) {
                 $location_id = $Location->id();
 
-                $Marker = array_filter($markers, function($Marker) use($location_id) {
+                $Marker = array_filter($markers, function ($Marker) use ($location_id) {
                     return $Marker->id() == $location_id;
                 });
 
                 $Marker = array_values($Marker);
 
-                if(isset($Marker[0])) {
+                if (isset($Marker[0])) {
                     $Marker = $Marker[0];
 
                     $Location->squirrel('markerLatitude', $Marker->markerLatitude());

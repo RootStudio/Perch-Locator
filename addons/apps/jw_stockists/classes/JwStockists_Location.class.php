@@ -1,7 +1,5 @@
 <?php
 
-include PERCH_PATH . '/addons/apps/jw_stockists/libraries/GoogleMapsGeocoder/GoogleMapsGeocoder.php';
-
 /**
  * Class JwStockists_Location
  *
@@ -147,8 +145,7 @@ class JwStockists_Location extends PerchAPI_Base
         $address .= '+' . $this->locationPostcode();
         $address .= '+' . $this->locationCountry();
 
-        $Geocoder = new GoogleMapsGeocoder($address);
-        $response = $Geocoder->geocode();
+        $response = JwStockists_Geocode::geocode($address);
 
         if ($response['status'] === 'OK') {
             $marker_data = array();
