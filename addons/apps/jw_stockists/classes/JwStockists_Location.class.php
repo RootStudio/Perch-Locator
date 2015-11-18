@@ -15,6 +15,12 @@ class JwStockists_Location extends PerchAPI_Base
             $data['locationUpdatedAt'] = date("Y-m-d H:i:s");
         }
 
+        $Error = $this->get_error();
+
+        if(is_object($Error)) {
+            $Error->delete();
+        }
+
         parent::update($data);
     }
 
