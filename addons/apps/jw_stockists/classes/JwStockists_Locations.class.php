@@ -105,7 +105,7 @@ class JwStockists_Locations extends PerchAPI_Factory
     {
         $results = array();
 
-        if(PerchUtil::count($ids)) {
+        if(PerchUtil::count($marker_ids)) {
             if ($Paging && $Paging->enabled()) {
                 $sql = $Paging->select_sql();
             } else {

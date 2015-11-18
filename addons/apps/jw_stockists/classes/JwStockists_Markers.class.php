@@ -56,7 +56,11 @@ class JwStockists_Markers extends PerchAPI_Factory
     public function get_locations()
     {
         $markers = $this->all();
+        return $this->eager_loadeding_processor($markers);
+    }
 
+    private function eager_loadeding_processor($markers)
+    {
         $marker_ids = array();
         if(PerchUtil::count($markers)) {
             foreach($markers as $Marker) {
@@ -67,17 +71,29 @@ class JwStockists_Markers extends PerchAPI_Factory
         $Locations = new JwStockists_Locations($this->api);
         $locations = $Locations->all_with_markers($marker_ids);
 
+        $locations_data = array();
+
         if(PerchUtil::count($locations)) {
             foreach($locations as $Location) {
+                $location_id = $Location->id();
+
                 $Marker = array_filter($markers, function($Marker) use($location_id) {
-                    $Marker->id() == $location_id;
+                    return $Marker->id() == $location_id;
                 });
 
-                $Location->squirrel('markerLatitude', $Marker->markerLatitude());
-                $Location->squirrel('markerLongitude', $Marker->markerLongitude());
+                $Marker = array_values($Marker);
+
+                if(isset($Marker[0])) {
+                    $Marker = $Marker[0];
+
+                    $Location->squirrel('markerLatitude', $Marker->markerLatitude());
+                    $Location->squirrel('markerLongitude', $Marker->markerLongitude());
+
+                    $locations_data[] = $Location->to_array();
+                }
             }
         }
-        
-        return $Locations;
+
+        return $locations_data;
     }
 }
