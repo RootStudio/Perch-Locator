@@ -31,6 +31,13 @@ a:hover .tag.error {
     color: #FFF;
 }
 
+.map-preview {
+    display: block;
+    border: 1px solid #E5E5E5;
+    padding: 5px;
+    margin: 20px 0 20px 240px;
+}
+
 .error-list {
 
 }

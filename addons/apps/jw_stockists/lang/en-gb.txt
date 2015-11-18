@@ -48,5 +48,8 @@
     "This location could not be Geocoded <a href=\"\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\" class=\"action\">View Details<\/a>",
     "This location could not be Geocoded <a href=\"#\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"#\" class=\"action\">View Details<\/a>",
     "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=8\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=8\" class=\"action\">View Details<\/a>",
-    "There have been no failed Geocoding jobs": "There have been no failed Geocoding jobs"
+    "There have been no failed Geocoding jobs": "There have been no failed Geocoding jobs",
+    "Force Geocoding": "Force Geocoding",
+    "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=7\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=7\" class=\"action\">View Details<\/a>",
+    "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=6\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=6\" class=\"action\">View Details<\/a>"
 }

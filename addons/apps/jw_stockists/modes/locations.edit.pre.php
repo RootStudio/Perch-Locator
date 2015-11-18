@@ -61,10 +61,15 @@ if ($Form->submitted()) {
         'locationTown',
         'locationRegion',
         'locationCountry',
-        'locationPostcode'
+        'locationPostcode',
+        'force_geocoding'
     );
 
     $data = $Form->receive($postvars);
+
+    // Force update
+    $force_geocoding = isset($data['force_geocoding']);
+    unset($data['force_geocoding']);
 
     // Dynamic data
     $previous_values = false;
@@ -78,7 +83,7 @@ if ($Form->submitted()) {
 
     // Store
     if (is_object($Location)) {
-        $result = $Location->update($data);
+        $result = $Location->update($data, $force_geocoding);
         $details = $Location->to_array();
     } else {
         if (isset($data['locationID'])) {

@@ -8,7 +8,7 @@ class JwStockists_Location extends PerchAPI_Base
 
     protected $pk = 'locationID';
 
-    public function update($data, $ignore_timestamp = false)
+    public function update($data, $force_geocoding = false, $ignore_timestamp = false)
     {
         if (!$ignore_timestamp) {
             $this->set_status(1);
@@ -21,7 +21,13 @@ class JwStockists_Location extends PerchAPI_Base
             $Error->delete();
         }
 
-        parent::update($data);
+        $result = parent::update($data);
+
+        if($force_geocoding) {
+            $this->geocode();
+        }
+
+        return $result;
     }
 
     public function delete()
@@ -135,12 +141,12 @@ class JwStockists_Location extends PerchAPI_Base
 
         $base_url = 'https://maps.googleapis.com/maps/api/staticmap?';
         $parameters = array(
-            'size' => '400x400',
+            'size' => '400x200',
             'maptype' => 'roadmap',
             'markers' => 'color:red|' . $Marker->markerLatitude() . ',' . $Marker->markerLongitude()
         );
 
-        return '<img src="' . $base_url . http_build_query($parameters) . '" />';
+        return '<img class="map-preview" src="' . $base_url . http_build_query($parameters) . '" />';
     }
 
     /**
@@ -150,7 +156,7 @@ class JwStockists_Location extends PerchAPI_Base
     {
         $this->update(array(
             'locationProcessingStatus' => $status_code
-        ), true);
+        ), false, true);
     }
 
     private function set_marker($data)
@@ -160,7 +166,7 @@ class JwStockists_Location extends PerchAPI_Base
 
         $this->update(array(
             'markerID' => $Marker->id()
-        ), true);
+        ), false, true);
     }
 
     private function set_error($error_message)

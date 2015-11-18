@@ -37,6 +37,10 @@ echo $Form->form_start();
     $country_opts = include '../utilities/country_codes.php';
     echo $Form->select_field('locationCountry', 'Country', $country_opts, isset($details['locationCountry']) ? $details['locationCountry'] : 'GB');
 
+    if(is_object($Location)) {
+        echo $Form->checkbox_field('force_geocoding', 'Force Geocoding', '1');
+    }
+
     if(is_object($Location) && ($Location->get_status() === 3)) {
         echo $HTML->heading2('Preview');
         echo $Location->map_preview();
