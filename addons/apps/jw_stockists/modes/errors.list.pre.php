@@ -1,6 +1,6 @@
 <?php
 
-if ($CurrentUser->has_priv('jw_stockists.errors')) {
+if (!$CurrentUser->has_priv('jw_stockists.errors')) {
     PerchUtil::redirect($API->app_path());
 }
 

@@ -7,17 +7,16 @@ $API = new PerchAPI(1.0, 'jw_stockists');
 $Lang = $API->get('Lang');
 
 // Page Meta
-$Perch->page_title = $Lang->get('Import Stockist Locations');
-$Perch->add_css($API->app_path() . '/assets/css/locator.css');
+$Perch->page_title = $Lang->get('Delete Stockist Locations');
 
 // Page Initialising
-include('../modes/locations.import.pre.php');
+include('../modes/locations.delete.pre.php');
 
 // Perch Frame
 include(PERCH_CORE . '/inc/top.php');
 
 // Page
-include('../modes/locations.import.post.php');
+include('../modes/locations.delete.post.php');
 
 // Perch Frame
 include(PERCH_CORE . '/inc/btm.php');

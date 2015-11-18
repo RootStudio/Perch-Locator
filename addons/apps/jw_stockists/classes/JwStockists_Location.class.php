@@ -61,7 +61,7 @@ class JwStockists_Location extends PerchAPI_Base
     {
         $Marker = $this->get_marker();
 
-        if (!is_object($Marker)) {
+        if (is_object($Marker)) {
             $Marker->delete();
         }
 

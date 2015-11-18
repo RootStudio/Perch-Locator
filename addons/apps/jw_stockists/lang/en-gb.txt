@@ -88,5 +88,10 @@
     "15": "25",
     "16": "50",
     "17": "100",
-    "To import CSV data, upload a new file and then select it from the menu. Imported data will be queued for geocoding.": "To import CSV data, upload a new file and then select it from the menu. Imported data will be queued for geocoding."
+    "To import CSV data, upload a new file and then select it from the menu. Imported data will be queued for geocoding.": "To import CSV data, upload a new file and then select it from the menu. Imported data will be queued for geocoding.",
+    "Delete Stockist Locations": "Delete Stockist Locations",
+    "Delete Location": "Delete Location",
+    "Delete a location here.": "Delete a location here.",
+    "Deleting a Location": "Deleting a Location",
+    "Are you sure you wish to delete the location %s?": "Are you sure you wish to delete the location %s?"
 }
