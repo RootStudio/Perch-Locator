@@ -9,9 +9,9 @@ $sql = "
 CREATE TABLE `__PREFIX__jw_stockists_locations` (
   `locationID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `locationTitle` varchar(255) NOT NULL DEFAULT '',
-  `locationBuilding` varchar(255) NOT NULL DEFAULT '',
+  `locationBuilding` varchar(255) DEFAULT '',
   `locationStreet` varchar(255) NOT NULL DEFAULT '',
-  `locationTown` varchar(255) NOT NULL DEFAULT '',
+  `locationTown` varchar(255) DEFAULT '',
   `locationRegion` varchar(255) DEFAULT '',
   `locationCountry` varchar(3) NOT NULL DEFAULT '',
   `locationPostcode` varchar(15) NOT NULL DEFAULT '',

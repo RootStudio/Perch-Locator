@@ -93,5 +93,18 @@
     "Delete Location": "Delete Location",
     "Delete a location here.": "Delete a location here.",
     "Deleting a Location": "Deleting a Location",
-    "Are you sure you wish to delete the location %s?": "Are you sure you wish to delete the location %s?"
+    "Are you sure you wish to delete the location %s?": "Are you sure you wish to delete the location %s?",
+    "49 locations have been imported": "49 locations have been imported",
+    "18": "25",
+    "19": "50",
+    "20": "100",
+    "21": "25",
+    "22": "50",
+    "23": "100",
+    "24": "25",
+    "25": "50",
+    "26": "100",
+    "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=75\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=75\" class=\"action\">View Details<\/a>",
+    "27": "50",
+    "28": "100"
 }

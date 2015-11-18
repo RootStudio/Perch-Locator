@@ -57,7 +57,7 @@ class JwStockists_Markers extends PerchAPI_Factory
     {
         $markers = $this->all();
 
-        return $this->eager_loadeding_processor($markers);
+        return $this->eager_loading_processor($markers);
     }
 
     public function get_nearest_locations($address, $radius = 50, $limit = 25)
@@ -76,7 +76,7 @@ class JwStockists_Markers extends PerchAPI_Factory
             $rows = $this->db->get_rows($sql);
             $markers = $this->return_instances($rows);
 
-            return $this->eager_loadeding_processor($markers);
+            return $this->eager_loading_processor($markers);
 
         } else {
             return array();
@@ -84,7 +84,7 @@ class JwStockists_Markers extends PerchAPI_Factory
         }
     }
 
-    private function eager_loadeding_processor($markers)
+    private function eager_loading_processor($markers)
     {
         $marker_ids = array();
         if (PerchUtil::count($markers)) {

@@ -1,10 +1,4 @@
 <?php
-include PERCH_PATH . '/addons/apps/jw_stockists/classes/JwStockists_Locations.class.php';
-include PERCH_PATH . '/addons/apps/jw_stockists/classes/JwStockists_Location.class.php';
-include PERCH_PATH . '/addons/apps/jw_stockists/classes/JwStockists_Markers.class.php';
-include PERCH_PATH . '/addons/apps/jw_stockists/classes/JwStockists_Marker.class.php';
-include PERCH_PATH . '/addons/apps/jw_stockists/classes/JwStockists_Errors.class.php';
-include PERCH_PATH . '/addons/apps/jw_stockists/classes/JwStockists_Error.class.php';
 
 PerchScheduledTasks::register_task('jw_stockists', 'geocode_location_batch', 10, 'jw_stockists_process_geocoding_queue');
 
