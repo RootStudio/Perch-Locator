@@ -101,6 +101,40 @@ class JwStockists_Locations extends PerchAPI_Factory
         return $this->return_instances($results);
     }
 
+    public function all_with_markers($marker_ids, $Paging = false)
+    {
+        $results = array();
+
+        if(PerchUtil::count($ids)) {
+            if ($Paging && $Paging->enabled()) {
+                $sql = $Paging->select_sql();
+            } else {
+                $sql = 'SELECT';
+            }
+
+            $sql .= ' *
+                FROM ' . $this->table;
+
+            $sql .= ' WHERE ' . $this->pk . ' IN(' . implode(',', $marker_ids) . ')';
+
+            if (isset($this->default_sort_column)) {
+                $sql .= ' ORDER BY ' . $this->default_sort_column . ' ' . $this->default_sort_direction;
+            }
+
+            if ($Paging && $Paging->enabled()) {
+                $sql .= ' ' . $Paging->limit_sql();
+            }
+
+            $results = $this->db->get_rows($sql);
+
+            if ($Paging && $Paging->enabled()) {
+                $Paging->set_total($this->db->get_count($Paging->total_count_sql()));
+            }
+        }
+
+        return $this->return_instances($results);
+    }
+
     public function get_queued($batch_limit = 25)
     {
         $sql  = 'SELECT * FROM ' . $this->table;
