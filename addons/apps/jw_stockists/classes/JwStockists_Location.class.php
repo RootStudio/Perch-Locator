@@ -35,6 +35,12 @@ class JwStockists_Location extends PerchAPI_Base
         return $Markers->find($this->markerID());
     }
 
+    public function get_error()
+    {
+        $Errors = new JwStockists_Errors($this->api);
+        return $Errors->find_by_location($this->id());
+    }
+
     public function get_status()
     {
         return (int)$this->locationProcessingStatus();

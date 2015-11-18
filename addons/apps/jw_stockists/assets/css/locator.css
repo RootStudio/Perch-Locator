@@ -23,3 +23,19 @@
 .tag.error {
     color: #CC0500;
 }
+
+.error-list {
+
+}
+
+.error-list thead th {
+    border-bottom-color: #ffcdcc;
+    background-color: #FFE0E0;
+    color: #CC0500;
+}
+
+.error-list td {
+    border-bottom-color: #FFE0E0;
+    background-color: #fff4f3;
+    color: #C45E5C;
+}

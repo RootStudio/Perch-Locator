@@ -25,6 +25,7 @@ echo $HTML->heading1('Listing Locations');
 <?php if (isset($message)) {
     echo $message;
 } ?>
+
 <?php if (PerchUtil::count($locations)): ?>
     <table class="d">
         <thead>
@@ -49,6 +50,7 @@ echo $HTML->heading1('Listing Locations');
         </thead>
         <tbody>
             <?php foreach ($locations as $Location): ?>
+            <tr>
                 <td class="primary">
                     <a href="<?php echo $HTML->encode($API->app_path()); ?>/edit/?id=<?php echo $HTML->encode(urlencode($Location->id())); ?>">
                         <?php echo $HTML->encode($Location->locationTitle()); ?>
@@ -74,6 +76,7 @@ echo $HTML->heading1('Listing Locations');
                         </a>
                     <?php endif; ?>
                 </td>
+            </tr>
             <?php endforeach; ?>
         </tbody>
     </table>

@@ -37,5 +37,10 @@
     "This location is currently queued for geocoding": "This location is currently queued for geocoding",
     "This location is currently queued for Geocoding": "This location is currently queued for Geocoding",
     "This location could not be Geocoded": "This location could not be Geocoded",
-    "Failed Jobs": "Failed Jobs"
+    "Failed Jobs": "Failed Jobs",
+    "Failed Stockist Locations": "Failed Stockist Locations",
+    "This page shows you the locations that have not been geocoded due to errors.": "This page shows you the locations that have not been geocoded due to errors.",
+    "Error": "Error",
+    "Date": "Date",
+    "Edit": "Edit"
 }

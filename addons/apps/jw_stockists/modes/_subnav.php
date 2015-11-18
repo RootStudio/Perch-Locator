@@ -23,4 +23,6 @@ $subnav_pages[] = array(
 );
 
 echo $HTML->subnav($CurrentUser, $subnav_pages);
+
+unset($Errors);
 unset($subnav_pages);
