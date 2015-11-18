@@ -2,12 +2,35 @@
 
 include PERCH_PATH . '/addons/apps/jw_stockists/utilities/GoogleMapsGeocoder.php';
 
+/**
+ * Class JwStockists_Location
+ *
+ * @author James Wigger <james.s.wigger@gmail.com>
+ */
 class JwStockists_Location extends PerchAPI_Base
 {
+    /**
+     * Locations table
+     *
+     * @var string
+     */
     protected $table = 'jw_stockists_locations';
 
+    /**
+     * Primary Key
+     *
+     * @var string
+     */
     protected $pk = 'locationID';
 
+    /**
+     * Update existing record, optionally forcing a geocode request
+     *
+     * @param array $data
+     * @param bool|false $force_geocoding
+     * @param bool|false $ignore_timestamp
+     * @return mixed
+     */
     public function update($data, $force_geocoding = false, $ignore_timestamp = false)
     {
         if (!$ignore_timestamp) {
@@ -30,6 +53,9 @@ class JwStockists_Location extends PerchAPI_Base
         return $result;
     }
 
+    /**
+     * Delete record including associated marker / error
+     */
     public function delete()
     {
         $Marker = $this->get_marker();
@@ -38,26 +64,52 @@ class JwStockists_Location extends PerchAPI_Base
             $Marker->delete();
         }
 
+        $Error = $this->get_error();
+
+        if(is_object($Error)) {
+            $Error->delete();
+        }
+
         parent::delete();
     }
 
+    /**
+     * Return associated Marker object
+     *
+     * @return JwStockists_Marker|false
+     */
     public function get_marker()
     {
         $Markers = new JwStockists_Markers($this->api);
         return $Markers->find($this->markerID());
     }
 
+    /**
+     * Return associated Error object
+     *
+     * @return JwStockists_Error|false
+     */
     public function get_error()
     {
         $Errors = new JwStockists_Errors($this->api);
         return $Errors->find_by_location($this->id());
     }
 
+    /**
+     * Return job status code
+     *
+     * @return int
+     */
     public function get_status()
     {
         return (int)$this->locationProcessingStatus();
     }
 
+    /**
+     * Return human readable status
+     *
+     * @return string
+     */
     public function get_status_tag()
     {
         switch ((int)$this->locationProcessingStatus()) {
@@ -79,6 +131,9 @@ class JwStockists_Location extends PerchAPI_Base
         }
     }
 
+    /**
+     * Convert given address into coordinates for Marker object
+     */
     public function geocode()
     {
         $this->set_status(2);
@@ -134,6 +189,11 @@ class JwStockists_Location extends PerchAPI_Base
         }
     }
 
+    /**
+     * Display Google static maps preview
+     *
+     * @return string
+     */
     public function map_preview()
     {
         $Markers = new JwStockists_Markers($this->api);
@@ -150,6 +210,8 @@ class JwStockists_Location extends PerchAPI_Base
     }
 
     /**
+     * Set job status code
+     *
      * @param int $status_code 1: queued, 2: processing, 3: synced, 4: Failed
      */
     private function set_status($status_code = 1)
@@ -159,6 +221,11 @@ class JwStockists_Location extends PerchAPI_Base
         ), false, true);
     }
 
+    /**
+     * Attach Marker object
+     *
+     * @param array $data
+     */
     private function set_marker($data)
     {
         $Markers = new JwStockists_Markers($this->api);
@@ -169,6 +236,12 @@ class JwStockists_Location extends PerchAPI_Base
         ), false, true);
     }
 
+    /**
+     * Attach Error object
+     *
+     * @param string $error_message
+     * @return bool
+     */
     private function set_error($error_message)
     {
         $data = array();
