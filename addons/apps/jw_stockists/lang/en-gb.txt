@@ -42,5 +42,11 @@
     "This page shows you the locations that have not been geocoded due to errors.": "This page shows you the locations that have not been geocoded due to errors.",
     "Error": "Error",
     "Date": "Date",
-    "Edit": "Edit"
+    "Edit": "Edit",
+    "This location could not be Geocoded <a href=\"\" class=\"button action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\" class=\"button action\">View Details<\/a>",
+    "This location could not be Geocoded <a href=\"\" class=\"button\">View Details<\/a>": "This location could not be Geocoded <a href=\"\" class=\"button\">View Details<\/a>",
+    "This location could not be Geocoded <a href=\"\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\" class=\"action\">View Details<\/a>",
+    "This location could not be Geocoded <a href=\"#\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"#\" class=\"action\">View Details<\/a>",
+    "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=8\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=8\" class=\"action\">View Details<\/a>",
+    "There have been no failed Geocoding jobs": "There have been no failed Geocoding jobs"
 }

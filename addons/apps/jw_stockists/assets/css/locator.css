@@ -24,6 +24,13 @@
     color: #CC0500;
 }
 
+a:hover .tag.error {
+    border-color: #CC0500;
+    background-color: #CC0500;
+    text-decoration: none;
+    color: #FFF;
+}
+
 .error-list {
 
 }

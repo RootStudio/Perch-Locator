@@ -66,7 +66,15 @@ echo $HTML->heading1('Listing Locations');
                     <?php echo $HTML->encode($Location->locationPostcode()); ?>
                 </td>
                 <td>
+                    <?php if($Location->get_status() === 4) {
+                        echo '<a href="'. $HTML->encode($API->app_path()) .'/errors/?view='. $HTML->encode(urlencode($Location->id())) .'">';
+                    } ?>
+
                     <?php echo $Location->get_status_tag(); ?>
+
+                    <?php if($Location->get_status() === 4) {
+                        echo '</a>';
+                    } ?>
                 </td>
                 <td>
                     <?php if ($CurrentUser->has_priv('jw_stockists.delete')): ?>

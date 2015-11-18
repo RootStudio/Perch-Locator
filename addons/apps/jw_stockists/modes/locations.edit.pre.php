@@ -30,7 +30,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     }
 
     if($Location->get_status() === 4) {
-        $message = $HTML->failure_message('This location could not be Geocoded');
+        $message = $HTML->failure_message('This location could not be Geocoded <a href="'. $HTML->encode($API->app_path()) .'/errors/?view='. $HTML->encode(urlencode($Location->id())) .'" class="action">View Details</a>');
     }
 
 } else {
