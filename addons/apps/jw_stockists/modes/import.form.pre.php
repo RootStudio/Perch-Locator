@@ -15,6 +15,10 @@ $files = $Importer->get_imported_csv_files();
 // Defaults
 $message = false;
 
+if(!$Importer->import_dir_writable()) {
+    $message = $HTML->warning_message('Your resources folder is not writable. Make this folder writable if you want to upload files.');
+}
+
 // Process Form
 if ($Form->submitted()) {
     $postvars = array('csv_path');

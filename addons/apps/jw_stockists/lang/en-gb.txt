@@ -65,5 +65,7 @@
     "Page %s of %s": "Page %s of %s",
     "Next": "Next",
     "Prev": "Prev",
-    "21 locations have been imported": "21 locations have been imported"
+    "21 locations have been imported": "21 locations have been imported",
+    "Your resources folder is not writable. Make this folder (\/resources) writable if you want to upload files.": "Your resources folder is not writable. Make this folder (\/resources) writable if you want to upload files.",
+    "Your resources folder is not writable. Make this folder writable if you want to upload files.": "Your resources folder is not writable. Make this folder writable if you want to upload files."
 }
