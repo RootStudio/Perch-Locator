@@ -1,6 +1,6 @@
 <?php
 
-include PERCH_PATH . '/addons/apps/jw_stockists/utilities/GoogleMapsGeocoder.php';
+include PERCH_PATH . '/addons/apps/jw_stockists/libraries/GoogleMapsGeocoder/GoogleMapsGeocoder.php';
 
 /**
  * Class JwStockists_Location
@@ -36,12 +36,13 @@ class JwStockists_Location extends PerchAPI_Base
         if (!$ignore_timestamp) {
             $this->set_status(1);
             $data['locationUpdatedAt'] = date("Y-m-d H:i:s");
-        }
 
-        $Error = $this->get_error();
+            // Move here, as this is a 'normal' update
+            $Error = $this->get_error();
 
-        if(is_object($Error)) {
-            $Error->delete();
+            if(is_object($Error)) {
+                $Error->delete();
+            }
         }
 
         $result = parent::update($data);

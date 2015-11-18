@@ -23,16 +23,9 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
 
     $heading1 = 'Locations / Edit Location';
 
-    $Location->geocode();
-
     if($Location->get_status() === 1) {
         $message = $HTML->warning_message('This location is currently queued for Geocoding');
     }
-
-    if($Location->get_status() === 4) {
-        $message = $HTML->failure_message('This location could not be Geocoded <a href="'. $HTML->encode($API->app_path()) .'/errors/?view='. $HTML->encode(urlencode($Location->id())) .'" class="action">View Details</a>');
-    }
-
 } else {
     $locationID = false;
     $Location = false;
@@ -108,4 +101,8 @@ if ($Form->submitted()) {
 if (isset($_GET['created']) && !$message) {
     $message = $HTML->success_message('The location has been successfully updated. Return to %slocations list%s',
         '<a href="' . $API->app_path() . '">', '</a>');
+}
+
+if(is_object($Location) && ($Location->get_status() === 4)) {
+    $message = $HTML->failure_message('This location could not be Geocoded <a href="'. $HTML->encode($API->app_path()) .'/errors/?view='. $HTML->encode(urlencode($Location->id())) .'" class="action">View Details</a>');
 }
