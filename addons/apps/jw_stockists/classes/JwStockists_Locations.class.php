@@ -26,7 +26,7 @@ class JwStockists_Locations extends PerchAPI_Factory
      *
      * @var string
      */
-    protected $default_sort_column = 'locationID';
+    protected $default_sort_column = 'locationTitle';
 
     /**
      * Sort direction

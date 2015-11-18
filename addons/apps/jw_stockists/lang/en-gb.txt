@@ -67,5 +67,22 @@
     "Prev": "Prev",
     "21 locations have been imported": "21 locations have been imported",
     "Your resources folder is not writable. Make this folder (\/resources) writable if you want to upload files.": "Your resources folder is not writable. Make this folder (\/resources) writable if you want to upload files.",
-    "Your resources folder is not writable. Make this folder writable if you want to upload files.": "Your resources folder is not writable. Make this folder writable if you want to upload files."
+    "Your resources folder is not writable. Make this folder writable if you want to upload files.": "Your resources folder is not writable. Make this folder writable if you want to upload files.",
+    "Batch Size": "Batch Size",
+    "0": "10",
+    "1": "25",
+    "2": "50",
+    "3": "100",
+    "Google API Key": "Google API Key",
+    "4": "10",
+    "5": "25",
+    "6": "50",
+    "7": "100",
+    "8": "10",
+    "9": "25",
+    "10": "50",
+    "11": "100",
+    "12": "25",
+    "13": "50",
+    "14": "100"
 }
