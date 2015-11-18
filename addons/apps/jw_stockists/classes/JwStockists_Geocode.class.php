@@ -7,6 +7,7 @@ class JwStockists_Geocode
     public static function geocode($address)
     {
         $Geocoder = new GoogleMapsGeocoder($address);
+
         return $Geocoder->geocode();
     }
 }

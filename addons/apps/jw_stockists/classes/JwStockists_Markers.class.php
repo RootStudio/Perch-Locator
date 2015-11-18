@@ -60,7 +60,7 @@ class JwStockists_Markers extends PerchAPI_Factory
         return $this->eager_loadeding_processor($markers);
     }
 
-    public function get_nearest_locations($address, $radius = 50)
+    public function get_nearest_locations($address, $radius = 50, $limit = 25)
     {
         $response = JwStockists_Geocode::geocode($address);
 
@@ -69,9 +69,9 @@ class JwStockists_Markers extends PerchAPI_Factory
             $lng = $response['results'][0]['geometry']['location']['lng'];
 
             $sql = "SELECT distinct *,
-                    ( 3959 * acos( cos( radians( {$lat} ) ) * cos( radians( `latitude` ) ) * cos( radians( `longitude` ) - radians( {$lng} ) ) + sin( radians( {$lat} ) ) * sin( radians( `latitude` ) ) ) ) AS distance
-                    FROM `{$this->table}` HAVING distance <= {$radius}
-                    ORDER BY distance;";
+                    ( 3959 * acos( cos( radians( {$lat} ) ) * cos( radians( `markerLatitude` ) ) * cos( radians( `markerLongitude` ) - radians( {$lng} ) ) + sin( radians( {$lat} ) ) * sin( radians( `markerLatitude` ) ) ) ) AS markerDistance
+                    FROM `{$this->table}` HAVING markerDistance <= {$radius}
+                    ORDER BY markerDistance LIMIT {$limit};";
 
             $rows = $this->db->get_rows($sql);
             $markers = $this->return_instances($rows);
@@ -113,6 +113,10 @@ class JwStockists_Markers extends PerchAPI_Factory
 
                     $Location->squirrel('markerLatitude', $Marker->markerLatitude());
                     $Location->squirrel('markerLongitude', $Marker->markerLongitude());
+
+                    if($distance = $Marker->markerDistance()) {
+                        $Location->squirrel('markerDistance', round($Marker->markerDistance(), 1));
+                    }
 
                     $locations_data[] = $Location->to_array();
                 }

@@ -38,14 +38,14 @@ class JwStockists_Location extends PerchAPI_Base
             // Move here, as this is a 'normal' update
             $Error = $this->get_error();
 
-            if(is_object($Error)) {
+            if (is_object($Error)) {
                 $Error->delete();
             }
         }
 
         $result = parent::update($data);
 
-        if($force_geocoding) {
+        if ($force_geocoding) {
             $this->geocode();
         }
 
@@ -65,7 +65,7 @@ class JwStockists_Location extends PerchAPI_Base
 
         $Error = $this->get_error();
 
-        if(is_object($Error)) {
+        if (is_object($Error)) {
             $Error->delete();
         }
 
@@ -80,6 +80,7 @@ class JwStockists_Location extends PerchAPI_Base
     public function get_marker()
     {
         $Markers = new JwStockists_Markers($this->api);
+
         return $Markers->find($this->markerID());
     }
 
@@ -91,6 +92,7 @@ class JwStockists_Location extends PerchAPI_Base
     public function get_error()
     {
         $Errors = new JwStockists_Errors($this->api);
+
         return $Errors->find_by_location($this->id());
     }
 
@@ -161,14 +163,14 @@ class JwStockists_Location extends PerchAPI_Base
             }
 
             $this->update(array(
-                'locationProcessedAt' =>  date("Y-m-d H:i:s")
+                'locationProcessedAt' => date("Y-m-d H:i:s")
             ), false, true);
 
             $this->set_status(3);
         } else {
             $status = $response['status'];
 
-            switch($status) {
+            switch ($status) {
                 case 'ZERO_RESULTS':
                     $this->set_error('No results found for address');
                     break;
@@ -203,7 +205,7 @@ class JwStockists_Location extends PerchAPI_Base
 
         $base_url = 'https://maps.googleapis.com/maps/api/staticmap?';
         $parameters = array(
-            'size' => '400x200',
+            'size'    => '400x200',
             'maptype' => 'roadmap',
             'markers' => 'color:red|' . $Marker->markerLatitude() . ',' . $Marker->markerLongitude()
         );
