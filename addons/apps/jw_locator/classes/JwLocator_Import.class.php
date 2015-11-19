@@ -131,6 +131,7 @@ class JwLocator_Import
             $data = array();
 
             foreach($row as $key => $column) {
+                $key = trim($key);
                 $data[$this->column_map[$key]] = $column;
             }
 

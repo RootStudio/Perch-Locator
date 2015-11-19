@@ -157,5 +157,8 @@
     "If the API limit has been reached, contact your developer to request a new key": "If the API limit has been reached, contact your developer to request a new key",
     "This page allows you to add \/ edit a location in the system.": "This page allows you to add \/ edit a location in the system.",
     "To prevent performance issues, all updates are queued to be plotted onto the map. Changes can take up to 10 minutes to appear.": "To prevent performance issues, all updates are queued to be plotted onto the map. Changes can take up to 10 minutes to appear.",
-    "If changes need to be made immediately, ticking the \"force geocoding\" box will update the map on save.": "If changes need to be made immediately, ticking the \"force geocoding\" box will update the map on save."
+    "If changes need to be made immediately, ticking the \"force geocoding\" box will update the map on save.": "If changes need to be made immediately, ticking the \"force geocoding\" box will update the map on save.",
+    "No locations have been added to the system.": "No locations have been added to the system.",
+    "All locations have been plotted successfully.": "All locations have been plotted successfully.",
+    "109 locations have been imported": "109 locations have been imported"
 }
