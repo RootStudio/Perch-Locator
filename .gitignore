@@ -6,7 +6,7 @@
 !/addons/apps
 /addons/apps/*
 
-!/addons/apps/jw_stockists
+!/addons/apps/jw_locator
 
 !.gitignore
 !readme.md
