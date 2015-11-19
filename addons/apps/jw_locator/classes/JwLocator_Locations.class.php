@@ -179,6 +179,12 @@ class JwLocator_Locations extends PerchAPI_Factory
         return parent::create($data);
     }
 
+    /**
+     * Search locations with custom filters
+     *
+     * @param array $opts
+     * @return array|bool|mixed|string
+     */
     public function get_custom($opts)
     {
         // Category Searching
@@ -202,6 +208,7 @@ class JwLocator_Locations extends PerchAPI_Factory
 
         // Custom searches
         $where_callback = $this->filtered_listing_where_callback($opts);
+        $pre_template_callback = $this->filtered_listing_template_callback($opts);
 
         // Prepare templates
         $set_template = $opts['template'];
@@ -215,9 +222,15 @@ class JwLocator_Locations extends PerchAPI_Factory
             return $template;
         };
 
-        return $this->get_filtered_listing($opts, $where_callback);
+        return $this->get_filtered_listing($opts, $where_callback, $pre_template_callback);
     }
 
+    /**
+     * Custom query for address based filtering
+     *
+     * @param array $opts
+     * @return Closure
+     */
     private function filtered_listing_where_callback($opts)
     {
         $db = $this->db;
@@ -244,6 +257,51 @@ class JwLocator_Locations extends PerchAPI_Factory
             }
 
             return $Query;
+        };
+    }
+
+    /**
+     * Inject data into template data before rendering
+     *
+     * @param array $opts
+     * @return Closure
+     */
+    private function filtered_listing_template_callback($opts)
+    {
+        $Markers = new JwLocator_Markers;
+
+        if (isset($opts['address'])) {
+            $radius = isset($opts['radius']) ? (int)$opts['radius'] : 25;
+            $limit = isset($opts['count']) ? (int)$opts['count'] : false;
+
+            $markers = $Markers->find_by_address($opts['address'], $radius, $limit);
+        } else {
+            $markers = $Markers->all();
+        }
+
+        return function($rows) use($markers) {
+            foreach($rows as &$location) {
+                $marker_id = $location['markerID'];
+
+                $Marker = array_filter($markers, function ($Marker) use ($marker_id) {
+                    return $Marker->id() == $marker_id;
+                });
+
+                $Marker = array_values($Marker);
+
+                if (isset($Marker[0])) {
+                    $Marker = $Marker[0];
+
+                    $location['markerLatitude'] = $Marker->markerLatitude();
+                    $location['markerLongitude'] = $Marker->markerLongitude();
+
+                    if($distance = $Marker->markerDistance()) {
+                        $location['markerDistance'] = round($Marker->markerDistance(), 1);
+                    }
+                }
+            }
+
+            return $rows;
         };
     }
 }

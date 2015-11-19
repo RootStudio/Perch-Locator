@@ -54,18 +54,6 @@ class JwLocator_Markers extends PerchAPI_Factory
     );
 
     /**
-     * Fetch a list of locations that have markers
-     *
-     * @return array
-     */
-    public function get_locations()
-    {
-        $markers = $this->all();
-
-        return $this->eager_loading_processor($markers);
-    }
-
-    /**
      * Fetch a list of locations using the Haversine formula
      *
      * @param string $address
@@ -97,53 +85,5 @@ class JwLocator_Markers extends PerchAPI_Factory
             return array();
             PerchUtil::debug($response['status']);
         }
-    }
-
-    /**
-     * Pair marker data to location instance after eager loading
-     *
-     * @param $markers
-     * @return array
-     */
-    private function eager_loading_processor($markers)
-    {
-        $marker_ids = array();
-        if (PerchUtil::count($markers)) {
-            foreach ($markers as $Marker) {
-                $marker_ids[] = (int)$Marker->id();
-            }
-        }
-
-        $Locations = new JwLocator_Locations($this->api);
-        $locations = $Locations->all_with_markers($marker_ids);
-
-        $locations_data = array();
-
-        if (PerchUtil::count($locations)) {
-            foreach ($locations as $Location) {
-                $location_id = $Location->id();
-
-                $Marker = array_filter($markers, function ($Marker) use ($location_id) {
-                    return $Marker->id() == $location_id;
-                });
-
-                $Marker = array_values($Marker);
-
-                if (isset($Marker[0])) {
-                    $Marker = $Marker[0];
-
-                    $Location->squirrel('markerLatitude', $Marker->markerLatitude());
-                    $Location->squirrel('markerLongitude', $Marker->markerLongitude());
-
-                    if($distance = $Marker->markerDistance()) {
-                        $Location->squirrel('markerDistance', round($Marker->markerDistance(), 1));
-                    }
-
-                    $locations_data[] = $Location->to_array();
-                }
-            }
-        }
-
-        return $locations_data;
     }
 }

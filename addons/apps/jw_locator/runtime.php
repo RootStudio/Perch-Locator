@@ -32,11 +32,6 @@ function jw_locator_marker_json($options = array(), $return = false)
     echo PerchUtil::json_safe_encode($locations, true);
 }
 
-function jw_locator_get_nearest($address, array $options = array())
-{
-
-}
-
 function jw_locator_get_custom(array $opts, $return = false)
 {
     $defaults = array(
@@ -46,6 +41,7 @@ function jw_locator_get_custom(array $opts, $return = false)
         'split-items'   => false,
         'filter'        => false,
         'paginate'      => false,
+        'json'          => false,
         'template'      => 'location_in_list.html',
     );
 
@@ -55,10 +51,18 @@ function jw_locator_get_custom(array $opts, $return = false)
         $return = true;
     }
 
+    if($opts['json']) {
+        $opts['skip-template'] = true;
+    }
+
     $API = new PerchAPI(1.0, 'jw_locator');
     $Locations = new JwLocator_Locations($API);
 
     $result = $Locations->get_custom($opts);
+
+    if($opts['json']) {
+        $result = jw_locator_location_json($result, true);
+    }
 
     if ($return) {
         return $result;
@@ -72,8 +76,14 @@ function jw_locator_location()
 
 }
 
-function jw_locator_location_json(array $locations)
+function jw_locator_location_json(array $locations, $return = false)
 {
+    $json = PerchUtil::json_safe_encode($locations, true);
 
+    if ($return) {
+        return $json;
+    }
+
+    echo $json;
 }
 
