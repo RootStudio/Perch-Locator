@@ -117,5 +117,13 @@
     "36": "100",
     "37": "50",
     "38": "100",
-    "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=53\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=53\" class=\"action\">View Details<\/a>"
+    "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=53\" class=\"action\">View Details<\/a>": "This location could not be Geocoded <a href=\"\/addons\/apps\/jw_stockists\/errors\/?view=53\" class=\"action\">View Details<\/a>",
+    "39": "50",
+    "40": "100",
+    "41": "50",
+    "42": "100",
+    "Access the locator app": "Access the locator app",
+    "Delete locations": "Delete locations",
+    "Mass import location data": "Mass import location data",
+    "View error log": "View error log"
 }

@@ -101,6 +101,13 @@ class JwStockists_Locations extends PerchAPI_Factory
         return $this->return_instances($results);
     }
 
+    /**
+     * Eager loading of locations using Marker IDs
+     *
+     * @param $marker_ids
+     * @param bool|false $Paging
+     * @return array|bool
+     */
     public function all_with_markers($marker_ids, $Paging = false)
     {
         $results = array();
@@ -135,6 +142,12 @@ class JwStockists_Locations extends PerchAPI_Factory
         return $this->return_instances($results);
     }
 
+    /**
+     * Fetch queued locations in date order
+     *
+     * @param int $batch_limit
+     * @return array|bool
+     */
     public function get_queued($batch_limit = 25)
     {
         $sql  = 'SELECT * FROM ' . $this->table;
