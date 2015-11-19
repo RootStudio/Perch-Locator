@@ -174,5 +174,7 @@
     "62": "100",
     "63": "100",
     "Manage Locations - Perch": "Manage Locations - Perch",
-    "Location Errors - Perch": "Location Errors - Perch"
+    "Location Errors - Perch": "Location Errors - Perch",
+    "Import Locations - Perch": "Import Locations - Perch",
+    "Edit Location - Perch": "Edit Location - Perch"
 }

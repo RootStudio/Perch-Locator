@@ -20,4 +20,20 @@ class JwLocator_Marker extends PerchAPI_Base
      * @var string
      */
     protected $pk = 'markerID';
+
+    /**
+     * JwLocator_Marker constructor.
+     *
+     * Fix for missing markerDistance property
+     *
+     * @param array $details
+     */
+    public function __construct($details)
+    {
+        if(!isset($details['markerDistance'])) {
+            $details['markerDistance'] = false;
+        }
+
+        parent::__construct($details);
+    }
 }
