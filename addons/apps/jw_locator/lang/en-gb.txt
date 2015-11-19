@@ -160,5 +160,10 @@
     "If changes need to be made immediately, ticking the \"force geocoding\" box will update the map on save.": "If changes need to be made immediately, ticking the \"force geocoding\" box will update the map on save.",
     "No locations have been added to the system.": "No locations have been added to the system.",
     "All locations have been plotted successfully.": "All locations have been plotted successfully.",
-    "109 locations have been imported": "109 locations have been imported"
+    "109 locations have been imported": "109 locations have been imported",
+    "54": "100",
+    "There was an issue plotting this location onto the map. <a href=\"\/addons\/apps\/jw_locator\/errors\/?view=18\" class=\"action\">View Details<\/a>": "There was an issue plotting this location onto the map. <a href=\"\/addons\/apps\/jw_locator\/errors\/?view=18\" class=\"action\">View Details<\/a>",
+    "55": "100",
+    "56": "100",
+    "The location is in the queue to be plotted onto the map.": "The location is in the queue to be plotted onto the map."
 }

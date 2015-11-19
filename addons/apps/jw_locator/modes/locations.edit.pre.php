@@ -24,7 +24,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     $heading1 = 'Locations / Edit Location';
 
     if($Location->get_status() === 1) {
-        $message = $HTML->warning_message('This location is currently queued for Geocoding');
+        $message = $HTML->warning_message('The location is in the queue to be plotted onto the map.');
     }
 } else {
     $locationID = false;
