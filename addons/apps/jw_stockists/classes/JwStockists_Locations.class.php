@@ -42,6 +42,8 @@ class JwStockists_Locations extends PerchAPI_Factory
      */
     protected $singular_classname = 'JwStockists_Location';
 
+    protected $namespace = 'locator';
+
     /**
      * Non dynamic fields
      *
@@ -71,7 +73,7 @@ class JwStockists_Locations extends PerchAPI_Factory
     {
         $results = array();
 
-        if(PerchUtil::count($ids)) {
+        if (PerchUtil::count($ids)) {
             if ($Paging && $Paging->enabled()) {
                 $sql = $Paging->select_sql();
             } else {
@@ -112,7 +114,7 @@ class JwStockists_Locations extends PerchAPI_Factory
     {
         $results = array();
 
-        if(PerchUtil::count($marker_ids)) {
+        if (PerchUtil::count($marker_ids)) {
             if ($Paging && $Paging->enabled()) {
                 $sql = $Paging->select_sql();
             } else {
@@ -150,12 +152,13 @@ class JwStockists_Locations extends PerchAPI_Factory
      */
     public function get_queued($batch_limit = 25)
     {
-        $sql  = 'SELECT * FROM ' . $this->table;
+        $sql = 'SELECT * FROM ' . $this->table;
         $sql .= ' WHERE `locationUpdatedAt` > `locationProcessedAt`';
         $sql .= ' ORDER BY `locationUpdatedAt` ASC';
         $sql .= ' LIMIT ' . $batch_limit;
 
         $results = $this->db->get_rows($sql);
+
         return $this->return_instances($results);
     }
 
@@ -169,10 +172,78 @@ class JwStockists_Locations extends PerchAPI_Factory
      */
     public function create($data, $ignore_timestamp = false)
     {
-        if(!$ignore_timestamp) {
+        if (!$ignore_timestamp) {
             $data['locationUpdatedAt'] = date("Y-m-d H:i:s");
         }
 
         return parent::create($data);
+    }
+
+    public function get_custom($opts)
+    {
+        // Category Searching
+        if (isset($opts['category'])) {
+            if (!is_array($opts['category'])) {
+                $opts['category'] = array($opts['category']);
+            }
+
+            if (PerchUtil::count(($opts['category']))) {
+                foreach ($opts['category'] as &$cat) {
+                    if (strpos($cat, '/') === false) {
+                        if (substr($cat, 0, 1) == '!') {
+                            $cat = '!locator/' . substr($cat, 1) . '/';
+                        } else {
+                            $cat = 'locator/' . $cat . '/';
+                        }
+                    }
+                }
+            }
+        }
+
+        // Custom searches
+        $where_callback = $this->filtered_listing_where_callback($opts);
+
+        // Prepare templates
+        $set_template = $opts['template'];
+        $opts['template'] = function ($items) use ($set_template) {
+            if (isset($set_template) && $set_template != false) {
+                $template = 'locator/' . str_replace('locator/', '', $set_template);
+            } else {
+                $template = 'locator/location.html';
+            }
+
+            return $template;
+        };
+
+        return $this->get_filtered_listing($opts, $where_callback);
+    }
+
+    private function filtered_listing_where_callback($opts)
+    {
+        $db = $this->db;
+
+        return function (PerchQuery $Query) use ($opts, $db) {
+
+            // Nearest
+            if (isset($opts['address'])) {
+                $radius = isset($opts['radius']) ? (int)$opts['radius'] : 25;
+                $limit = isset($opts['count']) ? (int)$opts['count'] : false;
+
+                $Markers = new JwStockists_Markers;
+                $markers = $Markers->find_by_address($opts['address'], $radius, $limit);
+
+                if (PerchUtil::count($markers)) {
+                    $marker_ids = array();
+
+                    foreach ($markers as $Marker) {
+                        $marker_ids[] = $Marker->id();
+                    }
+
+                    $Query->where[] = ' `markerID` IN(' . implode(',', $marker_ids) . ')';
+                }
+            }
+
+            return $Query;
+        };
     }
 }

@@ -32,3 +32,48 @@ function jw_stockists_marker_json($options = array(), $return = false)
     echo PerchUtil::json_safe_encode($locations, true);
 }
 
+function jw_locator_get_nearest($address, array $options = array())
+{
+
+}
+
+function jw_locator_get_custom(array $opts, $return = false)
+{
+    $defaults = array(
+        'address'       => null,
+        'radius'        => 25,
+        'skip-template' => false,
+        'split-items'   => false,
+        'filter'        => false,
+        'paginate'      => false,
+        'template'      => 'location_in_list.html',
+    );
+
+    $opts = array_merge($defaults, $opts);
+
+    if ($opts['skip-template'] || $opts['split-items']) {
+        $return = true;
+    }
+
+    $API = new PerchAPI(1.0, 'jw_stockists');
+    $Locations = new JwStockists_Locations($API);
+
+    $result = $Locations->get_custom($opts);
+
+    if ($return) {
+        return $result;
+    }
+
+    echo $result;
+}
+
+function jw_locator_location()
+{
+
+}
+
+function jw_locator_location_json(array $locations)
+{
+
+}
+

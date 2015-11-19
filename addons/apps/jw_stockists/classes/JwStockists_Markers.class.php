@@ -73,7 +73,7 @@ class JwStockists_Markers extends PerchAPI_Factory
      * @param int $limit
      * @return array
      */
-    public function get_nearest_locations($address, $radius = 50, $limit = 25)
+    public function find_by_address($address, $radius = 50, $limit = false)
     {
         $response = JwStockists_Geocode::geocode($address);
 
@@ -84,12 +84,14 @@ class JwStockists_Markers extends PerchAPI_Factory
             $sql = "SELECT distinct *,
                     ( 3959 * acos( cos( radians( {$lat} ) ) * cos( radians( `markerLatitude` ) ) * cos( radians( `markerLongitude` ) - radians( {$lng} ) ) + sin( radians( {$lat} ) ) * sin( radians( `markerLatitude` ) ) ) ) AS markerDistance
                     FROM `{$this->table}` HAVING markerDistance <= {$radius}
-                    ORDER BY markerDistance LIMIT {$limit};";
+                    ORDER BY markerDistance";
+
+            if($limit) {
+                $sql .= " LIMIT {$limit}";
+            }
 
             $rows = $this->db->get_rows($sql);
-            $markers = $this->return_instances($rows);
-
-            return $this->eager_loading_processor($markers);
+            return $this->return_instances($rows);
 
         } else {
             return array();
