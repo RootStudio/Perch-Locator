@@ -1,5 +1,6 @@
 <?php
 
+include PERCH_PATH . '/addons/apps/jw_locator/classes/JwLocator_QueryCache.class.php';
 include PERCH_PATH . '/addons/apps/jw_locator/classes/JwLocator_Locations.class.php';
 include PERCH_PATH . '/addons/apps/jw_locator/classes/JwLocator_Location.class.php';
 include PERCH_PATH . '/addons/apps/jw_locator/classes/JwLocator_Geocode.class.php';

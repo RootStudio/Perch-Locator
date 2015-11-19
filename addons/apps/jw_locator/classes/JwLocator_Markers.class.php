@@ -63,7 +63,14 @@ class JwLocator_Markers extends PerchAPI_Factory
      */
     public function find_by_address($address, $radius = 50, $limit = false)
     {
-        $response = JwLocator_Geocode::geocode($address);
+        $cache = JwLocator_QueryCache::fetch();
+        $cache_slug = PerchUtil::urlify($address);
+
+        if(!$cache->has($cache_slug . '_geocode_result')) {
+            $cache->set($cache_slug . '_geocode_result', JwLocator_Geocode::geocode($address));
+        }
+
+        $response = $cache->get($cache_slug  . '_geocode_result');
 
         if ($response['status'] === 'OK') {
             $lat = $response['results'][0]['geometry']['location']['lat'];
@@ -74,11 +81,18 @@ class JwLocator_Markers extends PerchAPI_Factory
                     FROM `{$this->table}` HAVING markerDistance <= {$radius}
                     ORDER BY markerDistance";
 
+            $query_cache_slug = $cache_slug . '_query_result_' . $radius;
+
             if($limit) {
                 $sql .= " LIMIT {$limit}";
+                $query_cache_slug .= '_' . $limit;
             }
 
-            $rows = $this->db->get_rows($sql);
+            if(!$cache->has($query_cache_slug)) {
+                $cache->set($query_cache_slug, $this->db->get_rows($sql));
+            }
+
+            $rows = $cache->get($query_cache_slug);
             return $this->return_instances($rows);
 
         } else {
