@@ -42,6 +42,11 @@ class JwLocator_Locations extends PerchAPI_Factory
      */
     protected $singular_classname = 'JwLocator_Location';
 
+    /**
+     * Template namespace
+     *
+     * @var string
+     */
     protected $namespace = 'locator';
 
     /**
