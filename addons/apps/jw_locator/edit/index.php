@@ -7,7 +7,7 @@ $API = new PerchAPI(1.0, 'jw_locator');
 $Lang = $API->get('Lang');
 
 // Page Meta
-$Perch->page_title = $Lang->get('Edit Stockist Locations');
+$Perch->page_title = $Lang->get('Edit Location - Perch');
 $Perch->add_css($API->app_path() . '/assets/css/locator.css');
 
 // Page Initialising

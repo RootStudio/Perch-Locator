@@ -165,5 +165,11 @@
     "There was an issue plotting this location onto the map. <a href=\"\/addons\/apps\/jw_locator\/errors\/?view=18\" class=\"action\">View Details<\/a>": "There was an issue plotting this location onto the map. <a href=\"\/addons\/apps\/jw_locator\/errors\/?view=18\" class=\"action\">View Details<\/a>",
     "55": "100",
     "56": "100",
-    "The location is in the queue to be plotted onto the map.": "The location is in the queue to be plotted onto the map."
+    "The location is in the queue to be plotted onto the map.": "The location is in the queue to be plotted onto the map.",
+    "57": "100",
+    "58": "100",
+    "59": "100",
+    "60": "100",
+    "61": "100",
+    "62": "100"
 }

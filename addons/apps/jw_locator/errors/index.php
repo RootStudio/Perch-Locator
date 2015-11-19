@@ -7,7 +7,7 @@ $API = new PerchAPI(1.0, 'jw_locator');
 $Lang = $API->get('Lang');
 
 // Page Meta
-$Perch->page_title = $Lang->get('Failed Stockist Locations');
+$Perch->page_title = $Lang->get('Location Errors - Perch');
 $Perch->add_css($API->app_path() . '/assets/css/locator.css');
 
 // Page Initialising

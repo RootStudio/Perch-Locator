@@ -7,7 +7,7 @@ $API = new PerchAPI(1.0, 'jw_locator');
 $Lang = $API->get('Lang');
 
 // Page Meta
-$Perch->page_title = $Lang->get('Delete Stockist Locations');
+$Perch->page_title = $Lang->get('Delete Location - Perch');
 
 // Page Initialising
 include('../modes/locations.delete.pre.php');
