@@ -9,30 +9,6 @@ include 'classes/JwLocator_Marker.class.php';
 include 'classes/JwLocator_Errors.class.php';
 include 'classes/JwLocator_Error.class.php';
 
-function jw_locator_marker_json($options = array(), $return = false)
-{
-    $opts = array_merge(array(
-        'address' => null,
-        'radius'  => 50,
-        'count'   => 25
-    ), $options);
-
-    $API = new PerchAPI(1.0, 'jw_locator');
-    $Markers = new JwLocator_Markers($API);
-
-    if(!is_null($opts['address']) && $opts['address']) {
-        $locations = $Markers->get_nearest_locations($opts['address'], $opts['radius'], $opts['count']);
-    } else {
-        $locations = $Markers->get_locations();
-    }
-
-    if ($return) {
-        return PerchUtil::json_safe_encode($locations);
-    }
-
-    echo PerchUtil::json_safe_encode($locations, true);
-}
-
 function jw_locator_get_custom(array $opts, $return = false)
 {
     $defaults = array(
@@ -70,11 +46,6 @@ function jw_locator_get_custom(array $opts, $return = false)
     }
 
     echo $result;
-}
-
-function jw_locator_location()
-{
-
 }
 
 function jw_locator_location_json(array $locations, $return = false)

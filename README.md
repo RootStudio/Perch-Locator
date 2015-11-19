@@ -49,7 +49,7 @@ If existing location data has been returned using `skip-template`, it can be con
 
 The MIT License (MIT)
 
-Copyright (c) 2015 James Wigger
+Copyright (c) 2015 Root Studio
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
