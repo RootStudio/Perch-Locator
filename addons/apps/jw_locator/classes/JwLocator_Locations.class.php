@@ -258,6 +258,8 @@ class JwLocator_Locations extends PerchAPI_Factory
                     }
 
                     $Query->where[] = ' `markerID` IN(' . implode(',', $marker_ids) . ')';
+                } else {
+                    $Query->where[] = ' `markerID` IN(-1)';
                 }
             }
 
@@ -288,11 +290,13 @@ class JwLocator_Locations extends PerchAPI_Factory
             foreach($rows as &$location) {
                 $marker_id = $location['markerID'];
 
-                $Marker = array_filter($markers, function ($Marker) use ($marker_id) {
-                    return $Marker->id() == $marker_id;
-                });
+                if(is_array($markers)) {
+                    $Marker = array_filter($markers, function ($Marker) use ($marker_id) {
+                        return $Marker->id() == $marker_id;
+                    });
 
-                $Marker = array_values($Marker);
+                    $Marker = array_values($Marker);
+                }
 
                 if (isset($Marker[0])) {
                     $Marker = $Marker[0];
