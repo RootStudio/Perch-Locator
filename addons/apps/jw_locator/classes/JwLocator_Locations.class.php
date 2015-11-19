@@ -314,6 +314,13 @@ class JwLocator_Locations extends PerchAPI_Factory
                 unset($location['locationProcessingStatus']);
             }
 
+            // Fix distance ordering
+            usort($rows, function($a, $b) {
+                if(isset($a['markerDistance']) && isset($b['markerDistance'])) {
+                    return ($a['markerDistance'] < $b['markerDistance']) ? -1 : 1;
+                }
+            });
+
             return $rows;
         };
     }
