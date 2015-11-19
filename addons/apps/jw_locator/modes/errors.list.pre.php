@@ -23,5 +23,5 @@ if(isset($_GET['view']) && $_GET['view'] != "") {
 }
 
 if ($locations === false) {
-    $message = $HTML->success_message('There have been no failed Geocoding jobs');
+    $message = $HTML->success_message('All locations have been plotted successfully.');
 }

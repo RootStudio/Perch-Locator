@@ -172,19 +172,19 @@ class JwLocator_Location extends PerchAPI_Base
 
             switch ($status) {
                 case 'ZERO_RESULTS':
-                    $this->set_error('No results found for address');
+                    $this->set_error('The address could not be found.');
                     break;
                 case 'OVER_QUERY_LIMIT':
-                    $this->set_error('API quota limit reached');
+                    $this->set_error('API quota limit reached.');
                     break;
                 case 'REQUEST_DENIED':
-                    $this->set_error('Request denied by API');
+                    $this->set_error('Request denied by API.');
                     break;
                 case 'INVALID_REQUEST':
                     $this->set_error('Request is missing required parameters');
                     break;
                 case 'UNKNOWN_ERROR':
-                    $this->set_error('External server error');
+                    $this->set_error('External server error.');
                 default:
                     break;
             }

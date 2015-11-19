@@ -102,5 +102,5 @@ if (isset($_GET['created']) && !$message) {
 }
 
 if(is_object($Location) && ($Location->get_status() === 4)) {
-    $message = $HTML->failure_message('This location could not be Geocoded <a href="'. $HTML->encode($API->app_path()) .'/errors/?view='. $HTML->encode(urlencode($Location->id())) .'" class="action">View Details</a>');
+    $message = $HTML->failure_message('There was an issue plotting this location onto the map. <a href="'. $HTML->encode($API->app_path()) .'/errors/?view='. $HTML->encode(urlencode($Location->id())) .'" class="action">View Details</a>');
 }

@@ -2,7 +2,9 @@
 
 // Side Panel UI
 echo $HTML->side_panel_start();
-echo $HTML->para('This page shows you the locations that have not been geocoded due to errors.');
+echo $HTML->para('This page lists all locations that could not be plotted onto the map.');
+echo $HTML->para('Common reasons for failure are incorrect addresses or reaching the API limit.');
+echo $HTML->para('If the API limit has been reached, contact your developer to request a new key');
 echo $HTML->side_panel_end();
 
 // Main Panel UI

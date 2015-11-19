@@ -2,7 +2,9 @@
 
 // Side Panel UI
 echo $HTML->side_panel_start();
-echo $HTML->para('To import CSV data, upload a new file and then select it from the menu. Imported data will be queued for geocoding.');
+echo $HTML->para('To import CSV data, upload a new file and then select it from the menu.');
+echo $HTML->para('CSV data must have the following headings: title, building, street, town, region, country, postcode');
+echo $HTML->para('Imported locations will be added to the queue to be plotted onto the map.');
 echo $HTML->side_panel_end();
 
 // Main Panel UI

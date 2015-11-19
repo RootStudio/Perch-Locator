@@ -2,7 +2,9 @@
 
 // Side Panel UI
 echo $HTML->side_panel_start();
-echo $HTML->para('To force an immediate update to the marker location, tick "force geocoding", otherwise any changes will be queued to avoid API throttling.');
+echo $HTML->para('This page allows you to add / edit a location in the system.');
+echo $HTML->para('To prevent performance issues, all updates are queued to be plotted onto the map. Changes can take up to 10 minutes to appear.');
+echo $HTML->para('If changes need to be made immediately, ticking the "force geocoding" box will update the map on save.');
 echo $HTML->side_panel_end();
 
 // Main Panel UI
