@@ -8,22 +8,7 @@ include PERCH_PATH . '/addons/apps/jw_stockists/classes/JwStockists_Marker.class
 include PERCH_PATH . '/addons/apps/jw_stockists/classes/JwStockists_Errors.class.php';
 include PERCH_PATH . '/addons/apps/jw_stockists/classes/JwStockists_Error.class.php';
 
-function jw_stockists_marker_json($return = false)
-{
-    $API = new PerchAPI(1.0, 'jw_stockists');
-    $Markers = new JwStockists_Markers($API);
-
-    $locations = $Markers->get_locations();
-
-    if ($return) {
-        return PerchUtil::json_safe_encode($locations);
-    }
-
-    echo PerchUtil::json_safe_encode($locations, true);
-}
-
-
-function jw_stockists_nearest_marker_json($options = array(), $return = false)
+function jw_stockists_marker_json($options = array(), $return = false)
 {
     $opts = array_merge(array(
         'address' => null,
@@ -34,7 +19,11 @@ function jw_stockists_nearest_marker_json($options = array(), $return = false)
     $API = new PerchAPI(1.0, 'jw_stockists');
     $Markers = new JwStockists_Markers($API);
 
-    $locations = $Markers->get_nearest_locations($opts['address'], $opts['radius'], $opts['count']);
+    if(!is_null($opts['address']) && $opts['address']) {
+        $locations = $Markers->get_nearest_locations($opts['address'], $opts['radius'], $opts['count']);
+    } else {
+        $locations = $Markers->get_locations();
+    }
 
     if ($return) {
         return PerchUtil::json_safe_encode($locations);
@@ -42,3 +31,4 @@ function jw_stockists_nearest_marker_json($options = array(), $return = false)
 
     echo PerchUtil::json_safe_encode($locations, true);
 }
+
