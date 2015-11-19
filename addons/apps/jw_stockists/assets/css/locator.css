@@ -36,6 +36,19 @@ a:hover .tag.error {
     border: 1px solid #E5E5E5;
     padding: 5px;
     margin: 20px 0 20px 240px;
+    max-width: 100%;
+}
+
+@media screen and (max-width:1060px) {
+    .sidebar-open .map-preview {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width:840px) {
+    .sidebar-closed .map-preview {
+        margin-left: 0;
+    }
 }
 
 .error-list {
