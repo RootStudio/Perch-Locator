@@ -1,13 +1,13 @@
 <?php
 
-include PERCH_PATH . '/addons/apps/jw_locator/classes/JwLocator_QueryCache.class.php';
-include PERCH_PATH . '/addons/apps/jw_locator/classes/JwLocator_Locations.class.php';
-include PERCH_PATH . '/addons/apps/jw_locator/classes/JwLocator_Location.class.php';
-include PERCH_PATH . '/addons/apps/jw_locator/classes/JwLocator_Geocode.class.php';
-include PERCH_PATH . '/addons/apps/jw_locator/classes/JwLocator_Markers.class.php';
-include PERCH_PATH . '/addons/apps/jw_locator/classes/JwLocator_Marker.class.php';
-include PERCH_PATH . '/addons/apps/jw_locator/classes/JwLocator_Errors.class.php';
-include PERCH_PATH . '/addons/apps/jw_locator/classes/JwLocator_Error.class.php';
+include 'classes/JwLocator_QueryCache.class.php';
+include 'classes/JwLocator_Locations.class.php';
+include 'classes/JwLocator_Location.class.php';
+include 'classes/JwLocator_Geocode.class.php';
+include 'classes/JwLocator_Markers.class.php';
+include 'classes/JwLocator_Marker.class.php';
+include 'classes/JwLocator_Errors.class.php';
+include 'classes/JwLocator_Error.class.php';
 
 function jw_locator_marker_json($options = array(), $return = false)
 {
