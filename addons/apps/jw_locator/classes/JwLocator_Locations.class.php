@@ -304,6 +304,10 @@ class JwLocator_Locations extends PerchAPI_Factory
                         $location['markerDistance'] = round($Marker->markerDistance(), 1);
                     }
                 }
+
+                // Remove unwanted data
+                unset($location['locationProcessedAt']);
+                unset($location['locationProcessingStatus']);
             }
 
             return $rows;
