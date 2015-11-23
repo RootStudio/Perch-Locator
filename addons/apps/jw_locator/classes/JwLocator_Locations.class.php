@@ -33,7 +33,7 @@ class JwLocator_Locations extends PerchAPI_Factory
      *
      * @var string
      */
-    protected $default_sort_direction = 'DESC';
+    protected $default_sort_direction = 'ASC';
 
     /**
      * Factory singular class
