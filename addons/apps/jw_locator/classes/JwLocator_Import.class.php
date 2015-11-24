@@ -23,6 +23,15 @@ class JwLocator_Import
     );
 
     /**
+     * Columns that must be set in CSV.
+     *
+     * @var array
+     */
+    protected $required_columns = array(
+        'locationTitle'
+    );
+
+    /**
      * Perch Resource Bucket
      *
      * @var array
@@ -35,6 +44,13 @@ class JwLocator_Import
      * @var string
      */
     protected $bucket_name = 'csv_import';
+
+    /**
+     * Total number of rows that could not be imported
+     *
+     * @var int
+     */
+    protected $failed_rows = 0;
 
     /**
      * JwLocator_Import constructor.
@@ -128,8 +144,16 @@ class JwLocator_Import
             $data = array();
             $dynamic_fields = array();
 
+            $failed = false;
+
             foreach($row as $key => $column) {
                 $key = trim($key);
+
+                if(in_array($key, $this->required_columns) && empty($column)) {
+                    PerchUtil::debug('Row is missing value for required column ' . $key);
+                    PerchUtil::debug($row, 'error');
+                    $failed = true;
+                }
 
                 if(in_array($key, $columns)) {
                     $data[$key] = $column;
@@ -140,6 +164,11 @@ class JwLocator_Import
                 if($key === 'categories') {
                     $dynamic_fields['categories'] = explode(',', $column);
                 }
+            }
+
+            if($failed) {
+                $this->failed_rows++;
+                continue;
             }
 
             $data['locationDynamicFields'] = PerchUtil::json_safe_encode($dynamic_fields);
@@ -158,6 +187,11 @@ class JwLocator_Import
     public function import_dir_writable()
     {
         return is_dir($this->bucket['file_path']) && is_writable($this->bucket['file_path']);
+    }
+
+    public function get_failed_rows()
+    {
+        return (int) $this->failed_rows;
     }
 
     private function csv_columns()
