@@ -16,14 +16,10 @@ class JwLocator_Import
      *
      * @var array
      */
-    protected $column_map = array(
-        'title'    => 'locationTitle',
-        'building' => 'locationBuilding',
-        'street'   => 'locationStreet',
-        'town'     => 'locationTown',
-        'region'   => 'locationRegion',
-        'country'  => 'locationCountry',
-        'postcode' => 'locationPostcode',
+    protected $hidden_columns = array(
+        'locationUpdatedAt',
+        'locationProcessedAt',
+        'markerID'
     );
 
     /**
@@ -119,6 +115,7 @@ class JwLocator_Import
         $API = new PerchAPI(1.0, 'jw_locator');
 
         $Locations = new JwLocator_Locations($API);
+        $columns = $this->csv_columns();
 
         if(!file_exists($full_path)) {
             return false;
@@ -129,12 +126,19 @@ class JwLocator_Import
 
         while($row = $Reader->getRow()) {
             $data = array();
+            $dynamic_fields = array();
 
             foreach($row as $key => $column) {
                 $key = trim($key);
-                $data[$this->column_map[$key]] = $column;
+
+                if(in_array($key, $columns)) {
+                    $data[$key] = $column;
+                } else {
+                    $dynamic_fields[$key] = $column;
+                }
             }
 
+            $data['locationDynamicFields'] = PerchUtil::json_safe_encode($dynamic_fields);
             $Locations->create($data);
             $counter++;
         }
@@ -150,5 +154,20 @@ class JwLocator_Import
     public function import_dir_writable()
     {
         return is_dir($this->bucket['file_path']) && is_writable($this->bucket['file_path']);
+    }
+
+    private function csv_columns()
+    {
+        $API = new PerchAPI(1.0, 'jw_locator');
+        $Locations = new JwLocator_Locations($API);
+
+        $columns = $Locations->static_fields;
+
+        foreach($this->hidden_columns as $unset_key)
+        {
+            unset($columns[$unset_key]);
+        }
+
+        return $columns;
     }
 }
