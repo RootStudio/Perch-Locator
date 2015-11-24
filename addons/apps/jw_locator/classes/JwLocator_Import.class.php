@@ -107,8 +107,8 @@ class JwLocator_Import
         );
         $files = PerchUtil::get_dir_contents($this->bucket['file_path']);
 
-        if(PerchUtil::count($files)) {
-            foreach($files as $file) {
+        if (PerchUtil::count($files)) {
+            foreach ($files as $file) {
                 $file_opts[] = array(
                     'value' => $file,
                     'label' => $file
@@ -133,42 +133,42 @@ class JwLocator_Import
         $Locations = new JwLocator_Locations($API);
         $columns = $this->csv_columns();
 
-        if(!file_exists($full_path)) {
+        if (!file_exists($full_path)) {
             return false;
         }
 
         $Reader = new \EasyCSV\Reader($full_path);
         $counter = 0;
 
-        while($row = $Reader->getRow()) {
+        while ($row = $Reader->getRow()) {
             $data = array();
             $dynamic_fields = array();
 
             $failed = false;
 
-            foreach($row as $key => $column) {
+            foreach ($row as $key => $column) {
                 $key = trim($key);
 
                 // Check for required column values
-                if(in_array($key, $this->required_columns) && empty($column)) {
+                if (in_array($key, $this->required_columns) && empty($column)) {
                     PerchUtil::debug('Row is missing value for required column ' . $key);
                     PerchUtil::debug($row, 'error');
                     $failed = true;
                 }
 
-                if(in_array($key, $columns)) {
+                if (in_array($key, $columns)) {
                     $data[$key] = $column;
                 } else {
                     $dynamic_fields[$key] = $column;
                 }
 
-                if($key === 'categories') {
+                if ($key === 'categories') {
                     $dynamic_fields['categories'] = explode(',', $column);
                 }
             }
 
             // Increment, log and move on.
-            if($failed) {
+            if ($failed) {
                 $this->failed_rows++;
                 continue;
             }
@@ -198,7 +198,7 @@ class JwLocator_Import
      */
     public function get_failed_rows()
     {
-        return (int) $this->failed_rows;
+        return (int)$this->failed_rows;
     }
 
     /**
@@ -206,18 +206,13 @@ class JwLocator_Import
      *
      * @return array
      */
-    private function csv_columns()
+    public function csv_columns()
     {
         $API = new PerchAPI(1.0, 'jw_locator');
         $Locations = new JwLocator_Locations($API);
 
         $columns = $Locations->static_fields;
 
-        foreach($this->hidden_columns as $unset_key)
-        {
-            unset($columns[$unset_key]);
-        }
-
-        return $columns;
+        return array_diff($columns, $this->hidden_columns);
     }
 }

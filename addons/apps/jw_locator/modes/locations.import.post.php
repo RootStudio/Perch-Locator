@@ -3,7 +3,9 @@
 // Side Panel UI
 echo $HTML->side_panel_start();
 echo $HTML->para('To import CSV data, upload a new file and then select it from the menu.');
-echo $HTML->para('CSV data must have the following headings: title, building, street, town, region, country, postcode');
+echo $HTML->para('CSV data must have the following headings: <pre>%s</pre>', implode(',<br />', $Importer->csv_columns()));
+echo $HTML->para('Any additional fields will be added as a dynamic value for use in templates.');
+echo $HTML->para('To add categories, an additional column of <strong>categories</strong> can be added with a comma seperated list of category IDs.');
 echo $HTML->para('Imported locations will be added to the queue to be plotted onto the map.');
 echo $HTML->side_panel_end();
 
