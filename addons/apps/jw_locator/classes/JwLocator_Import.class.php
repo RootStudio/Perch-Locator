@@ -149,6 +149,7 @@ class JwLocator_Import
             foreach($row as $key => $column) {
                 $key = trim($key);
 
+                // Check for required column values
                 if(in_array($key, $this->required_columns) && empty($column)) {
                     PerchUtil::debug('Row is missing value for required column ' . $key);
                     PerchUtil::debug($row, 'error');
@@ -166,6 +167,7 @@ class JwLocator_Import
                 }
             }
 
+            // Increment, log and move on.
             if($failed) {
                 $this->failed_rows++;
                 continue;
@@ -189,11 +191,21 @@ class JwLocator_Import
         return is_dir($this->bucket['file_path']) && is_writable($this->bucket['file_path']);
     }
 
+    /**
+     * Return the number of rows that failed validation
+     *
+     * @return int
+     */
     public function get_failed_rows()
     {
         return (int) $this->failed_rows;
     }
 
+    /**
+     * Return CSV columns as array sans hidden columns
+     *
+     * @return array
+     */
     private function csv_columns()
     {
         $API = new PerchAPI(1.0, 'jw_locator');
