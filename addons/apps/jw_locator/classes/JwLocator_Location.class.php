@@ -72,6 +72,11 @@ class JwLocator_Location extends PerchAPI_Base
         parent::delete();
     }
 
+    /**
+     * Convert class instance to generic array with category data for JSON
+     *
+     * @return array
+     */
     public function to_array()
     {
         $QueryCache = JwLocator_QueryCache::fetch();

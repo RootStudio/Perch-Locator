@@ -263,6 +263,8 @@ class JwLocator_Locations extends PerchAPI_Factory
                 }
             }
 
+            $Query->where[] = ' `locationProcessingStatus` = 3';
+
             return $Query;
         };
     }
