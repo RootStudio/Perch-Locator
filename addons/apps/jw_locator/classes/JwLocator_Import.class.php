@@ -136,6 +136,10 @@ class JwLocator_Import
                 } else {
                     $dynamic_fields[$key] = $column;
                 }
+
+                if($key === 'categories') {
+                    $dynamic_fields['categories'] = explode(',', $column);
+                }
             }
 
             $data['locationDynamicFields'] = PerchUtil::json_safe_encode($dynamic_fields);
