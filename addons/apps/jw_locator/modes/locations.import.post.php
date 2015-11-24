@@ -17,6 +17,10 @@ if ($message) {
     echo $message;
 }
 
+if($Importer->get_failed_rows() > 0) {
+    echo $HTML->failure_message('%s rows could not be imported due to missing column data', $Importer->get_failed_rows());
+}
+
 echo $HTML->heading2('Import Data');
 
 echo $Form->form_start();
