@@ -72,6 +72,28 @@ class JwLocator_Location extends PerchAPI_Base
         parent::delete();
     }
 
+    public function to_array()
+    {
+        $QueryCache = JwLocator_QueryCache::fetch();
+        $Categories = new PerchCategories_Categories();
+
+        $out = parent::to_array();
+        $out['locationCategories'] = array();
+
+        if (PerchUtil::count($out['perch_categories'])) {
+            foreach ($out['perch_categories'] as $catID) {
+                if (!$QueryCache->has('category_search_' . $catID)) {
+                    $QueryCache->set('category_search_' . $catID, $Categories->find($catID));
+                }
+
+                $Category = $QueryCache->get('category_search_' . $catID);
+                $out['locationCategories'][$Category->catSlug()] = $Category->catTitle();
+            }
+        }
+
+        return $out;
+    }
+
     /**
      * Return associated Marker object
      *
