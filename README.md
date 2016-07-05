@@ -21,7 +21,9 @@ CSV imports are not reccommended for general client use, instead as a time-savin
 
 The app operates on a queue system to prevent Google blocking API requests and performance issues therefore setting up the scheduled tasks in Perch is essential.
 
-A Google API key (Geocoding must be enabled) can be used to increase the number of calls that can be made.
+<strike>A Google API key (Geocoding must be enabled) can be used to increase the number of calls that can be made.</strike>
+
+**Update:** As of June 22nd, Google now requires that all mapping requests be made using an API Key. You can set an API Key in the settings panel of Perch.
 
 ## Page Functions
 ### jw\_locator\_get\_custom
