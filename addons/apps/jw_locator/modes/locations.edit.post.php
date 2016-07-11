@@ -39,6 +39,7 @@ echo $Form->form_start();
     echo $Form->select_field('locationCountry', 'Country', $country_opts, isset($details['locationCountry']) ? $details['locationCountry'] : 'GB');
 
     if(is_object($Location)) {
+        echo $Form->hint('Check this to skip the queue and process immediately.');
         echo $Form->checkbox_field('force_geocoding', 'Force Geocoding', '1');
     }
 
