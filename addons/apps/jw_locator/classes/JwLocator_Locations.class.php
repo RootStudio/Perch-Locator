@@ -306,7 +306,7 @@ class JwLocator_Locations extends PerchAPI_Factory
                     $location['markerLatitude'] = $Marker->markerLatitude();
                     $location['markerLongitude'] = $Marker->markerLongitude();
 
-                    if($distance = $Marker->markerDistance()) {
+                    if($Marker->markerDistance() !== false) {
                         $location['markerDistance'] = round($Marker->markerDistance(), 1);
                     }
                 }
