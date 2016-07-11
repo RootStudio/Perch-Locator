@@ -159,17 +159,6 @@ class JwLocator_Location extends PerchAPI_Base
     }
 
     /**
-     * Return job status code
-     *
-     * @deprecated v1.1.1
-     * @return int
-     */
-    public function get_status()
-    {
-        return (int)$this->locationProcessingStatus();
-    }
-
-    /**
      * Return if in queue
      *
      * @return bool
@@ -220,8 +209,20 @@ class JwLocator_Location extends PerchAPI_Base
     }
 
     /**
+     * Return job status code
+     *
+     * @deprecated v1.1.1
+     * @return int
+     */
+    public function get_status()
+    {
+        return (int)$this->locationProcessingStatus();
+    }
+
+    /**
      * Return human readable status
      *
+     * @deprecated v1.1.1
      * @return string
      */
     public function get_status_tag()

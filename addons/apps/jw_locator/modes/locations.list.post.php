@@ -66,13 +66,13 @@ $Alert->output();
                     <?php echo $HTML->encode($Location->locationPostcode()); ?>
                 </td>
                 <td>
-                    <?php if($Location->get_status() === 4) {
+                    <?php if($Location->is_failed()) {
                         echo '<a href="'. $HTML->encode($API->app_path()) .'/errors/?view='. $HTML->encode(urlencode($Location->id())) .'">';
                     } ?>
 
-                    <?php echo $Location->get_status_tag(); ?>
+                    <?php JwLocator_Helpers::status_tag($Location->locationProcessingStatus()); ?>
 
-                    <?php if($Location->get_status() === 4) {
+                    <?php if($Location->is_failed()) {
                         echo '</a>';
                     } ?>
                 </td>
