@@ -13,6 +13,7 @@ include('_subnav.php');
 
 echo $HTML->heading1('Listing Locations');
 
+$Alert->output();
 ?>
 
 <ul class="smartbar">
@@ -22,10 +23,6 @@ echo $HTML->heading1('Listing Locations');
         </a>
     </li>
 </ul>
-
-<?php if (isset($message)) {
-    echo $message;
-} ?>
 
 <?php if (PerchUtil::count($locations)): ?>
     <table class="d error-list">

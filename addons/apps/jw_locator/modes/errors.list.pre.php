@@ -13,7 +13,6 @@ $Errors = new JwLocator_Errors($API);
 $Locations = new JwLocator_Locations($API);
 
 $locations = array();
-$message = false;
 
 if(isset($_GET['view']) && $_GET['view'] != "") {
     $location_id = (int) $_GET['view'];
@@ -23,5 +22,5 @@ if(isset($_GET['view']) && $_GET['view'] != "") {
 }
 
 if ($locations === false) {
-    $message = $HTML->success_message('All locations have been plotted successfully.');
+    $Alert->set('filter', $Lang->get('All locations have been plotted successfully.'));
 }
