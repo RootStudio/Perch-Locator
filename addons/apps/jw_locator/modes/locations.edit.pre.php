@@ -24,7 +24,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     $heading1 = 'Locations / Edit Location';
 
     if($Location->get_status() === 1) {
-        $message = $HTML->warning_message('The location is in the queue to be plotted onto the map.');
+        $Alert->set('notice', $Lang->get('The location is in the queue to be plotted onto the map.'));
     }
 } else {
     $locationID = false;
@@ -82,21 +82,19 @@ if ($Form->submitted()) {
         if ($new_location) {
             PerchUtil::redirect($API->app_path() . '/edit/?id=' . $new_location->id() . '&created=1');
         } else {
-            $message = $HTML->failure_message('Sorry, that location could not be updated.');
+            $Alert->set('error', $Lang->get('Sorry, that location could not be updated.'));
         }
     }
 
     if ($result) {
-        $message = $HTML->success_message('The location has been successfully updated. Return to %slocations list%s',
-            '<a href="' . $API->app_path() . '">', '</a>');
+        $Alert->set('success', $Lang->get('The location has been successfully updated. Return to %slocations list%s', '<a href="' . $API->app_path() . '">', '</a>'));
     }
 }
 
 if (isset($_GET['created']) && !$message) {
-    $message = $HTML->success_message('The location has been successfully updated. Return to %slocations list%s',
-        '<a href="' . $API->app_path() . '">', '</a>');
+    $Alert->set('success', $Lang->get('The location has been successfully updated. Return to %slocations list%s', '<a href="' . $API->app_path() . '">', '</a>'));
 }
 
 if(is_object($Location) && ($Location->get_status() === 4)) {
-    $message = $HTML->failure_message('There was an issue plotting this location onto the map. <a href="'. $HTML->encode($API->app_path()) .'/errors/?view='. $HTML->encode(urlencode($Location->id())) .'" class="action">View Details</a>');
+    $Alert->set('error', $Lang->get('There was an issue plotting this location onto the map. <a href="%s/errors/?view=%s" class="action">View Details</a>', $API->app_path(), $HTML->encode($Location->id())));
 }

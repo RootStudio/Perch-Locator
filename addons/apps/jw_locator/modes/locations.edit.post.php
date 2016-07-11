@@ -12,9 +12,8 @@ echo $HTML->main_panel_start();
 include('_subnav.php');
 
 echo $HTML->heading1($heading1);
-if ($message) {
-    echo $message;
-}
+
+$Alert->output();
 
 echo $HTML->heading2('Location details');
 
