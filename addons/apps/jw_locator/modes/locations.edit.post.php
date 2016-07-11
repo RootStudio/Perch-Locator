@@ -42,7 +42,7 @@ echo $Form->form_start();
         echo $Form->checkbox_field('force_geocoding', 'Force Geocoding', '1');
     }
 
-    if(is_object($Location) && ($Location->get_status() === 3)) {
+    if(is_object($Location) && ($Location->is_synced())) {
         echo $HTML->heading2('Preview');
         echo $Location->map_preview();
     }

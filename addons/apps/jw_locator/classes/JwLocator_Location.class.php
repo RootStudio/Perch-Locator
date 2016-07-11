@@ -318,6 +318,14 @@ class JwLocator_Location extends PerchAPI_Base
      */
     public function map_preview()
     {
+        $API = new PerchAPI('jw_locator', 1.0);
+        $Settings = $API->get('Settings');
+        $HTML = $API->get('HTML');
+
+        if(!$Settings->get('jw_locator_google_api_key')->val()) {
+            return $HTML->warning_message('You must set a Google API key and enable the Maps Embed API to display a preview.');
+        }
+
         $Markers = new JwLocator_Markers($this->api);
         $Marker = $Markers->find($this->markerID());
 
@@ -325,7 +333,8 @@ class JwLocator_Location extends PerchAPI_Base
         $parameters = array(
             'size'    => '400x200',
             'maptype' => 'roadmap',
-            'markers' => 'color:red|' . $Marker->markerLatitude() . ',' . $Marker->markerLongitude()
+            'markers' => 'color:red|' . $Marker->markerLatitude() . ',' . $Marker->markerLongitude(),
+            'key' => $Settings->get('jw_locator_google_api_key')->val()
         );
 
         return '<img class="map-preview" src="' . $base_url . http_build_query($parameters) . '" />';
