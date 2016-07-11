@@ -23,7 +23,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
 
     $heading1 = 'Locations / Edit Location';
 
-    if($Location->get_status() === 1) {
+    if($Location->is_queued()) {
         $Alert->set('notice', $Lang->get('The location is in the queue to be plotted onto the map.'));
     }
 } else {
@@ -95,6 +95,6 @@ if (isset($_GET['created']) && !$message) {
     $Alert->set('success', $Lang->get('The location has been successfully updated. Return to %slocations list%s', '<a href="' . $API->app_path() . '">', '</a>'));
 }
 
-if(is_object($Location) && ($Location->get_status() === 4)) {
+if(is_object($Location) && ($Location->is_failed())) {
     $Alert->set('error', $Lang->get('There was an issue plotting this location onto the map. <a href="%s/errors/?view=%s" class="action">View Details</a>', $API->app_path(), $HTML->encode($Location->id())));
 }
