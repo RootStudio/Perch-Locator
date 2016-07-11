@@ -11,3 +11,6 @@
 !.gitignore
 !readme.md
 !LICENSE
+
+.DS_Store
+.idea
