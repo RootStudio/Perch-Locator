@@ -120,6 +120,7 @@ class JwLocator_Location extends PerchAPI_Base
         $out = parent::to_array();
         $out['locationCategories'] = array();
 
+
         if (PerchUtil::count($out['perch_categories'])) {
             foreach ($out['perch_categories'] as $catID) {
                 if (!$QueryCache->has('category_search_' . $catID)) {
@@ -127,7 +128,10 @@ class JwLocator_Location extends PerchAPI_Base
                 }
 
                 $Category = $QueryCache->get('category_search_' . $catID);
-                $out['locationCategories'][$Category->catSlug()] = $Category->catTitle();
+
+                if($Category) {
+                    $out['locationCategories'][$Category->catSlug()] = $Category->catTitle();
+                }
             }
         }
 
