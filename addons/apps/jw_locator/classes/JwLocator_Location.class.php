@@ -22,6 +22,41 @@ class JwLocator_Location extends PerchAPI_Base
     protected $pk = 'locationID';
 
     /**
+     * Location in queue
+     * 
+     * @var int
+     */
+    const STATUS_QUEUED = 1;
+
+    /**
+     * Location is being processed
+     * 
+     * @var int
+     */
+    const STATUS_PROCESSING= 2;
+
+    /**
+     * Location has completed geo-coding
+     * 
+     * @var int
+     */
+    const STATUS_SYNCED = 3;
+
+    /**
+     * Location failed to be geo-coded
+     * 
+     * @var int
+     */
+    const STATUS_FAILED = 4;
+
+    /**
+     * Default state is errored
+     * 
+     * @var int
+     */
+    const STATUS_ERROR = 0;
+
+    /**
      * Update existing record, optionally forcing a geocode request
      *
      * @param array $data
@@ -126,11 +161,62 @@ class JwLocator_Location extends PerchAPI_Base
     /**
      * Return job status code
      *
+     * @deprecated v1.1.1
      * @return int
      */
     public function get_status()
     {
         return (int)$this->locationProcessingStatus();
+    }
+
+    /**
+     * Return if in queue
+     *
+     * @return bool
+     */
+    public function is_queued()
+    {
+        return (int)$this->locationProcessingStatus() === self::STATUS_QUEUED;
+    }
+
+    /**
+     * Return if location is being geo-coded
+     *
+     * @return bool
+     */
+    public function is_processing()
+    {
+        return (int)$this->locationProcessingStatus() === self::STATUS_PROCESSING;
+    }
+
+    /**
+     * Return if location is completed
+     *
+     * @return bool
+     */
+    public function is_synced()
+    {
+        return (int)$this->locationProcessingStatus() === self::STATUS_SYNCED;
+    }
+
+    /**
+     * Return if location failed
+     *
+     * @return bool
+     */
+    public function is_failed()
+    {
+        return (int)$this->locationProcessingStatus() === self::STATUS_FAILED;
+    }
+
+    /**
+     * Return if location has unknown error
+     *
+     * @return bool
+     */
+    public function is_error()
+    {
+        return (int)$this->locationProcessingStatus() === self::STATUS_ERROR;
     }
 
     /**
