@@ -15,9 +15,9 @@ $locations = $Locations->all($Paging);
 
 if ($locations === false) {
     $Locations->attempt_install();
-    $message = $HTML->warning_message('No locations have been added to the system.');
+    $Alert->set('notice', $Lang->get('No locations have been added to the system.'));
 }
 
 if($Errors->total() > 0) {
-    $message = $HTML->failure_message('There were issues plotting some locations on the map. <a href="'. $HTML->encode($API->app_path()) .'/errors/" class="action">View Details</a>');
+    $Alert->set('error', $Lang->get('There were issues plotting some locations on the map. <a href="%s/errors/" class="action">View Details</a>', $HTML->encode($API->app_path())));
 }

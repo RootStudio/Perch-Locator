@@ -14,6 +14,8 @@ include('_subnav.php');
 echo '<a class="add button" href="' . $HTML->encode($API->app_path() . '/edit/') . '">' . $Lang->get('Add Location') . '</a>';
 echo $HTML->heading1('Listing Locations');
 
+$Alert->output();
+
 ?>
 
     <ul class="smartbar">
@@ -23,10 +25,6 @@ echo $HTML->heading1('Listing Locations');
             </a>
         </li>
     </ul>
-
-<?php if (isset($message)) {
-    echo $message;
-} ?>
 
 <?php if (PerchUtil::count($locations)): ?>
     <table class="d">
