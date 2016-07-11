@@ -27,6 +27,7 @@ class JwLocator_Geocode
             $Geocoder->setApiKey($api_key);
         }
 
-        return $Geocoder->geocode();
+        // Suppressing is never the answer, but I have little control here. Revisit in future.
+        return @$Geocoder->geocode();
     }
 }
