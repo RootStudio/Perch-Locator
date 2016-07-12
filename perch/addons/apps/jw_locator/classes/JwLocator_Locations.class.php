@@ -323,7 +323,7 @@ class JwLocator_Locations extends PerchAPI_Factory
             $markers = $Markers->all();
         }
 
-        return function($rows) use($markers) {
+        return function($rows) use($markers, $opts) {
             foreach($rows as &$location) {
                 $marker_id = $location['markerID'];
 
@@ -342,7 +342,14 @@ class JwLocator_Locations extends PerchAPI_Factory
                     $location['markerLongitude'] = $Marker->markerLongitude();
 
                     if($Marker->markerDistance() !== false) {
-                        $location['markerDistance'] = round($Marker->markerDistance(), 1);
+                        $distance = round($Marker->markerDistance(), 1);
+
+                        // JSON output wants to remain an int
+                        if(!(isset($opts['json']) && $opts['json'])) {
+                            $distance = (string) $distance;
+                        }
+
+                        $location['markerDistance'] = $distance;
                     }
                 }
 

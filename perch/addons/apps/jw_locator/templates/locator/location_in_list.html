@@ -1,11 +1,29 @@
 <perch:before>
+    <h1>Results</h1>
     <ul>
 </perch:before>
 
         <li>
-            <h2><perch:locator id="locationTitle" /></h2>
+            <h2>
+                <perch:locator id="locationTitle" />
+                <strong style="float:right;">
+                    <perch:locator id="markerDistance" /> miles away
+                </strong>
+            </h2>
+            <address>
+                <perch:locator id="locationBuilding" />,
+                <perch:locator id="locationStreet" />,
+                <perch:locator id="locationTown" />,
+                <perch:locator id="locationRegion" />,
+                <perch:locator id="locationPostcode" />,
+                <perch:locator id="locationCountry" />
+            </address>
         </li>
 
 <perch:after>
     </ul>
 </perch:after>
+
+<perch:noresults>
+    <h1>No locations found</h1>
+</perch:noresults>
