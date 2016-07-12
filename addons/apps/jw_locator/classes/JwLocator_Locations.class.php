@@ -85,9 +85,7 @@ class JwLocator_Locations extends PerchAPI_Factory
                 $sql = 'SELECT';
             }
 
-            $sql .= ' *
-                FROM ' . $this->table;
-
+            $sql .= ' * FROM ' . $this->table;
             $sql .= ' WHERE ' . $this->pk . ' IN(' . implode(',', $ids) . ')';
 
             if (isset($this->default_sort_column)) {
@@ -103,6 +101,43 @@ class JwLocator_Locations extends PerchAPI_Factory
             if ($Paging && $Paging->enabled()) {
                 $Paging->set_total($this->db->get_count($Paging->total_count_sql()));
             }
+        }
+
+        return $this->return_instances($results);
+    }
+
+    /**
+     * Search records by their starting letter by group (EG, A-C)
+     *
+     * @param string $characters
+     * @param bool $Paging
+     * @return array|bool
+     */
+    public function all_by_start_character($characters, $Paging = false)
+    {
+        $regex = '^[' . $characters . ']';
+
+        if($Paging && $Paging->enabled()) {
+            $sql = $Paging->select_sql();
+        } else {
+            $sql = 'SELECT';
+        }
+
+        $sql .= ' * FROM ' . $this->table;
+        $sql .= ' WHERE `locationTitle` REGEXP ' . $this->db->pdb($regex);
+
+        if (isset($this->default_sort_column)) {
+            $sql .= ' ORDER BY ' . $this->default_sort_column . ' ' . $this->default_sort_direction;
+        }
+
+        if ($Paging && $Paging->enabled()) {
+            $sql .= ' ' . $Paging->limit_sql();
+        }
+
+        $results = $this->db->get_rows($sql);
+
+        if ($Paging && $Paging->enabled()) {
+            $Paging->set_total($this->db->get_count($Paging->total_count_sql()));
         }
 
         return $this->return_instances($results);
