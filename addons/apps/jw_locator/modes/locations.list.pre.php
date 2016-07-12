@@ -11,11 +11,20 @@ $Errors = new JwLocator_Errors($API);
 $locations = array();
 $message = false;
 
-$locations = $Locations->all($Paging);
 
-if ($locations === false) {
-    $Locations->attempt_install();
-    $Alert->set('notice', $Lang->get('No locations have been added to the system.'));
+if(isset($_GET['chars']) && $_GET['chars'] != '') {
+    $locations = $Locations->all_by_start_character($_GET['chars'], $Paging);
+
+    if ($locations === false) {
+        $Alert->set('notice', $Lang->get('No locations could be found for the selected filter.'));
+    }
+} else {
+    $locations = $Locations->all($Paging);
+
+    if ($locations === false) {
+        $Locations->attempt_install();
+        $Alert->set('notice', $Lang->get('No locations have been added to the system.'));
+    }
 }
 
 if($Errors->total() > 0) {

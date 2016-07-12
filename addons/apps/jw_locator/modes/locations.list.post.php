@@ -15,19 +15,14 @@ include('_subnav.php');
 echo '<a class="add button" href="' . $HTML->encode($API->app_path() . '/edit/') . '">' . $Lang->get('Add Location') . '</a>';
 echo $HTML->heading1('Listing Locations');
 
+// Output alerts
 $Alert->output();
 
-?>
+// Include filter bar partial
+include 'partials/char-filter.php';
 
-    <ul class="smartbar">
-        <li class="selected">
-            <a href="<?php echo PerchUtil::html($API->app_path()); ?>">
-                <?php echo $Lang->get('All'); ?>
-            </a>
-        </li>
-    </ul>
-
-<?php if (PerchUtil::count($locations)): ?>
+// List items
+if (PerchUtil::count($locations)): ?>
     <table class="d">
         <thead>
             <tr>
