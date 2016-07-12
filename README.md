@@ -25,6 +25,9 @@ The app operates on a queue system to prevent Google blocking API requests and p
 
 **Update:** As of June 22nd, Google now requires that all mapping requests be made using an API Key. You can set an API Key in the settings panel of Perch.
 
+## Displaying on a map
+To display your location results onto a map, take a look at the example code in the `locations/index.php` file.
+
 ## Page Functions
 ### jw\_locator\_get\_custom
 
