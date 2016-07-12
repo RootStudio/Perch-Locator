@@ -1,7 +1,7 @@
 <?php
 
 if ($CurrentUser->logged_in() && $CurrentUser->has_priv('jw_locator')) {
-    $this->register_app('jw_locator', 'Locator', 1, 'Store / Location finder', '1.1.0');
+    $this->register_app('jw_locator', 'Locator', 1, 'Store / Location finder', '1.1.1');
     $this->require_version('jw_locator', 2.8);
     $this->add_create_page('jw_locator', 'edit');
 
