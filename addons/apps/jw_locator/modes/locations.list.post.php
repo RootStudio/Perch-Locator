@@ -5,6 +5,7 @@ echo $HTML->side_panel_start();
 echo $HTML->para('This page shows you the current locations stored in the app. To edit a location, click on its title.');
 echo $HTML->para('Locations are queued to be plotted on the map, you can see the status with the "status" tag.');
 echo $HTML->para('There are 4 possible statuses: In Queue, Processing, Synced and Failed');
+echo $HTML->para('Due to a change in Google\'s API policy, an key is now required. Please create one using the <a href="https://console.developers.google.com" target="_blank">Google API Console</a> and ensure that the Maps API is enabled.');
 echo $HTML->side_panel_end();
 
 // Main Panel UI

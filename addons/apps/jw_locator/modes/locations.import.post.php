@@ -15,9 +15,7 @@ include('_subnav.php');
 
 echo $HTML->heading1('Import Locations');
 
-if ($message) {
-    echo $message;
-}
+$Alert->output();
 
 if($Importer->get_failed_rows() > 0) {
     echo $HTML->failure_message('%s rows could not be imported due to missing column data', $Importer->get_failed_rows());
