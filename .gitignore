@@ -1,12 +1,15 @@
 /*
 
-!/addons
-/addons/*
+!/perch
+/perch/*
 
-!/addons/apps
-/addons/apps/*
+!/perch/addons
+/perch/addons/*
 
-!/addons/apps/jw_locator
+!/perch/addons/apps
+/perch/addons/apps/*
+
+!/perch/addons/apps/jw_locator
 
 !.gitignore
 !readme.md
