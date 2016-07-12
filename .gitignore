@@ -11,6 +11,8 @@
 
 !/perch/addons/apps/jw_locator
 
+!/locations/*
+
 !.gitignore
 !readme.md
 !LICENSE
