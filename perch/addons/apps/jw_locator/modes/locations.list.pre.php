@@ -1,7 +1,12 @@
 <?php
 
-$HTML = $API->get('HTML');
 $Settings = $API->get('Settings');
+
+if ($Settings->get('jw_locator_update')->val() != '1.1.2') {
+    PerchUtil::redirect($API->app_path() . '/update/');
+}
+
+$HTML = $API->get('HTML');
 $Paging = $API->get('Paging');
 $Paging->set_per_page('20');
 
