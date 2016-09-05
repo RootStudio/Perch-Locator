@@ -36,7 +36,7 @@ echo $Form->form_start();
     echo $Form->text_field('locationPostcode', 'Postcode', isset($details['locationPostcode']) ? $details['locationPostcode'] : false, 's');
 
     $country_opts = include '../utilities/country_codes.php';
-    echo $Form->select_field('locationCountry', 'Country', $country_opts, isset($details['locationCountry']) ? $details['locationCountry'] : 'GB');
+    echo $Form->select_field('locationCountry', 'Country', $country_opts, isset($details['locationCountry']) ? $details['locationCountry'] : 'UK');
 
     if(is_object($Location)) {
         echo $Form->hint('Check this to skip the queue and process immediately.');

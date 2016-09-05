@@ -228,7 +228,7 @@ return array(
     array('value' => 'UG', 'label' => 'Uganda'),
     array('value' => 'UA', 'label' => 'Ukraine'),
     array('value' => 'AE', 'label' => 'United Arab Emirates'),
-    array('value' => 'GB', 'label' => 'United Kingdom'),
+    array('value' => 'UK', 'label' => 'United Kingdom'),
     array('value' => 'US', 'label' => 'United States'),
     array('value' => 'UM', 'label' => 'United States Minor Outlying Islands'),
     array('value' => 'UY', 'label' => 'Uruguay'),
