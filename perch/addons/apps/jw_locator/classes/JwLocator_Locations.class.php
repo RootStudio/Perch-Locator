@@ -68,6 +68,13 @@ class JwLocator_Locations extends PerchAPI_Factory
     );
 
     /**
+     * Maximum attempts to geocode before erroring
+     *
+     * @var int
+     */
+    const MAX_ATTEMPTS = 3;
+
+    /**
      * Fetch locations in array of IDs
      *
      * @param array $ids
@@ -194,6 +201,7 @@ class JwLocator_Locations extends PerchAPI_Factory
     {
         $sql = 'SELECT * FROM ' . $this->table;
         $sql .= ' WHERE `locationUpdatedAt` > `locationProcessedAt`';
+        $sql .= ' AND `locationProcessingAttempts` < ' . $this->db->pdb(self::MAX_ATTEMPTS);
         $sql .= ' ORDER BY `locationUpdatedAt` ASC';
         $sql .= ' LIMIT ' . $batch_limit;
 

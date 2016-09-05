@@ -66,16 +66,15 @@ class JwLocator_Location extends PerchAPI_Base
      */
     public function update($data, $force_geocoding = false, $ignore_timestamp = false)
     {
-        if (!$ignore_timestamp) {
-            $this->set_status(1);
-            $data['locationUpdatedAt'] = date("Y-m-d H:i:s");
+        $this->reset_attempts();
+        $this->set_status(1);
+        $data['locationUpdatedAt'] = date("Y-m-d H:i:s");
 
-            // Move here, as this is a 'normal' update
-            $Error = $this->get_error();
+        // Move here, as this is a 'normal' update
+        $Error = $this->get_error();
 
-            if (is_object($Error)) {
-                $Error->delete();
-            }
+        if (is_object($Error)) {
+            $Error->delete();
         }
 
         $result = parent::update($data);
@@ -280,11 +279,12 @@ class JwLocator_Location extends PerchAPI_Base
                 $Marker->update($marker_data);
             }
 
-            $this->update(array(
-                'locationProcessedAt' => date("Y-m-d H:i:s")
-            ), false, true);
+            $this->db->update($this->table, array(
+                'locationProcessedAt'        => date("Y-m-d H:i:s"),
+                'locationProcessingStatus'   => self::STATUS_SYNCED,
+                'locationProcessingAttempts' => 0
+            ), $this->pk, $this->id());
 
-            $this->set_status(3);
         } else {
             $status = $response['status'];
 
@@ -307,6 +307,7 @@ class JwLocator_Location extends PerchAPI_Base
                     break;
             }
 
+            $this->increment_attempts();
             $this->set_status(4);
         }
     }
@@ -341,15 +342,37 @@ class JwLocator_Location extends PerchAPI_Base
     }
 
     /**
+     * Reset attempts counter to zero
+     */
+    private function reset_attempts()
+    {
+        $this->db->update($this->table, array(
+            'locationProcessingAttempts' => 0
+        ), $this->pk, $this->id());
+
+        $this->details['locationProcessingAttempts'] = 0;
+    }
+
+    /**
+     * Update the location processing attempts column
+     */
+    private function increment_attempts()
+    {
+        $this->db->update($this->table, array(
+            'locationProcessingAttempts' => ($this->locationProcessingAttempts() + 1)
+        ), $this->pk, $this->id());
+    }
+
+    /**
      * Set job status code
      *
      * @param int $status_code 1: queued, 2: processing, 3: synced, 4: Failed
      */
     private function set_status($status_code = 1)
     {
-        $this->update(array(
+        $this->db->update($this->table, array(
             'locationProcessingStatus' => $status_code
-        ), false, true);
+        ), $this->pk, $this->id());
     }
 
     /**
@@ -362,9 +385,9 @@ class JwLocator_Location extends PerchAPI_Base
         $Markers = new JwLocator_Markers($this->api);
         $Marker = $Markers->create($data);
 
-        $this->update(array(
+        $this->db->update($this->table, array(
             'markerID' => $Marker->id()
-        ), false, true);
+        ), $this->pk, $this->id());
     }
 
     /**
@@ -385,5 +408,4 @@ class JwLocator_Location extends PerchAPI_Base
 
         return $Error;
     }
-
 }
