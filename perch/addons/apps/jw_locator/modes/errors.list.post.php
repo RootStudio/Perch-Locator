@@ -34,6 +34,9 @@ $Alert->output();
                 <th class="score-title">
                     <?php echo $Lang->get('Error'); ?>
                 </th>
+                <th class="score-title" style="text-align: center">
+                    <?php echo $Lang->get('Tries'); ?>
+                </th>
                 <th class="score-title">
                     <?php echo $Lang->get('Date'); ?>
                 </th>
@@ -51,6 +54,9 @@ $Alert->output();
                         $Error = $Location->get_error();
                         echo $HTML->encode($Error ? $Error->errorMessage() : null);
                     ?>
+                </td>
+                <td style="text-align: center">
+                    <?php echo $HTML->encode($Location->locationProcessingAttempts()); ?>
                 </td>
                 <td>
                     <?php
