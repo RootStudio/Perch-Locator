@@ -12,6 +12,7 @@ $Settings = $API->get('Settings');
 
 // Page settings
 $Perch->page_title = $Lang->get('Locator');
+$Perch->add_css($API->app_path() . '/assets/css/locator.css');
 
 // Page Initialising
 include('modes/addresses.list.pre.php');

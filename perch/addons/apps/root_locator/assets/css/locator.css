@@ -17,3 +17,25 @@
         margin-left: 0;
     }
 }
+
+.status-icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.status-icon--rotate {
+    animation: icon-rotate 1s infinite linear;
+}
+
+@keyframes icon-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+.status-column {
+    text-align: center;
+}
