@@ -50,7 +50,7 @@ class RootLocator_Addresses extends PerchAPI_Factory
     protected $namespace = 'locator';
 
     /**
-     * Non dynamic fields
+     * Database columns to be excluded from template dynamic fields
      *
      * @var array
      */
@@ -64,6 +64,14 @@ class RootLocator_Addresses extends PerchAPI_Factory
         'addressCountry'
     ];
 
+    /**
+     * Return results filtered by first character of title column
+     *
+     * @param string     $string
+     * @param bool $Paging
+     *
+     * @return array|bool|SplFixedArray
+     */
     public function filterByTitleChar($string, $Paging = false)
     {
         $regex = '^[' . $string . ']';
@@ -93,11 +101,25 @@ class RootLocator_Addresses extends PerchAPI_Factory
         return $this->return_instances($results);
     }
 
+    /**
+     * Return results where coordinates have been set
+     *
+     * @param bool $Paging
+     *
+     * @return array|bool|SplFixedArray
+     */
     public function filterByCoordinates($Paging = false)
     {
 
     }
 
+    /**
+     * Return results where errors have occurred
+     *
+     * @param bool $Paging
+     *
+     * @return array|bool|SplFixedArray
+     */
     public function filterByErrors($Paging = false)
     {
         if ($Paging && $Paging->enabled()) {
@@ -125,7 +147,12 @@ class RootLocator_Addresses extends PerchAPI_Factory
         return $this->return_instances($results);
     }
 
-    public function totalGeocoded()
+    /**
+     * Return total number of records with coordinates
+     *
+     * @return int
+     */
+    public function totalWithCoordinates()
     {
         return $this->db->get_count('
           SELECT COUNT(`addressID`) 
@@ -135,7 +162,12 @@ class RootLocator_Addresses extends PerchAPI_Factory
         );
     }
 
-    public function totalErrored()
+    /**
+     * Return total number of records with errors
+     *
+     * @return int
+     */
+    public function totalWithErrors()
     {
         return $this->db->get_count('
           SELECT COUNT(`addressID`) 

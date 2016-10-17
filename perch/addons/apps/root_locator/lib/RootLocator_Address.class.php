@@ -26,6 +26,11 @@ class RootLocator_Address extends PerchAPI_Base
      */
     protected $modified_date_column = 'addressUpdated';
 
+    /**
+     * Return full address string
+     *
+     * @return string
+     */
     public function fullAddress()
     {
         $address = [
@@ -40,6 +45,11 @@ class RootLocator_Address extends PerchAPI_Base
         return implode(', ', $address);
     }
 
+    /**
+     * Transform given address details into geographic coordinates
+     *
+     * @return mixed
+     */
     public function geocode()
     {
         $Geocoder = RootLocator_GeocoderFactory::createGeocoder();
@@ -60,6 +70,14 @@ class RootLocator_Address extends PerchAPI_Base
         ]);
     }
 
+    /**
+     * Update object attributes and persist to data store
+     *
+     * @param array $data
+     * @param bool  $geocode
+     *
+     * @return mixed
+     */
     public function update($data, $geocode = false)
     {
         $result = parent::update($data);
@@ -71,26 +89,31 @@ class RootLocator_Address extends PerchAPI_Base
         return $result;
     }
 
+    /**
+     * Returns if the object has been given coordinates
+     *
+     * @return bool
+     */
     public function hasCoordinates()
     {
         return ($this->addressLatitude() && $this->addressLongitude());
     }
 
+    /**
+     * Returns if object has experienced an error
+     *
+     * @return bool
+     */
     public function hasError()
     {
         return !is_null($this->addressError());
     }
-
-    public function addAttempt()
-    {
-
-    }
-
-    public function clearAttempts()
-    {
-
-    }
-
+    
+    /**
+     * Return google static map preview of coordinates
+     *
+     * @return bool|string
+     */
     public function preview()
     {
         $PerchSettings = PerchSettings::fetch();

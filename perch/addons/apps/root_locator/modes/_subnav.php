@@ -1,7 +1,7 @@
 <?php
 
 $Addresses = new RootLocator_Addresses;
-$errorCount = $Addresses->totalErrored();
+$errorCount = $Addresses->totalWithErrors();
 
 echo $HTML->subnav($CurrentUser, [
     [
