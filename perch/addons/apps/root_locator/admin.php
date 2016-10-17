@@ -14,6 +14,8 @@ if ($CurrentUser->logged_in() && $CurrentUser->has_priv('root_locator')) {
 
     $this->add_setting('root_locator_google_api_key', 'API key', 'text');
 
+    include(__DIR__ . '/lib/vendor/autoload.php');
+
     spl_autoload_register(function ($class_name) {
         if (strpos($class_name, 'RootLocator') === 0) {
             include(PERCH_PATH . '/addons/apps/root_locator/lib/' . $class_name . '.class.php');

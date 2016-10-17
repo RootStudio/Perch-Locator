@@ -1,0 +1,19 @@
+.map-preview {
+    display: block;
+    border: 1px dotted #E5E5E5;
+    padding: 5px;
+    margin: 15px 0 0 240px;
+    max-width: 100%;
+}
+
+@media screen and (max-width:1060px) {
+    .sidebar-open .map-preview {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width:840px) {
+    .sidebar-closed .map-preview {
+        margin-left: 0;
+    }
+}
