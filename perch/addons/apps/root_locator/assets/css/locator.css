@@ -39,3 +39,15 @@
 .status-column {
     text-align: center;
 }
+
+.smartbar .err a:link,
+.smartbar .err a:visited {
+    color: #FF3E1B;
+    text-transform: uppercase
+}
+
+.smartbar .err.selected a:link,
+.smartbar .err.selected a:visited {
+    background-color: #FF3E1B;
+    color: #fff;
+}

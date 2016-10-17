@@ -32,6 +32,10 @@ echo $Form->form_start();
 
     echo $HTML->heading2('Map');
 
+    if(is_object($Address) && $Address->hasError()) {
+        echo $HTML->failure_message(RootLocator_Errors::get($Address->addressError()));
+    }
+
     if(is_object($Address) && $Address->preview()) {
         echo $Address->preview();
     }

@@ -43,11 +43,20 @@ class RootLocator_Address extends PerchAPI_Base
     public function geocode()
     {
         $Geocoder = RootLocator_GeocoderFactory::createGeocoder();
-        $coordinates = $Geocoder->geocode($this->fullAddress())->getFirstCoordinates();
+        $result = $Geocoder->geocode($this->fullAddress());
+
+        if ($result->hasError()) {
+            return $this->update([
+                'addressError' => $result->getErrorKey()
+            ]);
+        }
+
+        $coordinates = $result->getFirstCoordinates();
 
         return $this->update([
             'addressLatitude'  => $coordinates['latitude'],
-            'addressLongitude' => $coordinates['longitude']
+            'addressLongitude' => $coordinates['longitude'],
+            'addressError'     => null
         ]);
     }
 
@@ -62,14 +71,14 @@ class RootLocator_Address extends PerchAPI_Base
         return $result;
     }
 
-    public function isGeocoded()
+    public function hasCoordinates()
     {
         return ($this->addressLatitude() && $this->addressLongitude());
     }
 
-    public function isErrored()
+    public function hasError()
     {
-
+        return !is_null($this->addressError());
     }
 
     public function addAttempt()
@@ -87,7 +96,7 @@ class RootLocator_Address extends PerchAPI_Base
         $PerchSettings = PerchSettings::fetch();
         $apiKey = $PerchSettings->get('root_locator_google_api_key')->settingValue();
 
-        if (!$this->isGeocoded() || !$apiKey) {
+        if (!$this->hasCoordinates() || !$apiKey) {
             return false;
         }
 

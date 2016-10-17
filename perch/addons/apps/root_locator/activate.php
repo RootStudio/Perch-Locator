@@ -16,6 +16,7 @@ $sql = "
       `addressCountry` varchar(3) DEFAULT '',
       `addressLatitude` decimal(9,6),
       `addressLongitude` decimal(9,6),
+      `addressError` varchar(255),
       `addressDynamicFields` text,
       `addressUpdated` datetime NOT NULL,
       PRIMARY KEY (`addressID`)

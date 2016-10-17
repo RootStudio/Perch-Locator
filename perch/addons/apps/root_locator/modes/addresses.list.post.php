@@ -13,10 +13,30 @@ include(__DIR__ . '/_subnav.php');
 echo '<a class="add button" href="' . $HTML->encode($API->app_path() . '/edit/') . '">' . $Lang->get('Add Address') . '</a>';
 echo $HTML->heading1('Listing Addresses');
 
-// Output alerts
-$Alert->output();
-
 ?>
+
+    <ul class="smartbar">
+        <li>
+            <span class="set">Filter</span>
+        </li>
+        <li class="<?php if(!isset($_GET['chars']) && !isset($_GET['filter'])): ?>selected<?php endif; ?>">
+            <a href="<?php echo $API->app_path(); ?>"><?php echo $Lang->get('All'); ?></a>
+        </li>
+        <li class="err <?php if(isset($_GET['filter']) && $_GET['filter'] == 'failed'): ?>selected<?php endif; ?>">
+            <a href="<?php echo $API->app_path(); ?>?filter=failed"><?php echo $Lang->get('Failed'); ?></a>
+        </li>
+        <?php echo PerchUtil::smartbar_filter('chars', 'By Title', 'Filtered by ‘%s’', [
+            ['arg' => 'chars', 'val' => 'abcd', 'label' => 'A-D'],
+            ['arg' => 'chars', 'val' => 'efgh', 'label' => 'E-H'],
+            ['arg' => 'chars', 'val' => 'ijkl', 'label' => 'I-L'],
+            ['arg' => 'chars', 'val' => 'mopq', 'label' => 'M-Q'],
+            ['arg' => 'chars', 'val' => 'rstv', 'label' => 'R-V'],
+            ['arg' => 'chars', 'val' => 'wxyz', 'label' => 'W-Z'],
+            ['arg' => 'chars', 'val' => '0-9', 'label' => '0-9']
+        ], 'icon region', $Alert, "You are viewing addresses filtered by title ‘%s’", $API->app_path()); ?>
+    </ul>
+
+<?php $Alert->output(); ?>
 
 <?php if (PerchUtil::count($addresses)): ?>
     <table class="d">
@@ -59,9 +79,9 @@ $Alert->output();
             </td>
             <td class="status-column">
                 <?php
-                    if($Address->isGeocoded()) {
+                    if($Address->hasCoordinates()) {
                         echo sprintf('<img src="%s/assets/images/status-%s.svg" alt="%s" class="status-icon %s" />', $API->app_path(), 'success', 'Geocoded', null);
-                    } elseif($Address->isErrored()) {
+                    } elseif($Address->hasError()) {
                         echo sprintf('<img src="%s/assets/images/status-%s.svg" alt="%s" class="status-icon %s" />', $API->app_path(), 'error', 'Failed to geocode', null);
                     } else {
                         echo sprintf('<img src="%s/assets/images/status-%s.svg" alt="%s" class="status-icon %s" />', $API->app_path(), 'processing', 'Item is in queue', 'status-icon--rotate');

@@ -17,7 +17,7 @@ class RootLocator_GeocoderFactory
             $httpAdapter,
             null,
             null,
-            false,
+            true,
             $apiKey
         );
 
