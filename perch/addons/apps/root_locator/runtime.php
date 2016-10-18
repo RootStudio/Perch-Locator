@@ -12,21 +12,99 @@ spl_autoload_register(function ($class_name) {
     return false;
 });
 
-function root_locator_address($id, array $opts = [], $return = false)
+/**
+ * Shortcut to output detail for single address
+ *
+ * @param int     $id
+ * @param bool $return
+ *
+ * @return void|array
+ */
+function root_locator_address($id, $return = false)
 {
+    $options = [
+        'template' => 'address.html',
+        '_id' => (int) $id
+    ];
 
+    if($return) {
+        return root_locator_get_custom($options, true);
+    }
+
+    root_locator_get_custom($options);
 }
 
-function root_locator_address_fields($id, ...$fields)
+/**
+ * Output data from single field
+ *
+ * @param      $id
+ * @param      $field
+ * @param bool $return
+ *
+ * @return bool|string
+ */
+function root_locator_address_field($id, $field, $return = false)
 {
+    $API = new PerchAPI(1.0, 'root_locator');
+    $Addresses = new RootLocator_Addresses($API);
 
+    $Address = $Addresses->find((int) $id);
+    $result = false;
+
+    if(is_object($Address)) {
+        $result = $Address->getField($field);
+    }
+
+    if($return) {
+        return $result;
+    }
+
+    echo $result;
 }
 
+/**
+ * Display list of addresses near to location specified by ID
+ *
+ * @param       $id
+ * @param array $opts
+ * @param bool  $return
+ *
+ * @return void|array
+ */
 function root_locator_nearby($id, array $opts = [], $return = false)
 {
+    $API = new PerchAPI(1.0, 'root_locator');
+    $Addresses = new RootLocator_Addresses($API);
 
+    $Address = $Addresses->find((int) $id);
+    $coordinates = false;
+
+    if(is_object($Address)) {
+        $coordinates = $Address->getCoordinates();
+    }
+
+    if($coordinates) {
+        if(isset($opts['address'])) $opts['address'] = null;
+
+        $opts['coordinates'] = $coordinates;
+        $opts['exclude'] = $id;
+
+        if($return) {
+            root_locator_get_custom($opts, $return);
+        }
+
+        root_locator_get_custom($opts, $return);
+    }
 }
 
+/**
+ * Perform custom queries on address data and output results
+ *
+ * @param array $opts
+ * @param bool  $return
+ *
+ * @return void|string
+ */
 function root_locator_get_custom(array $opts = [], $return = false)
 {
     $defaults = [

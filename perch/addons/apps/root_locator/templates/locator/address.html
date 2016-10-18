@@ -1,1 +1,39 @@
-<perch:categories id="categories" set="locator" label="Categories" display-as="checkboxes" divider-before="Meta Data"/>
+<h1><perch:locator id="addressTitle" /></h1>
+<p>
+    <perch:if exists="addressBuilding">
+        <perch:locator id="addressBuilding" />,
+    </perch:if>
+
+    <perch:if exists="addressStreet">
+        <perch:locator id="addressStreet" />,
+    </perch:if>
+
+    <perch:if exists="addressTown">
+        <perch:locator id="addressTown" />,
+    </perch:if>
+
+    <perch:if exists="addressRegion">
+        <perch:locator id="addressRegion" />,
+    </perch:if>
+
+    <perch:if exists="addressPostcode">
+        <perch:locator id="addressPostcode" />,
+    </perch:if>
+
+    <perch:if exists="addressCountry">
+        <perch:locator id="addressCountry" />
+    </perch:if>
+
+    <br /><code><perch:locator id="addressLatitude" />, <perch:locator id="addressLongitude" /></code>
+</p>
+
+<perch:categories id="categories" set="locator" label="Categories" display-as="checkboxes" divider-before="Meta Data">
+    <perch:before>
+        <h3>Categories</h3>
+        <ul>
+    </perch:before>
+        <li><perch:category id="catTitle" /></li>
+    <perch:after>
+        </ul>
+    </perch:after>
+</perch:categories>

@@ -27,6 +27,38 @@ class RootLocator_Address extends PerchAPI_Base
     protected $modified_date_column = 'addressUpdated';
 
     /**
+     * Return data from set field on address record
+     *
+     * @param string $field
+     *
+     * @return bool
+     */
+    public function getField($field)
+    {
+        $data = $this->to_array();
+
+        if (isset($data[$field])) {
+            $Template = $this->api->get('Template');
+            $Template->set('locator/address.html', 'locator');
+            $Tag = $Template->find_tag($field);
+
+            if ($Tag) {
+                if ($Tag->is_set('suppress')) {
+                    $Tag->set('suppress', false);
+                }
+
+                $Template->set_from_string(PerchXMLTag::create('perch:locator', 'single', $Tag->get_attributes()), 'locator');
+
+                return $Template->render($data);
+            }
+
+            return $data[$field];
+        }
+
+        return false;
+    }
+
+    /**
      * Return full address string
      *
      * @return string
@@ -58,7 +90,7 @@ class RootLocator_Address extends PerchAPI_Base
         $result = $Geocoder->geocode($this->fullAddress());
 
         if ($result->hasError()) {
-            if($log) {
+            if ($log) {
                 $this->update([
                     'addressError' => $result->getErrorKey()
                 ]);
@@ -106,6 +138,20 @@ class RootLocator_Address extends PerchAPI_Base
     }
 
     /**
+     * Fetch coordinates array (useful for find nearby runtime function)
+     *
+     * @return array|bool
+     */
+    public function getCoordinates()
+    {
+        if($this->hasCoordinates()) {
+            return [$this->addressLatitude(), $this->addressLongitude()];
+        }
+
+        return false;
+    }
+
+    /**
      * Returns if object has experienced an error
      *
      * @return bool
@@ -114,7 +160,7 @@ class RootLocator_Address extends PerchAPI_Base
     {
         return !is_null($this->addressError());
     }
-    
+
     /**
      * Return google static map preview of coordinates
      *

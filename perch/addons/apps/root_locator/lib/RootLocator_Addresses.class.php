@@ -304,6 +304,11 @@ class RootLocator_Addresses extends PerchAPI_Factory
                 $query->where[] = ' `addressID` IN(' . implode(',', $include) . ')';
             }
 
+            // Exclude item
+            if(isset($options['exclude'])) {
+                $query->where[] = ' `addressID` <> ' . (int) $this->db->pdb($options['exclude']);
+            }
+
             // Limit
             $query->where[] = ' `addressLatitude` IS NOT NULL AND `addressLongitude` IS NOT NULL';
 
