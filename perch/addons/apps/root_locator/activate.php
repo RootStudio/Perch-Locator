@@ -19,7 +19,8 @@ $sql = "
       `addressError` varchar(255),
       `addressDynamicFields` text,
       `addressUpdated` datetime NOT NULL,
-      PRIMARY KEY (`addressID`)
+      PRIMARY KEY (`addressID`),
+      FULLTEXT KEY `root_locator_search_index` (`addressTitle`,`addressBuilding`,`addressStreet`,`addressPostcode`)
     ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
     
     CREATE TABLE `__PREFIX__root_locator_tasks` (

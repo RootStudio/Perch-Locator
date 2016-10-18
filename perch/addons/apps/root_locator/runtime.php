@@ -12,6 +12,9 @@ spl_autoload_register(function ($class_name) {
     return false;
 });
 
+// Search Handler
+PerchSystem::register_search_handler('RootLocator_SearchHandler');
+
 /**
  * Shortcut to output detail for single address
  *
