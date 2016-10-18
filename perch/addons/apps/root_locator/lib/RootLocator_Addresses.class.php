@@ -377,4 +377,40 @@ class RootLocator_Addresses extends PerchAPI_Factory
 
         return [-1];
     }
+
+    /**
+     * Return database rows from legacy table format for upgrade
+     *
+     * @param $Paging
+     *
+     * @return mixed
+     */
+    public function getLegacyData($Paging)
+    {
+        $sql = $Paging->select_sql();
+
+        $sql .= '
+            loc.locationTitle, 
+            loc.locationBuilding, 
+            loc.locationStreet, 
+            loc.locationTown, 
+            loc.locationRegion, 
+            loc.locationCountry, 
+            loc.locationPostcode, 
+            loc.locationDynamicFields,
+            mkr.markerLatitude,
+            mkr.markerLongitude,
+            err.errorMessage
+            FROM perch2_jw_locator_locations loc
+            LEFT JOIN perch2_jw_locator_markers mkr ON loc.markerID = mkr.markerID
+            LEFT JOIN perch2_jw_locator_failed_jobs err ON loc.locationID = err.locationID
+        ';
+
+        $sql .= ' ' . $Paging->limit_sql();
+
+        $results = $this->db->get_rows($sql);
+        $Paging->set_total($this->db->get_count($Paging->total_count_sql()));
+
+        return $results;
+    }
 }
