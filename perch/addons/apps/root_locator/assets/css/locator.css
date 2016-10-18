@@ -51,3 +51,10 @@
     background-color: #FF3E1B;
     color: #fff;
 }
+
+.importables li .status-message {
+    float: right;
+    font-size: 12px;
+    font-style: italic;
+    padding-right: 10px;
+}

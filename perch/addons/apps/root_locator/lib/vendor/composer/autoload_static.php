@@ -19,6 +19,10 @@ class ComposerStaticInitdab9da119c295811d6eee5ec2134719a
         array (
             'Psr\\Http\\Message\\' => 17,
         ),
+        'L' => 
+        array (
+            'League\\Csv\\' => 11,
+        ),
         'I' => 
         array (
             'Ivory\\HttpAdapter\\' => 18,
@@ -33,6 +37,10 @@ class ComposerStaticInitdab9da119c295811d6eee5ec2134719a
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'League\\Csv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/csv/src',
         ),
         'Ivory\\HttpAdapter\\' => 
         array (

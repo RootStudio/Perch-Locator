@@ -118,7 +118,7 @@ class RootLocator_Tasks extends PerchAPI_Factory
      *
      * @return int
      */
-    public function processQueue()
+    public function processQueue($delay = false)
     {
         if (!$this->api) {
             PerchUtil::debug('Locator: Perch API must be set on Tasks class to process queue', 'error');
@@ -195,6 +195,10 @@ class RootLocator_Tasks extends PerchAPI_Factory
             }
 
             $count++;
+
+            if($delay) {
+                sleep((int) $delay);
+            }
         }
 
         return $count;

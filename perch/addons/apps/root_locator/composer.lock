@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2a6160c2652ee4225a85f9a685471477",
-    "content-hash": "4121646d219b57ff454b5f6aff465ab6",
+    "hash": "1a93af3dda7c5dbc266761b5d5eee16d",
+    "content-hash": "de6b2790a229f4ffafadcb67ee8b45c1",
     "packages": [
         {
             "name": "egeloen/http-adapter",
@@ -130,6 +130,63 @@
                 "hash-map"
             ],
             "time": "2014-12-15 23:03:51"
+        },
+        {
+            "name": "league/csv",
+            "version": "8.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/csv.git",
+                "reference": "3b22a40804aa0bc5224ffb2f5e8248edf0a9a38c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/csv/zipball/3b22a40804aa0bc5224ffb2f5e8248edf0a9a38c",
+                "reference": "3b22a40804aa0bc5224ffb2f5e8248edf0a9a38c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^1.9",
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "8.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Csv\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ignace Nyamagana Butera",
+                    "email": "nyamsprod@gmail.com",
+                    "homepage": "https://github.com/nyamsprod/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Csv data manipulation made easy in PHP",
+            "homepage": "http://csv.thephpleague.com",
+            "keywords": [
+                "csv",
+                "export",
+                "filter",
+                "import",
+                "read",
+                "write"
+            ],
+            "time": "2016-09-05 08:16:07"
         },
         {
             "name": "psr/http-message",
