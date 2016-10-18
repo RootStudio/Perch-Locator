@@ -22,13 +22,13 @@ $sql = "
       PRIMARY KEY (`addressID`)
     ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
     
-    CREATE TABLE `__prefix__root_locator_tasks` (
+    CREATE TABLE `__PREFIX__root_locator_tasks` (
       `taskID` int(11) unsigned NOT NULL AUTO_INCREMENT,
       `taskKey` VARCHAR(255) NOT NULL,
       `addressID` int(11) unsigned NOT NULL,
       `taskAttempt` int(1) unsigned NOT NULL DEFAULT 1,
       `taskStart` datetime NOT NULL,
-      PRIMARY KEY (`queueID`)
+      PRIMARY KEY (`taskID`)
     ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 ";
 
