@@ -20,4 +20,27 @@ class RootLocator_Task extends PerchAPI_Base
      * @var string
      */
     protected $pk = 'taskID';
+
+    /**
+     * Send task to back of the queue
+     *
+     * @return mixed
+     */
+    public function requeue()
+    {
+        return $this->update([
+            'taskAttempt' => $this->taskAttempt() + 1,
+            'taskStart' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /**
+     * Return whether the task has failed the maximum times
+     *
+     * @return bool
+     */
+    public function isLastAttempt()
+    {
+        return $this->taskAttempt() === 3;
+    }
 }

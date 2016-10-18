@@ -48,17 +48,23 @@ class RootLocator_Address extends PerchAPI_Base
     /**
      * Transform given address details into geographic coordinates
      *
+     * @param bool $log
+     *
      * @return mixed
      */
-    public function geocode()
+    public function geocode($log = false)
     {
         $Geocoder = RootLocator_GeocoderFactory::createGeocoder();
         $result = $Geocoder->geocode($this->fullAddress());
 
         if ($result->hasError()) {
-            return $this->update([
-                'addressError' => $result->getErrorKey()
-            ]);
+            if($log) {
+                $this->update([
+                    'addressError' => $result->getErrorKey()
+                ]);
+            }
+
+            return false;
         }
 
         $coordinates = $result->getFirstCoordinates();
@@ -83,7 +89,7 @@ class RootLocator_Address extends PerchAPI_Base
         $result = parent::update($data);
 
         if ($geocode) {
-            $result = $this->geocode();
+            $result = $this->geocode(true);
         }
 
         return $result;

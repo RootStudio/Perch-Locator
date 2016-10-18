@@ -64,6 +64,14 @@ class RootLocator_Addresses extends PerchAPI_Factory
         'addressCountry'
     ];
 
+    public function getQueued(array $ids)
+    {
+        $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pk . ' IN(' . implode(',', $ids) . ');';
+        $rows = $this->db->get_rows($sql);
+
+        return $this->return_instances($rows);
+    }
+
     /**
      * Return results filtered by first character of title column
      *

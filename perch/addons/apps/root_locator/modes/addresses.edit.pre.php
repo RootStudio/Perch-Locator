@@ -2,6 +2,7 @@
 
 // Data
 $Addresses = new RootLocator_Addresses($API);
+$Tasks = new RootLocator_Tasks($API);
 $result = false;
 
 // Master template
@@ -67,12 +68,18 @@ if($Form->submitted()) {
     if(is_object($Address)) {
         $result = $Address->update($data, $force);
         $details = $Address->to_array();
+
+        if(!$force) {
+            $Tasks->add('address.geocode', $Address->id());
+        }
     } else {
         $new_address = $Addresses->create($data);
 
         if($new_address) {
             if($force) {
                 $new_address->geocode();
+            } else {
+                $Tasks->add('address.geocode', $new_address->id());
             }
 
             PerchUtil::redirect($API->app_path() . '/edit/?id=' . $new_address->id() . '&created=1');

@@ -24,7 +24,7 @@
 }
 
 .status-icon--rotate {
-    animation: icon-rotate 1s infinite linear;
+    animation: icon-rotate 2s infinite linear;
 }
 
 @keyframes icon-rotate {
