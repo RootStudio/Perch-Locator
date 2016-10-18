@@ -13,6 +13,11 @@ if(isset($_GET['chars']) && $_GET['chars'] != '') {
     $addresses = $Addresses->filterByTitleChar($_GET['chars'], $Paging);
 }
 
+if(isset($_GET['filter']) && $_GET['filter'] == 'complete') {
+    $filtered = true;
+    $addresses = $Addresses->filterByCoordinates($Paging);
+}
+
 if(isset($_GET['filter']) && $_GET['filter'] == 'failed') {
     $filtered = true;
     $addresses = $Addresses->filterByErrors($Paging);

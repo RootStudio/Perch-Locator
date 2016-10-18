@@ -118,7 +118,29 @@ class RootLocator_Addresses extends PerchAPI_Factory
      */
     public function filterByCoordinates($Paging = false)
     {
+        if ($Paging && $Paging->enabled()) {
+            $sql = $Paging->select_sql();
+        } else {
+            $sql = 'SELECT';
+        }
 
+        $sql .= ' * FROM ' . $this->table;
+        $sql .= ' WHERE `addressLatitude` IS NOT NULL AND `addressLongitude` IS NOT NULL';
+
+        if (isset($this->default_sort_column)) {
+            $sql .= ' ORDER BY ' . $this->default_sort_column . ' ' . $this->default_sort_direction;
+        }
+
+        if ($Paging && $Paging->enabled()) {
+            $sql .= ' ' . $Paging->limit_sql();
+        }
+
+        $results = $this->db->get_rows($sql);
+        if ($Paging && $Paging->enabled()) {
+            $Paging->set_total($this->db->get_count($Paging->total_count_sql()));
+        }
+
+        return $this->return_instances($results);
     }
 
     /**

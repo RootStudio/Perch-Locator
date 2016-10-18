@@ -116,6 +116,8 @@ class RootLocator_Tasks extends PerchAPI_Factory
     /**
      * Run through task queue and mass-geocode
      *
+     * @param bool $delay
+     *
      * @return int
      */
     public function processQueue($delay = false)

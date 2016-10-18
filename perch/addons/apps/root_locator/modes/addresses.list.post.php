@@ -22,6 +22,9 @@ echo $HTML->heading1('Listing Addresses');
         <li class="<?php if(!isset($_GET['chars']) && !isset($_GET['filter'])): ?>selected<?php endif; ?>">
             <a href="<?php echo $API->app_path(); ?>"><?php echo $Lang->get('All'); ?></a>
         </li>
+        <li class="new <?php if(isset($_GET['filter']) && $_GET['filter'] == 'complete'): ?>selected<?php endif; ?>">
+            <a href="<?php echo $API->app_path(); ?>?filter=complete"><?php echo $Lang->get('Complete'); ?></a>
+        </li>
         <li class="err <?php if(isset($_GET['filter']) && $_GET['filter'] == 'failed'): ?>selected<?php endif; ?>">
             <a href="<?php echo $API->app_path(); ?>?filter=failed"><?php echo $Lang->get('Failed'); ?></a>
         </li>
