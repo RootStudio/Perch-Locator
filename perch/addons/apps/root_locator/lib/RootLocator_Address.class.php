@@ -139,4 +139,14 @@ class RootLocator_Address extends PerchAPI_Base
 
         return '<img class="map-preview" src="' . $base_url . http_build_query($parameters) . '" />';
     }
+
+    /**
+     * Delete record from database
+     */
+    public function delete()
+    {
+        $this->db->delete(PERCH_DB_PREFIX . 'root_locator_tasks', 'addressID', $this->id());
+
+        return parent::delete();
+    }
 }
