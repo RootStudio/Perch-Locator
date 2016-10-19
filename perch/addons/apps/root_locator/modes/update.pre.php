@@ -12,6 +12,14 @@ if ($Paging->is_first_page()) {
     $UserPrivileges->create_privilege('root_locator', 'Access the locator app');
     $UserPrivileges->create_privilege('root_locator.import', 'Mass import location data');
 
+    // Convert categories
+    $sql = 'UPDATE ' . PERCH_DB_PREFIX . 'category_sets 
+            SET setTemplate="~root_locator/templates/locator/category_set.html", setCatTemplate="~root_locator/templates/locator/category.html"
+            WHERE setTemplate="~/jw_locator/templates/locator/category_set.html"
+            AND setCatTemplate="~/jw_locator/templates/locator/category.html"';
+
+    $db->execute($sql);
+
 }
 
 if ($Settings->get('root_locator_update')->val() != '2.0.0') {
