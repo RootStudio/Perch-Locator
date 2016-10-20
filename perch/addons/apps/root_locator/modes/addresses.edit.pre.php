@@ -67,13 +67,16 @@ if($Form->submitted()) {
     // Save
     if(is_object($Address)) {
         $requeue = $Address->shouldQueue($data);
-        $result = $Address->update($data, $force);
-        $details = $Address->to_array();
 
         if(!$force && $requeue) {
             $Tasks->add('address.geocode', $Address->id());
+
+            $data['addressLatitude'] = null;
+            $data['addressLongitude'] = null;
         }
 
+        $result = $Address->update($data, $force);
+        $details = $Address->to_array();
         $Address->index($Template);
     } else {
         $new_address = $Addresses->create($data);

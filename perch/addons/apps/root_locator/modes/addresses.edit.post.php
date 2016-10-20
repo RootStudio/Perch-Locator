@@ -32,6 +32,10 @@ echo $Form->form_start();
 
     echo $HTML->heading2('Map');
 
+    if(is_object($Address) && !$Address->hasCoordinates()) {
+        echo $HTML->warning_message('The address is in the queue to be plotted on the map.');
+    }
+
     if(is_object($Address) && $Address->hasError()) {
         echo $HTML->failure_message(RootLocator_Errors::get($Address->addressError()));
     }
