@@ -8,6 +8,8 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     PerchUtil::redirect($API->app_path());
 }
 
+$Form->set_name('delete');
+
 if ($Form->submitted()) {
     if (is_object($Address)) {
 

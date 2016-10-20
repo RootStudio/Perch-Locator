@@ -92,8 +92,7 @@ echo $HTML->heading1('Listing Addresses');
                 ?>
             </td>
             <td>
-                <a href="<?php echo $HTML->encode($API->app_path()); ?>/delete/?id=<?php echo $HTML->encode(urlencode($Address->id())); ?>"
-                   class="delete inline-delete">
+                <a href="<?php echo $HTML->encode($API->app_path()); ?>/delete/?id=<?php echo $HTML->encode(urlencode($Address->id())); ?>" class="delete inline-delete">
                     <?php echo $Lang->get('Delete'); ?>
                 </a>
             </td>
