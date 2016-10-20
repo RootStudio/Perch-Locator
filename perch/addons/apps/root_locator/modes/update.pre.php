@@ -30,7 +30,7 @@ if ($Settings->get('root_locator_update')->val() != '2.0.0') {
 
             // Ok, we have an error and it's not a quota issue, so just save as is.
             if (isset($row['errorMessage']) && !empty($row['errorMessage']) && $row['errorMessage'] == 'The address could not be found.') {
-                $Addresses->create([
+                $legacyAddress = $Addresses->create([
                     'addressTitle'         => $row['locationTitle'],
                     'addressBuilding'      => $row['locationBuilding'],
                     'addressStreet'        => $row['locationStreet'],
@@ -42,12 +42,14 @@ if ($Settings->get('root_locator_update')->val() != '2.0.0') {
                     'addressError'         => 'no_results'
                 ]);
 
+                $legacyAddress->index();
+
                 continue;
             }
 
             // Do we have some existing location data we can just simply shift over?
             if (isset($row['markerLatitude']) && isset($row['markerLongitude'])) {
-                $Addresses->create([
+                $legacyAddress = $Addresses->create([
                     'addressTitle'         => $row['locationTitle'],
                     'addressBuilding'      => $row['locationBuilding'],
                     'addressStreet'        => $row['locationStreet'],
@@ -59,6 +61,8 @@ if ($Settings->get('root_locator_update')->val() != '2.0.0') {
                     'addressLatitude'      => $row['markerLatitude'],
                     'addressLongitude'     => $row['markerLongitude']
                 ]);
+
+                $legacyAddress->index();
 
                 continue;
             }
@@ -74,6 +78,8 @@ if ($Settings->get('root_locator_update')->val() != '2.0.0') {
                 'addressCountry'       => $row['locationPostcode'],
                 'addressDynamicFields' => $row['locationDynamicFields']
             ]);
+
+            $legacyAddress->index();
 
             $Tasks->add('address.geocode', $legacyAddress->id());
         }

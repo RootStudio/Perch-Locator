@@ -132,8 +132,10 @@ class RootLocator_Tasks extends PerchAPI_Factory
         $Geocoder = RootLocator_GeocoderFactory::createGeocoder();
 
         $Settings = $this->api->get('Settings');
-        $batch = $Settings->get('root_locator_batch_size')->val();
+        $Template = $this->api->get('Template');
+        $Template->set('locator/address.html', 'locator');
 
+        $batch = $Settings->get('root_locator_batch_size')->val();
         $tasks = $this->getBatch('address.geocode', $batch);
         $count = 0;
 
@@ -164,7 +166,10 @@ class RootLocator_Tasks extends PerchAPI_Factory
                     'addressError'     => null
                 ]);
 
+                $Address->index($Template);
                 $Task->delete();
+
+                continue;
             }
 
             // Firstly, if our API limit has been reached then we need to try again tomorrow
@@ -193,6 +198,7 @@ class RootLocator_Tasks extends PerchAPI_Factory
                     'addressError'     => $result->getErrorKey()
                 ]);
 
+                $Address->index($Template);
                 $Task->delete(); // Admit defeat...
             }
 

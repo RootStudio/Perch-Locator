@@ -77,6 +77,10 @@ class RootLocator_Importer
     {
         $API = new PerchAPI(1.0, 'root_locator');
         $Lang = $API->get('Lang');
+
+        $Template = $API->get('Template');
+        $Template->set('locator/address.html', 'locator');
+
         $Addresses = new RootLocator_Addresses($API);
         $Tasks = new RootLocator_Tasks($API);
 
@@ -102,9 +106,10 @@ class RootLocator_Importer
                 'addressTown'     => $row['addressTown'],
                 'addressRegion'   => $row['addressRegion'],
                 'addressPostcode' => $row['addressPostcode'],
-                'addressCountry' => $row['addressCountry']
+                'addressCountry'  => $row['addressCountry']
             ]);
 
+            $imported->index($Template);
             $Tasks->add('address.geocode', $imported->id());
 
             $this->addSuccess($row);

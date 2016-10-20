@@ -66,12 +66,15 @@ if($Form->submitted()) {
 
     // Save
     if(is_object($Address)) {
+        $requeue = $Address->shouldQueue($data);
         $result = $Address->update($data, $force);
         $details = $Address->to_array();
 
-        if(!$force) {
+        if(!$force && $requeue) {
             $Tasks->add('address.geocode', $Address->id());
         }
+
+        $Address->index($Template);
     } else {
         $new_address = $Addresses->create($data);
 
@@ -81,6 +84,8 @@ if($Form->submitted()) {
             } else {
                 $Tasks->add('address.geocode', $new_address->id());
             }
+
+            $new_address->index($Template);
 
             PerchUtil::redirect($API->app_path() . '/edit/?id=' . $new_address->id() . '&created=1');
         } else {

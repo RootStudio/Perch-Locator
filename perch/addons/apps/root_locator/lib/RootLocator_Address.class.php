@@ -19,6 +19,14 @@ class RootLocator_Address extends PerchAPI_Base
      * @var string
      */
     protected $pk = 'addressID';
+
+    /**
+     * Address index table
+     *
+     * @var string
+     */
+    protected $index_table = 'root_locator_index';
+
     /**
      * Modified date column
      *
@@ -159,6 +167,36 @@ class RootLocator_Address extends PerchAPI_Base
     public function hasError()
     {
         return !is_null($this->addressError());
+    }
+
+    /**
+     * Only queue again when address data changes
+     *
+     * @param $data
+     *
+     * @return bool
+     */
+    public function shouldQueue($data)
+    {
+        $check = md5(implode('', [
+            $this->addressBuilding(),
+            $this->addressStreet(),
+            $this->addressTown(),
+            $this->addressRegion(),
+            $this->addressPostcode(),
+            $this->addressCountry()
+        ]));
+
+        $compare = md5(implode('', [
+            $data['addressBuilding'],
+            $data['addressStreet'],
+            $data['addressTown'],
+            $data['addressRegion'],
+            $data['addressPostcode'],
+            $data['addressCountry']
+        ]));
+
+        return $check !== $compare;
     }
 
     /**

@@ -23,6 +23,19 @@ $sql = "
       FULLTEXT KEY `root_locator_search_index` (`addressTitle`,`addressBuilding`,`addressStreet`,`addressPostcode`)
     ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
     
+    CREATE TABLE `__PREFIX__root_locator_index` (
+      `indexID` int(10) NOT NULL AUTO_INCREMENT,
+      `itemKey` char(64) NOT NULL DEFAULT '-',
+      `itemID` int(10) NOT NULL DEFAULT '0',
+      `indexKey` char(64) NOT NULL DEFAULT '-',
+      `indexValue` char(255) NOT NULL DEFAULT '',
+      PRIMARY KEY (`indexID`),
+      KEY `idx_fk` (`itemKey`,`itemID`),
+      KEY `idx_key` (`indexKey`),
+      KEY `idx_key_val` (`indexKey`,`indexValue`),
+      KEY `idx_keys` (`itemKey`,`indexKey`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+    
     CREATE TABLE `__PREFIX__root_locator_tasks` (
       `taskID` int(11) unsigned NOT NULL AUTO_INCREMENT,
       `taskKey` VARCHAR(255) NOT NULL,

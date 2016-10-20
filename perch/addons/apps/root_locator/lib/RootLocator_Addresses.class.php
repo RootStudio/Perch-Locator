@@ -22,6 +22,13 @@ class RootLocator_Addresses extends PerchAPI_Factory
     protected $pk = 'addressID';
 
     /**
+     * Address index table
+     *
+     * @var string
+     */
+    protected $index_table = 'root_locator_index';
+
+    /**
      * Sort column
      *
      * @var string
@@ -232,12 +239,12 @@ class RootLocator_Addresses extends PerchAPI_Factory
     public function getCustom(array $options)
     {
         // Category Searching
-        if (isset($opts['category'])) {
-            if (!is_array($opts['category'])) {
-                $opts['category'] = [$opts['category']];
+        if (isset($options['category'])) {
+            if (!is_array($options['category'])) {
+                $options['category'] = [$options['category']];
             }
-            if (PerchUtil::count(($opts['category']))) {
-                foreach ($opts['category'] as &$cat) {
+            if (PerchUtil::count(($options['category']))) {
+                foreach ($options['category'] as &$cat) {
                     if (strpos($cat, '/') === false) {
                         if (substr($cat, 0, 1) == '!') {
                             $cat = '!locator/' . substr($cat, 1) . '/';
