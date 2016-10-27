@@ -1,1 +1,11 @@
-<perch:template path="_address_json.html" relative="true" />
+{
+"addressID": <perch:locator id="addressID" />,
+"addressTitle": <perch:if exists="addressTitle"><perch:locator id="addressTitle" jsonencode="true" /><perch:else />false</perch:if>,
+"addressBuilding": <perch:if exists="addressBuilding"><perch:locator id="addressBuilding" jsonencode="true" /><perch:else />false</perch:if>,
+"addressStreet": <perch:if exists="addressStreet"><perch:locator id="addressStreet" jsonencode="true" /><perch:else />false</perch:if>,
+"addressTown": <perch:if exists="addressTown"><perch:locator id="addressTown" jsonencode="true" /><perch:else />false</perch:if>,
+"addressRegion": <perch:if exists="addressRegion"><perch:locator id="addressRegion" jsonencode="true" /><perch:else />false</perch:if>,
+"addressCountry": <perch:if exists="addressCountry"><perch:locator id="addressCountry" jsonencode="true" /><perch:else />false</perch:if>,
+"addressLatitude": <perch:locator id="addressLatitude" />,
+"addressLongitude": <perch:locator id="addressLongitude" />
+} <perch:if not-exists="perch_item_last">,</perch:if>
