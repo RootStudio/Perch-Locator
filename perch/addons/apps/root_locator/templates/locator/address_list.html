@@ -1,0 +1,42 @@
+<perch:before>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Building</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>Region</th>
+        <th>Postcode</th>
+        <th>Country</th>
+        <th>Coordinates</th>
+        <th>Distance</th>
+    </tr>
+    </thead>
+    <tbody>
+</perch:before>
+
+        <tr>
+            <td><perch:locator id="addressTitle" /></td>
+            <td><perch:locator id="addressBuilding" /></td>
+            <td><perch:locator id="addressStreet" /></td>
+            <td><perch:locator id="addressTown" /></td>
+            <td><perch:locator id="addressRegion" /></td>
+            <td><perch:locator id="addressPostcode" /></td>
+            <td><perch:locator id="addressCountry" /></td>
+            <td><perch:locator id="addressLatitude" />, <perch:locator id="addressLongitude" /></td>
+            <td>
+                <perch:if id="addressDistance" match="gt" value="0">
+                    <perch:locator id="addressDistance" /> miles
+                </perch:if>
+            </td>
+        </tr>
+
+<perch:after>
+    </tbody>
+</table>
+</perch:after>
+
+<perch:noresults>
+    <h2>Sorry, no addresses found.</h2>
+</perch:noresults>

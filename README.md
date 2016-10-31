@@ -1,9 +1,11 @@
-# Perch Locator
+# Perch Locator v2
 
-Perch Locator is an app to plot places of interest on a map that can be searched using an address.
+Perch Locator is an app to manage locatable resources within Perch CMS. Addresses are Geocoded and can be searched using coordinates or by a valid address to allow users to find places of interest near to them.
 
 ## Installation
-Upload the `jw_locator` directory to `perch/addons/apps` and add `jw_locator` to your `config/apps.php` file.
+
+### Fresh Install
+Upload the `root_locator` directory to `perch/addons/apps` and add `root_locator` to your `config/apps.php` file.
 
 Example:
 
@@ -11,50 +13,204 @@ Example:
 	    $apps_list = array(
 	        'content', 
 	        'categories',
-	        'jw_locator'
+	        'root_locator'
 	    );
 	    
+Before you can begin geocoding you must set an API key in the Perch settings area. This should have the following Google APIs enabled:
+
+* Geocoding
+* Static Maps
+
+### Upgrading
+
+If you are upgrading from v1 you must follow these steps:
+
+1. Remove the old `jw_locator` application from your `perch/addons/apps` directory.
+2. Upload the new app folder as per the instructions above.
+3. Log in to Perch and visit the new locator app. It will have the same name in the Apps menu but will have a different path of `root_locator` rather than `jw_locator`.
+4. The app should automatically install and begin importing old location data. Failed jobs from the previous app due to API quota exceptions will be automatically requeued.
+5. When the import is complete you can remove the old database tables. It is recommended you take a full backup of them first.
+
+Finally there are some changes to the runtime functions that will cause breaking changes in your code:
+
+* `jw_locator_get_custom` is now `root_locator_get_custom`
+* `jw_locator_location_json` has been removed.
+* The search distance key is now `range` and not `radius`
+* The `json` output option is no longer used, instead render `addresses_list_json.html` or `address_json.html`, these may need modifying to match the older JSON format.
+
+---
+	    
 ## Using the App
-In the Perch admin panel find the 'locator' app using the apps menu. Here you can add single locations in the conventional way or alternatively upload a CSV file to import large quantities of locations in one go.
 
-CSV imports are not reccommended for general client use, instead as a time-saving option for developers.
+Like standard Perch apps, the Locator can be accessed using the Apps menu in the top of the CMS admin area. Inside the app you are able to create new addresses or import in bulk using a CSV file. It is not recommended to give clients access to the import section and instead request data from them to format yourself. You can disable access by setting the correct priveledges for the user roles.
 
-The app operates on a queue system to prevent Google blocking API requests and performance issues therefore setting up the scheduled tasks in Perch is essential.
+CSV Data must include the following columns:
 
-<strike>A Google API key (Geocoding must be enabled) can be used to increase the number of calls that can be made.</strike>
+* `addressTitle` (required)
+* `addressBuilding` (required)
+* `addressStreet` (recommended)
+* `addressTown`
+* `addressRegion`
+* `addressPostcode` (required)
+* `addressCountry`
 
-**Update:** As of June 22nd, Google now requires that all mapping requests be made using an API Key. You can set an API Key in the settings panel of Perch.
+Rows that are missing any of the required fields will not be imported. Those missing recommended fields will be imported but may fail in the geocoding queue.
+
+---
 
 ## Displaying on a map
 To display your location results onto a map, take a look at the example code in the `locations/index.php` file.
 
-## Page Functions
-### jw\_locator\_get\_custom
+---
 
-Locations can be queried in a similar way to [perch\_content\_custom](https://docs.grabaperch.com/docs/content/perch-content-custom/). There are additional parameters to search by address, for example:
+## Function Reference
 
-	<?php jw_locator_get_custom(array(
-	    'address' => 'Lincoln, UK',
-	    'radius'  => 10
-	)); ?>
-	
-For use with a mapping API, the output can be returned as JSON:
+### root\_locator\_address
+Display a single address found by ID.
 
-	<?php jw_locator_get_custom(array(
-        'address' => 'LN1 3AU',
-        'radius'  => 10,
-        'json'    => true
-    )); ?>
+#### Parameters
+<table>
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Integer</td>
+            <td>ID of the address to show</td>
+        </tr>
+        <tr>
+            <td>Boolean</td>
+            <td>Set to <code>true</code> to have the value returned instead of echoed.</td>
+        </tr>
+    </tbody>
+</table>
+
+#### Usage
+
+```php
+<?php
+    $id = perch_get('address'); 
+    root_locator_address($id); 
+?>
+```
+
+### root\_locator\_address\_field
+Outputs a single field from the address template, this may be useful for setting the page title.
+
+#### Parameters
+<table>
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Integer</td>
+            <td>ID of the address</td>
+        </tr>
+        <tr>
+            <td>String</td>
+            <td>The ID of the template field to return</td>
+        </tr>
+        <tr>
+            <td>Boolean</td>
+            <td>Set to <code>true</code> to have the value returned instead of echoed.</td>
+        </tr>
+    </tbody>
+</table>
+
+#### Usage
+
+```php
+<?php
+    $id = perch_get('address');
+    echo '<title>' . root_locator_address_field($id, 'addressTitle', true) . '</title>';
+?>
+```
+
+### root\_locator\_nearby
+Returns a list of addresses that are near to a found address. The amount returned can be set using the `$options` array.
+
+#### Parameters
+<table>
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Integer</td>
+            <td>ID of the source address</td>
+        </tr>
+        <tr>
+            <td>Array</td>
+            <td>Options array, see table below</td>
+        </tr>
+        <tr>
+            <td>Boolean</td>
+            <td>Set to <code>true</code> to have the value returned instead of echoed.</td>
+        </tr>
+    </tbody>
+</table>
+
+#### Usage
+
+```php
+<?php
+    $id = perch_get('address');
     
-### jw\_locator\_location\_json
+    root_locator_nearby($id, [
+        'range' => 10,
+        'count' => 3
+    ]);
+?>
+```
 
-If existing location data has been returned using `skip-template`, it can be converted into a JSON format use this function.
+### root\_locator\_get\_custom
+Returns a custom query of the address data. Many of the functions above are shortcuts to options that can be configured using this function.
+
+For more information on the available settings see [perch\_content\_custom](https://docs.grabaperch.com/functions/content/perch-content-custom/).
+
+### Available Options
+These are in addition to the ones listed for `perch_content_custom()`.
+
+<table>
+    <thead>
+        <tr>
+            <th>Option</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>coordinates</td>
+            <td>An array containing latitude and longitide data.</td>
+        </tr>
+        <tr>
+            <td>address</td>
+            <td>An address to find nearby locations</td>
+        </tr>
+        <tr>
+            <td>exclude</td>
+            <td>To avoid returning the same record in a search you can exlude an ID from the results</td>
+        </tr>
+    </tbody>
+</table>
+
+---
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Root Studio
+Copyright (c) 2016 Root Studio
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

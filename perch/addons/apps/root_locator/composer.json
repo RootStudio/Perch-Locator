@@ -1,0 +1,13 @@
+{
+  "config": {
+    "vendor-dir": "lib/vendor",
+    "preferred-install": "dist",
+    "platform": {
+      "php": "5.5"
+    }
+  },
+  "require": {
+    "willdurand/geocoder": "^3.3",
+    "league/csv": "^8.0"
+  }
+}

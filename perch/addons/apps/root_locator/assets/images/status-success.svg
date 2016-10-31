@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18.88" height="14.58" viewBox="0 0 18.88 14.58">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #86bd87;
+      }
+    </style>
+  </defs>
+  <title>status-success</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M18.6,3.62,14.93,7.29l-3.33,3.33L7.92,14.3a1,1,0,0,1-1.38,0l-2-2L4,11.59.29,7.92a1,1,0,0,1,0-1.38l2-2a1,1,0,0,1,1.38,0L7.29,8.26l8-8a1,1,0,0,1,1.38,0l2,2A1,1,0,0,1,18.6,3.62Z"/>
+    </g>
+  </g>
+</svg>

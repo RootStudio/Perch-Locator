@@ -36,11 +36,11 @@
             <?php if(perch_get('address')): ?>
                 <div id="map"></div>
                 <script>
-                    var locations = <?php jw_locator_get_custom(array(
-                        'address' => perch_get('address'),
-                        'radius'  => 50,
-                        'json'    => true
-                    )); ?>;
+                    var locations = <?php root_locator_get_custom([
+                        'template' => 'address_list_json.html',
+                        'address'  => perch_get('address'),
+                        'range'    => 50
+                    ]); ?>;
 
                     var map;
 
@@ -57,11 +57,11 @@
 
                         // Iterate over locations and create markers
                         if(locations.length > 0) {
-                            locations.forEach(function(location) {
+                            locations.forEach(function(address) {
                                 var marker = new google.maps.Marker({
-                                    position: new google.maps.LatLng(location.markerLatitude, location.markerLongitude),
+                                    position: new google.maps.LatLng(address.addressLatitude, address.addressLongitude),
                                     map: map,
-                                    title: location.locationTitle
+                                    title: address.locationTitle
                                 });
 
                                 bounds.extend(marker.getPosition());
@@ -76,11 +76,13 @@
                 <!-- This is *not* the key you use in the Perch settings area. You will need a Browser key -->
                 <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=XXXXXXXXXX" async defer></script>
 
-                <?php jw_locator_get_custom(array(
+                <?php root_locator_get_custom(array(
                     'address' => perch_get('address'),
-                    'radius'  => 50
+                    'range'  => 50
                 )); ?>
             <?php endif; ?>
         </div>
     </body>
 </html>
+
+<?php PerchUtil::output_debug(); ?>

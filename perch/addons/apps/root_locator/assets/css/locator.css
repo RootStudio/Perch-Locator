@@ -1,0 +1,61 @@
+.map-preview {
+    display: block;
+    border: 1px dotted #E5E5E5;
+    padding: 5px;
+    margin: 15px 0 0 240px;
+    max-width: 100%;
+}
+
+@media screen and (max-width:1060px) {
+    .sidebar-open .map-preview {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width:840px) {
+    .sidebar-closed .map-preview {
+        margin-left: 0;
+    }
+}
+
+.status-icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.status-icon--rotate {
+    animation: icon-rotate 2s infinite linear;
+}
+
+@keyframes icon-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+.status-column {
+    padding: 0;
+    text-align: center;
+}
+
+.smartbar .err a:link,
+.smartbar .err a:visited {
+    color: #FF3E1B;
+    text-transform: uppercase
+}
+
+.smartbar .err.selected a:link,
+.smartbar .err.selected a:visited {
+    background-color: #FF3E1B;
+    color: #fff;
+}
+
+.importables li .status-message {
+    float: right;
+    font-size: 12px;
+    font-style: italic;
+    padding-right: 10px;
+}
