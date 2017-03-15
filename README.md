@@ -1,4 +1,4 @@
-# Perch Locator v2
+# Perch Locator v2.1
 
 Perch Locator is an app to manage locatable resources within Perch CMS. Addresses are Geocoded and can be searched using coordinates or by a valid address to allow users to find places of interest near to them.
 

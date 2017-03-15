@@ -1,7 +1,7 @@
 <?php
 
 if ($CurrentUser->logged_in() && $CurrentUser->has_priv('root_locator')) {
-    $this->register_app('root_locator', 'Locator', 1, 'Provide location based listings for your site', '2.0.0');
+    $this->register_app('root_locator', 'Locator', 1, 'Provide location based listings for your site', '2.1.0');
     $this->require_version('root_locator', '2.8.31');
     $this->add_create_page('root_locator', 'edit');
 
