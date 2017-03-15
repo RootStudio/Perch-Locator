@@ -56,6 +56,8 @@ CSV Data must include the following columns:
 
 Rows that are missing any of the required fields will not be imported. Those missing recommended fields will be imported but may fail in the geocoding queue.
 
+**v2.1**: You can now include custom fields in the CSV import. Any additional columns that are not listed above will be included in the dynamic fields array to be used in your templates.
+
 ---
 
 ## Displaying on a map
