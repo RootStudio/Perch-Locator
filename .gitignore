@@ -12,6 +12,12 @@
 !/perch/addons/apps/jw_locator
 !/perch/addons/apps/root_locator
 
+!/perch/addons/fieldtypes
+!/perch/addons/fieldtypes/*
+
+!/perch/addons/fieldtypes/locator
+!/perch/addons/fieldtypes/locator/*
+
 !/locations/*
 
 !.gitignore
