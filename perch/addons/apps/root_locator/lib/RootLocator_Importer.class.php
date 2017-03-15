@@ -99,14 +99,17 @@ class RootLocator_Importer
                 $this->addWarning($row, $Lang->get('‘%s’ columns are recommended to prevent geocoding errors.', $warnings));
             }
 
+            $dynamicFields = $this->getDynamicFields($Addresses->static_fields, $row);
+
             $imported = $Addresses->create([
-                'addressTitle'    => $row['addressTitle'],
-                'addressBuilding' => $row['addressBuilding'],
-                'addressStreet'   => $row['addressStreet'],
-                'addressTown'     => $row['addressTown'],
-                'addressRegion'   => $row['addressRegion'],
-                'addressPostcode' => $row['addressPostcode'],
-                'addressCountry'  => $row['addressCountry']
+                'addressTitle'         => $row['addressTitle'],
+                'addressBuilding'      => $row['addressBuilding'],
+                'addressStreet'        => $row['addressStreet'],
+                'addressTown'          => $row['addressTown'],
+                'addressRegion'        => $row['addressRegion'],
+                'addressPostcode'      => $row['addressPostcode'],
+                'addressCountry'       => $row['addressCountry'],
+                'addressDynamicFields' => PerchUtil::json_safe_encode($dynamicFields)
             ]);
 
             $imported->index($Template);
@@ -216,6 +219,27 @@ class RootLocator_Importer
         }
 
         return false;
+    }
+
+    /**
+     * Collect dynamic fields from CSV, compared with static fields
+     *
+     * @param array $static
+     * @param array $row
+     *
+     * @return array
+     */
+    private function getDynamicFields($static, $row)
+    {
+        $dynamicColumns = [];
+
+        foreach($row as $key => $value) {
+            if(!in_array($key, $static)) {
+                $dynamicColumns[$key] = $value;
+            }
+        }
+
+        return $dynamicColumns;
     }
 
     /**
