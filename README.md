@@ -1,4 +1,4 @@
-# Perch Locator v2
+# Perch Locator v2.1
 
 Perch Locator is an app to manage locatable resources within Perch CMS. Addresses are Geocoded and can be searched using coordinates or by a valid address to allow users to find places of interest near to them.
 
@@ -55,6 +55,8 @@ CSV Data must include the following columns:
 * `addressCountry`
 
 Rows that are missing any of the required fields will not be imported. Those missing recommended fields will be imported but may fail in the geocoding queue.
+
+**v2.1**: You can now include custom fields in the CSV import. Any additional columns that are not listed above will be included in the dynamic fields array to be used in your templates.
 
 ---
 

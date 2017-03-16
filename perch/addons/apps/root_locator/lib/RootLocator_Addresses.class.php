@@ -73,9 +73,29 @@ class RootLocator_Addresses extends PerchAPI_Factory
 
     protected $addressDistances = [];
 
+    /**
+     * Return queued addresses by array of IDs
+     *
+     * @param array $ids
+     *
+     * @return array|bool|SplFixedArray
+     */
     public function getQueued(array $ids)
     {
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pk . ' IN(' . implode(',', $ids) . ');';
+        $rows = $this->db->get_rows($sql);
+
+        return $this->return_instances($rows);
+    }
+
+    /**
+     * Return list of addresses that have been geocoded
+     *
+     * @return array|bool|SplFixedArray
+     */
+    public function getCompleted()
+    {
+        $sql = 'SELECT * FROM `' . $this->table . '` WHERE `addressLatitude` IS NOT NULL AND `addressLongitude` IS NOT NULL';
         $rows = $this->db->get_rows($sql);
 
         return $this->return_instances($rows);

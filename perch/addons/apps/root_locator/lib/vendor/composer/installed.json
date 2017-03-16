@@ -17,7 +17,7 @@
         "require": {
             "php": ">=5.4"
         },
-        "time": "2014-12-15 23:03:51",
+        "time": "2014-12-15T23:03:51+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -64,7 +64,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-08-06 14:39:51",
+        "time": "2016-08-06T14:39:51+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -96,58 +96,6 @@
             "psr-7",
             "request",
             "response"
-        ]
-    },
-    {
-        "name": "zendframework/zend-diactoros",
-        "version": "1.3.7",
-        "version_normalized": "1.3.7.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/zendframework/zend-diactoros.git",
-            "reference": "969ff423d3f201da3ff718a5831bb999bb0669b0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/969ff423d3f201da3ff718a5831bb999bb0669b0",
-            "reference": "969ff423d3f201da3ff718a5831bb999bb0669b0",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.4 || ^7.0",
-            "psr/http-message": "~1.0"
-        },
-        "provide": {
-            "psr/http-message-implementation": "~1.0.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^4.6 || ^5.5",
-            "squizlabs/php_codesniffer": "^2.3.1"
-        },
-        "time": "2016-10-11 13:25:21",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.3-dev",
-                "dev-develop": "1.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Zend\\Diactoros\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-2-Clause"
-        ],
-        "description": "PSR HTTP Message implementations",
-        "homepage": "https://github.com/zendframework/zend-diactoros",
-        "keywords": [
-            "http",
-            "psr",
-            "psr-7"
         ]
     },
     {
@@ -199,7 +147,7 @@
             "zendframework/zend-http": "Allows you to use the Zend 2 adapter",
             "zendframework/zendframework1": "Allows you to use the Zend 1 adapter"
         },
-        "time": "2015-08-12 09:35:40",
+        "time": "2015-08-12T09:35:40+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -261,7 +209,7 @@
             "geoip2/geoip2": "If you are going to use the GeoIP2DatabaseProvider.",
             "symfony/stopwatch": "If you want to use the TimedGeocoder"
         },
-        "time": "2015-12-06 20:17:20",
+        "time": "2015-12-06T20:17:20+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -295,17 +243,17 @@
     },
     {
         "name": "league/csv",
-        "version": "8.1.1",
-        "version_normalized": "8.1.1.0",
+        "version": "8.2.1",
+        "version_normalized": "8.2.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/thephpleague/csv.git",
-            "reference": "3b22a40804aa0bc5224ffb2f5e8248edf0a9a38c"
+            "reference": "43fd8b022815a0758d85e925dd92a43fe0d41bb4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/csv/zipball/3b22a40804aa0bc5224ffb2f5e8248edf0a9a38c",
-            "reference": "3b22a40804aa0bc5224ffb2f5e8248edf0a9a38c",
+            "url": "https://api.github.com/repos/thephpleague/csv/zipball/43fd8b022815a0758d85e925dd92a43fe0d41bb4",
+            "reference": "43fd8b022815a0758d85e925dd92a43fe0d41bb4",
             "shasum": ""
         },
         "require": {
@@ -316,11 +264,11 @@
             "friendsofphp/php-cs-fixer": "^1.9",
             "phpunit/phpunit": "^4.0"
         },
-        "time": "2016-09-05 08:16:07",
+        "time": "2017-02-23T08:25:03+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "8.0-dev"
+                "dev-master": "8.2-dev"
             }
         },
         "installation-source": "dist",
@@ -350,6 +298,58 @@
             "import",
             "read",
             "write"
+        ]
+    },
+    {
+        "name": "zendframework/zend-diactoros",
+        "version": "1.3.10",
+        "version_normalized": "1.3.10.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/zend-diactoros.git",
+            "reference": "83e8d98b9915de76c659ce27d683c02a0f99fa90"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/83e8d98b9915de76c659ce27d683c02a0f99fa90",
+            "reference": "83e8d98b9915de76c659ce27d683c02a0f99fa90",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.4 || ^7.0",
+            "psr/http-message": "~1.0"
+        },
+        "provide": {
+            "psr/http-message-implementation": "~1.0.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.6 || ^5.5",
+            "zendframework/zend-coding-standard": "~1.0.0"
+        },
+        "time": "2017-01-23T04:53:24+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.3-dev",
+                "dev-develop": "1.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zend\\Diactoros\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "description": "PSR HTTP Message implementations",
+        "homepage": "https://github.com/zendframework/zend-diactoros",
+        "keywords": [
+            "http",
+            "psr",
+            "psr-7"
         ]
     }
 ]

@@ -2,7 +2,9 @@
 
 // Side Panel UI
 echo $HTML->side_panel_start();
-echo $HTML->para('');
+echo $HTML->para('CSV Data must include the following columns:');
+echo $HTML->para('<pre>addressTitle (required)<br/>addressBuilding (required)<br/>addressStreet (recommended)<br/>addressTown<br/>addressRegion<br/>addressPostcode (required)<br/>addressCountry</pre>');
+echo $HTML->para('Rows that are missing any of the required fields will not be imported. Those missing recommended fields will be imported but may fail in the geocoding queue.');
 echo $HTML->side_panel_end();
 
 // Main Panel UI
