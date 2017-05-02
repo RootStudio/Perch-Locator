@@ -2,20 +2,8 @@
     display: block;
     border: 1px dotted #E5E5E5;
     padding: 5px;
-    margin: 15px 0 0 240px;
+    margin: 0 24px 12px 24px;
     max-width: 100%;
-}
-
-@media screen and (max-width:1060px) {
-    .sidebar-open .map-preview {
-        margin-left: 0;
-    }
-}
-
-@media screen and (max-width:840px) {
-    .sidebar-closed .map-preview {
-        margin-left: 0;
-    }
 }
 
 .status-icon {
@@ -53,9 +41,15 @@
     color: #fff;
 }
 
-.importables li .status-message {
-    float: right;
+.progress-item .status-message {
+    display: block;
+    padding-top: 5px;
     font-size: 12px;
     font-style: italic;
     padding-right: 10px;
+}
+
+.progress-item.progress-failure {
+    background-color: #EBDCDA;
+    color: #C84043;
 }

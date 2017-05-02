@@ -15,7 +15,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
     $Address = $Addresses->find($addressID);
     $details = $Address->to_array();
 
-    $heading1 = 'Addresses / Edit Address';
+    $heading1 = 'Edit Address';
 
 } else {
 
@@ -23,7 +23,7 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
     $Address = false;
     $details = [];
 
-    $heading1 = 'Locations / Add Address';
+    $heading1 = 'Add Address';
 }
 
 // Forms
