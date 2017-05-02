@@ -1,8 +1,12 @@
-# Perch Locator v2.1
+# Perch Locator v3.0.0
 
 Perch Locator is an app to manage locatable resources within Perch CMS. Addresses are Geocoded and can be searched using coordinates or by a valid address to allow users to find places of interest near to them.
 
 ## Installation
+
+### Perch 2.x
+
+If you still wish to use this application on Perch 2 please see the [v2.x branch](https://github.com/RootStudio/Perch-Locator/tree/v2.x). All active development will now take place on Perch 3.
 
 ### Fresh Install
 Upload the `root_locator` directory to `perch/addons/apps` and add `root_locator` to your `config/apps.php` file.
