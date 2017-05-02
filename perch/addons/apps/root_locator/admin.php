@@ -1,8 +1,8 @@
 <?php
 
 if ($CurrentUser->logged_in() && $CurrentUser->has_priv('root_locator')) {
-    $this->register_app('root_locator', 'Locator', 1, 'Provide location based listings for your site', '2.1.0');
-    $this->require_version('root_locator', '2.8.31');
+    $this->register_app('root_locator', 'Locator', 1, 'Provide location based listings for your site', '3.0.0');
+    $this->require_version('root_locator', '3.0');
     $this->add_create_page('root_locator', 'edit');
 
     $this->add_setting('root_locator_batch_size', 'Batch Size', 'select', 25, array(

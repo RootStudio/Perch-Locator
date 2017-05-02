@@ -8,7 +8,6 @@ echo $HTML->side_panel_end();
 // Main Panel UI
 echo $HTML->main_panel_start();
 
-include(__DIR__ . '/_subnav.php');
 echo $HTML->heading1('Delete Address');
 
 echo $Form->form_start();

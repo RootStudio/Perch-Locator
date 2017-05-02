@@ -14,6 +14,7 @@ $Form = $API->get('Form');
 $Perch->page_title = $Lang->get('Delete Address');
 
 // Page Initialising
+include('../modes/_subnav.php');
 include('../modes/addresses.delete.pre.php');
 
 // Perch Frame

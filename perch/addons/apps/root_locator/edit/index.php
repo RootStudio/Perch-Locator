@@ -17,6 +17,7 @@ $Perch->page_title = $Lang->get('Set Address');
 $Perch->add_css($API->app_path() . '/assets/css/locator.css');
 
 // Page Initialising
+include('../modes/_subnav.php');
 include('../modes/addresses.edit.pre.php');
 
 // Perch Frame
