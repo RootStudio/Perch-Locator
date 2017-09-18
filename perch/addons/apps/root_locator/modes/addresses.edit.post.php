@@ -13,13 +13,13 @@ echo $HTML->heading2('Address');
 
 echo $Form->form_start();
 
-    echo $Form->text_field('addressTitle', 'Title', isset($details['addressTitle']) ? $details['addressTitle'] : false, 'xl');
-    echo $Form->text_field('addressBuilding', 'Building', isset($details['addressBuilding']) ? $details['addressBuilding'] : false, 'm');
-    echo $Form->textarea_field('addressStreet', 'Street', isset($details['addressStreet']) ? $details['addressStreet'] : false, 's');
-    echo $Form->text_field('addressTown', 'Town / City', isset($details['addressTown']) ? $details['addressTown'] : false, 'l');
-    echo $Form->text_field('addressRegion', 'Region', isset($details['addressRegion']) ? $details['addressRegion'] : false, 'l');
-    echo $Form->text_field('addressPostcode', 'Postcode', isset($details['addressPostcode']) ? $details['addressPostcode'] : false, 'm');
-    echo $Form->text_field('addressCountry', 'Country', isset($details['addressCountry']) ? $details['addressCountry'] : false, 'm');
+    echo $Form->text_field('addressTitle', 'Title', isset($details['addressTitle']) ? $details['addressTitle'] : false, 'input-simple xl');
+    echo $Form->text_field('addressBuilding', 'Building', isset($details['addressBuilding']) ? $details['addressBuilding'] : false, 'input-simple m');
+    echo $Form->textarea_field('addressStreet', 'Street', isset($details['addressStreet']) ? $details['addressStreet'] : false, 'input-simple s');
+    echo $Form->text_field('addressTown', 'Town / City', isset($details['addressTown']) ? $details['addressTown'] : false, 'input-simple l');
+    echo $Form->text_field('addressRegion', 'Region', isset($details['addressRegion']) ? $details['addressRegion'] : false, 'input-simple l');
+    echo $Form->text_field('addressPostcode', 'Postcode', isset($details['addressPostcode']) ? $details['addressPostcode'] : false, 'input-simple m');
+    echo $Form->text_field('addressCountry', 'Country', isset($details['addressCountry']) ? $details['addressCountry'] : false, 'input-simple m');
 
     echo $HTML->heading2('Map');
 

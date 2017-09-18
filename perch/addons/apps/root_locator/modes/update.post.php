@@ -1,19 +1,25 @@
-<div class="main">
-    <div class="body">
+<?php
+    // Title
+    echo $HTML->title_panel([
+        'heading' => $Lang->get('Software Update')
+    ], $CurrentUser);
+?>
+
+    <?php if (!$Paging->is_last_page()): ?>
         <div class="inner">
-            <h1>Software Update</h1>
-            <?php
-            if (!$Paging->is_last_page()) {
-                echo '<ul class="updates">';
-                echo '<li class="icon success">Importing legacy locations ' . $Paging->lower_bound() . ' to ' . $Paging->upper_bound() . ' of ' . $Paging->total() . '.</li>';
-                echo '</ul>';
-            } else {
-                echo '<p class="info">You should now manually remove the previous database tables: "perch2_jw_locator_locations", "perch2_jw_locator_markers", "perch2_jw_locator_failed_jobs".</p>';
-                echo '<p class="info"><a href="' . $API->app_path() . '" class="button">Continue</a></p>';
-            }
-            ?>
+            <ul class="progress-list">
+                <li class="progress-item progress-success">
+                    <?php echo PerchUI::icon('core/circle-check', '16', 'Success'); ?>
+                    <?php echo $Lang->get('Importing legacy locations %s to %s of %s', $Paging->lower_bound(), $Paging->upper_bound(), $Paging->total()); ?>
+                </li>
+            </ul>
         </div>
-    </div>
+    <?php else: ?>
+        <?php echo $HTML->success_block('Update Complete', 'You should now manually remove the previous database tables: "perch2_jw_locator_locations", "perch2_jw_locator_markers", "perch2_jw_locator_failed_jobs".'); ?>
+        <div class="inner">
+            <a href="<?php echo $API->app_path(); ?>" class="button button-simple">Continue</a>
+        </div>
+    <?php endif; ?>
 
 <?php
 if (!$Paging->is_last_page()) {

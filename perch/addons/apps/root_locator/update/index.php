@@ -9,6 +9,7 @@ $API = new PerchAPI(1.0, 'root_locator');
 $Lang = $API->get('Lang');
 $Paging = $API->get('Paging');
 $db = $API->get('DB');
+$HTML = $API->get('HTML');
 
 // Page settings
 $Perch->page_title = $Lang->get('Update Locator');
