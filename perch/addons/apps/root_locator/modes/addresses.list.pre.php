@@ -8,17 +8,17 @@ $Addresses = new RootLocator_Addresses($API);
 $addresses = [];
 $filtered = false;
 
-if (isset($_GET['chars']) && $_GET['chars'] != '') {
+if (PerchRequest::get('chars')) {
     $filtered = true;
-    $addresses = $Addresses->filterByTitleChar($_GET['chars'], $Paging);
+    $addresses = $Addresses->filterByTitleChar(PerchRequest::get('chars'), $Paging);
 }
 
-if (isset($_GET['filter']) && $_GET['filter'] == 'complete') {
+if (PerchRequest::get('filter') == 'complete') {
     $filtered = true;
     $addresses = $Addresses->filterByCoordinates($Paging);
 }
 
-if (isset($_GET['filter']) && $_GET['filter'] == 'failed') {
+if (PerchRequest::get('filter') == 'failed') {
     $filtered = true;
     $addresses = $Addresses->filterByErrors($Paging);
 }

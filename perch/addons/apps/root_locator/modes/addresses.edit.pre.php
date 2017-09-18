@@ -9,21 +9,17 @@ $result = false;
 $Template->set('locator/address.html', 'locator');
 
 // Edit / Create
-if(isset($_GET['id']) && $_GET['id'] != '') {
+if(PerchRequest::get('id')) {
 
-    $addressID = (int) $_GET['id'];
+    $addressID = (int) PerchRequest::get('id');
     $Address = $Addresses->find($addressID);
     $details = $Address->to_array();
-
-    $heading1 = 'Edit Address';
 
 } else {
 
     $addressID = false;
     $Address = false;
     $details = [];
-
-    $heading1 = 'Add Address';
 }
 
 // Forms

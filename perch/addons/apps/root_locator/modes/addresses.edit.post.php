@@ -1,8 +1,15 @@
 <?php
 
 // Title
+
+if (is_object($Address)) {
+    $heading = $Lang->get('Editing ‘%s’', $HTML->encode($Address->addressTitle()));
+} else {
+    $heading = $Lang->get('Creating a New Address');
+}
+
 echo $HTML->title_panel([
-    'heading' => $Lang->get($heading1)
+    'heading' => $Lang->get($heading)
 ], $CurrentUser);
 
 // Output alerts

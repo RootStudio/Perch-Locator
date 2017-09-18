@@ -17,6 +17,7 @@ $Smartbar->add_item([
     'active' => (!isset($_GET['chars']) && !isset($_GET['filter']) && !isset($_GET['show-filter'])),
     'title' => 'All',
     'link'  => $API->app_nav(),
+    'icon' => 'core/menu'
 ]);
 
 $Smartbar->add_item([
