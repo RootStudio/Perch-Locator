@@ -10,6 +10,7 @@ $Lang = $API->get('Lang');
 $Paging = $API->get('Paging');
 $db = $API->get('DB');
 $HTML = $API->get('HTML');
+$Template = $API->get('Template');
 
 // Page settings
 $Perch->page_title = $Lang->get('Update Locator');

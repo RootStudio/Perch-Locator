@@ -35,6 +35,20 @@ class RootLocator_Address extends PerchAPI_Base
     protected $modified_date_column = 'addressUpdated';
 
     /**
+     * Temporary slug processing values
+     *
+     * @var array
+     */
+    private $tmp_slug_vars;
+
+    /**
+     * Temporary url processing values
+     *
+     * @var array
+     */
+    private $tmp_url_vars;
+
+    /**
      * Return data from set field on address record
      *
      * @param string $field
@@ -128,11 +142,76 @@ class RootLocator_Address extends PerchAPI_Base
     {
         $result = parent::update($data);
 
+        if (isset($data['addressTitle']) && !isset($data['addressSlug'])) {
+
+            if (!isset($data['addressUpdated'])) {
+                $data['addressUpdated'] = date('Y-m-d H:i:s');
+            }
+
+            $API = new PerchAPI(1.0, 'root_locator');
+            $Settings = $API->get('Settings');
+            $format = $Settings->get('root_locator_address_slug')->val();
+
+            if (!$format) {
+                $format = '{addressTitle}-{addressPostcode}';
+            }
+
+            $this->tmp_slug_vars = $this->details;
+            $slug = preg_replace_callback('/{([A-Za-z0-9_\-]+)}/', [$this, "substitute_slug_vars"], $format);
+            $this->tmp_slug_vars = [];
+            $data['addressSlug'] = strtolower(strftime($slug, strtotime($data['addressUpdated'])));
+
+            $result = parent::update($data);
+        }
+
         if ($geocode) {
             $result = $this->geocode(true);
         }
 
         return $result;
+    }
+
+    /**
+     * Return a URL with variable tokens parsed
+     *
+     * @param bool $full
+     *
+     * @return mixed|string
+     */
+    public function addressURL($full = false)
+    {
+        $Settings = PerchSettings::fetch();
+        $urlTemplate = $Settings->get('root_locator_address_url')->val();
+
+        $this->tmp_url_vars = $this->details;
+        $out = preg_replace_callback('/{([A-Za-z0-9_\-]+)}/', [$this, "substitute_url_vars"], $urlTemplate);
+        $this->tmp_url_vars = false;
+
+        if ($full) {
+            if (strpos($out, '://') === false) {
+                $siteURL = $Settings->get('siteURL')->settingValue();
+                if (substr($siteURL, 0, 4) != 'http') $siteURL = 'http://' . $_SERVER['HTTP_HOST'];
+                $out = $siteURL . $out;
+            }
+        }
+
+        return $out;
+    }
+
+    /**
+     * Serialise the entity to a plain array
+     *
+     * @return array
+     */
+    public function to_array()
+    {
+        $out = parent::to_array();
+
+        // URLs
+        $out['addressURL'] = $this->addressURL();
+        $out['addressURLFull'] = $this->addressURL(true);
+
+        return $out;
     }
 
     /**
@@ -152,7 +231,7 @@ class RootLocator_Address extends PerchAPI_Base
      */
     public function getCoordinates()
     {
-        if($this->hasCoordinates()) {
+        if ($this->hasCoordinates()) {
             return [$this->addressLatitude(), $this->addressLongitude()];
         }
 
@@ -232,5 +311,37 @@ class RootLocator_Address extends PerchAPI_Base
         $this->db->delete(PERCH_DB_PREFIX . 'root_locator_tasks', 'addressID', $this->id());
 
         return parent::delete();
+    }
+
+    /**
+     * Callback to swap slug tokens with values
+     *
+     * @param $matches
+     *
+     * @return mixed|string
+     */
+    private function substitute_slug_vars($matches)
+    {
+        $url_vars = $this->tmp_slug_vars;
+
+        if (isset($url_vars[$matches[1]])) {
+            return PerchUtil::urlify($url_vars[$matches[1]]);
+        }
+    }
+
+    /**
+     * Callback to swap url tokens with values
+     *
+     * @param $matches
+     *
+     * @return mixed|string
+     */
+    private function substitute_url_vars($matches)
+    {
+        $url_vars = $this->tmp_url_vars;
+
+        if (isset($url_vars[$matches[1]])) {
+            return $url_vars[$matches[1]];
+        }
     }
 }

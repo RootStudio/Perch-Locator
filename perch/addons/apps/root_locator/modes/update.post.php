@@ -5,12 +5,12 @@
     ], $CurrentUser);
 ?>
 
-    <?php if (!$Paging->is_last_page()): ?>
+    <?php if ($Paging && !$Paging->is_last_page()): ?>
         <div class="inner">
             <ul class="progress-list">
                 <li class="progress-item progress-success">
                     <?php echo PerchUI::icon('core/circle-check', '16', 'Success'); ?>
-                    <?php echo $Lang->get('Importing legacy locations %s to %s of %s', $Paging->lower_bound(), $Paging->upper_bound(), $Paging->total()); ?>
+                    <?php echo $Lang->get('Updating locations %s to %s of %s', $Paging->lower_bound(), $Paging->upper_bound(), $Paging->total()); ?>
                 </li>
             </ul>
         </div>
@@ -21,8 +21,9 @@
         </div>
     <?php endif; ?>
 
+
 <?php
-if (!$Paging->is_last_page()) {
+if ($Paging && !$Paging->is_last_page()) {
     $paging = $Paging->to_array();
     echo "
     <script>

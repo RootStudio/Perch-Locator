@@ -84,6 +84,7 @@ if($Form->submitted()) {
                 $Tasks->add('address.geocode', $new_address->id());
             }
 
+            $new_address->update($data);
             $new_address->index($Template);
 
             PerchUtil::redirect($API->app_path() . '/edit/?id=' . $new_address->id() . '&created=1');

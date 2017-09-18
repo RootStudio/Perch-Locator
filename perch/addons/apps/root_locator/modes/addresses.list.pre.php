@@ -35,6 +35,6 @@ if ($addresses === false) {
     $Addresses->attempt_install();
 }
 
-if ($Settings->get('root_locator_update')->val() != '2.0.0') {
+if ($Settings->get('root_locator_update')->val() != '3.0.0') {
     PerchUtil::redirect($API->app_path() . '/update/');
 }
