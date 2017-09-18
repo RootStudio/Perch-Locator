@@ -1,8 +1,12 @@
-# Perch Locator v2.1
+# Perch Locator v3.0.0
 
 Perch Locator is an app to manage locatable resources within Perch CMS. Addresses are Geocoded and can be searched using coordinates or by a valid address to allow users to find places of interest near to them.
 
 ## Installation
+
+### Perch 2.x
+
+If you still wish to use this application on Perch 2 please see the [v2.x branch](https://github.com/RootStudio/Perch-Locator/tree/v2.x). All active development will now take place on Perch 3.
 
 ### Fresh Install
 Upload the `root_locator` directory to `perch/addons/apps` and add `root_locator` to your `config/apps.php` file.
@@ -205,6 +209,43 @@ These are in addition to the ones listed for `perch_content_custom()`.
         </tr>
     </tbody>
 </table>
+
+---
+
+## Locator Field Type
+
+The locator field type can be used to include processed addresses in other Perch content types.
+
+### Installation
+
+Copy the entire `locator` directory to `perch/addons/fieldtypes`.
+
+### Requirements
+
+In order for the field type to work, you must have already installed and configured the main Locator app. This includes setting a Google API key.
+
+### Usage
+
+The locator field type works very similarly to the Pages field type. Including it within your templates will give you a list of geocoded addresses:
+
+```html
+<perch:content id="venue" type="locator" label="Venue" />
+```
+The example above will output the title of the address that is selected.
+
+Additionally, using the `output` attribute, you can include other fields from the address:
+
+```html
+<perch:content id="venue" type="locator" label="Venue" output="title" />
+<perch:content id="venue" type="locator" label="Venue" output="building" />
+<perch:content id="venue" type="locator" label="Venue" output="street" />
+<perch:content id="venue" type="locator" label="Venue" output="town" />
+<perch:content id="venue" type="locator" label="Venue" output="region" />
+<perch:content id="venue" type="locator" label="Venue" output="country" />
+<perch:content id="venue" type="locator" label="Venue" output="postcode" />
+<perch:content id="venue" type="locator" label="Venue" output="latitude" />
+<perch:content id="venue" type="locator" label="Venue" output="longitude" />
+```
 
 ---
 

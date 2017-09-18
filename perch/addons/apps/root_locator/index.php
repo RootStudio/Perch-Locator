@@ -15,6 +15,7 @@ $Perch->page_title = $Lang->get('Locator');
 $Perch->add_css($API->app_path() . '/assets/css/locator.css');
 
 // Page Initialising
+include('modes/_subnav.php');
 include('modes/addresses.list.pre.php');
 
 // Perch Frame

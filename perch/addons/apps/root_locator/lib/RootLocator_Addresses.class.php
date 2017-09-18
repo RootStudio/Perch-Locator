@@ -63,6 +63,7 @@ class RootLocator_Addresses extends PerchAPI_Factory
      */
     public $static_fields = [
         'addressTitle',
+        'addressSlug',
         'addressBuilding',
         'addressStreet',
         'addressTown',

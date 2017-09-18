@@ -17,7 +17,11 @@
 </perch:before>
 
         <tr>
-            <td><perch:locator id="addressTitle" /></td>
+            <td>
+                <a href="<perch:locator id="addressSlug" />">
+                    <perch:locator id="addressTitle" />
+                </a>
+            </td>
             <td><perch:locator id="addressBuilding" /></td>
             <td><perch:locator id="addressStreet" /></td>
             <td><perch:locator id="addressTown" /></td>

@@ -3,7 +3,7 @@
 $Addresses = new RootLocator_Addresses;
 $errorCount = $Addresses->totalWithErrors();
 
-echo $HTML->subnav($CurrentUser, [
+PerchUI::set_subnav([
     [
         'page'  => ['root_locator', 'root_locator/edit', 'root_locator/delete'],
         'label' => 'Add/Edit',

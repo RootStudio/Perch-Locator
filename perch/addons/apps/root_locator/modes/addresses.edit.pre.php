@@ -9,21 +9,17 @@ $result = false;
 $Template->set('locator/address.html', 'locator');
 
 // Edit / Create
-if(isset($_GET['id']) && $_GET['id'] != '') {
+if(PerchRequest::get('id')) {
 
-    $addressID = (int) $_GET['id'];
+    $addressID = (int) PerchRequest::get('id');
     $Address = $Addresses->find($addressID);
     $details = $Address->to_array();
-
-    $heading1 = 'Addresses / Edit Address';
 
 } else {
 
     $addressID = false;
     $Address = false;
     $details = [];
-
-    $heading1 = 'Locations / Add Address';
 }
 
 // Forms
@@ -88,6 +84,7 @@ if($Form->submitted()) {
                 $Tasks->add('address.geocode', $new_address->id());
             }
 
+            $new_address->update($data);
             $new_address->index($Template);
 
             PerchUtil::redirect($API->app_path() . '/edit/?id=' . $new_address->id() . '&created=1');

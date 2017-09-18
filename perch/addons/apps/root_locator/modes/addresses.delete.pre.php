@@ -2,8 +2,8 @@
 
 $Addresses = new RootLocator_Addresses($API);
 
-if (isset($_GET['id']) && $_GET['id'] != '') {
-    $Address = $Addresses->find($_GET['id'], true);
+if (PerchRequest::get('id')) {
+    $Address = $Addresses->find(PerchRequest::get('id'), true);
 } else {
     PerchUtil::redirect($API->app_path());
 }
