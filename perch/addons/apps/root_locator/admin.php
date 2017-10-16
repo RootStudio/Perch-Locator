@@ -9,7 +9,9 @@ if ($CurrentUser->logged_in() && $CurrentUser->has_priv('root_locator')) {
 
     require __DIR__ . '/_settings.php';
 
-    require __DIR__ . '/_fieldtypes.php';
+    if(!class_exists('PerchFieldType_locator')) {
+        require __DIR__ . '/_fieldtypes.php';
+    }
 
     // Search handler
     PerchSystem::register_admin_search_handler('RootLocator_SearchHandler');
