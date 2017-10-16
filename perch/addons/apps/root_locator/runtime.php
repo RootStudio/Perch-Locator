@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/autoloader.php';
+require __DIR__ . '/_autoload.php';
 
 // Search Handler
 PerchSystem::register_search_handler('RootLocator_SearchHandler');
